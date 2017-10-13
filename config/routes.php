@@ -25,6 +25,11 @@
  *     'contact'
  * );
  */
+/* @var $app \Zend\Expressive\Application */
 
-$app->get('/', App\Action\HomePageAction::class, 'home');
-$app->get('/api/ping', App\Action\PingAction::class, 'api.ping');
+/* /api/v1/stardict/cat */
+$app->get(
+    '/api/{version:v1}/{adapter:stardict|apresyan}/{text}',
+    Dictionary\Action\DictionaryAction::class,
+    'dictionary'
+);

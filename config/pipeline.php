@@ -6,6 +6,7 @@ use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
 use Zend\Expressive\Middleware\NotFoundHandler;
 use Zend\Stratigility\Middleware\ErrorHandler;
+use Common\Middleware;
 
 /**
  * Setup middleware pipeline:
@@ -48,6 +49,9 @@ $app->pipe(UrlHelperMiddleware::class);
 
 // Register the dispatch middleware in the middleware pipeline
 $app->pipeDispatchMiddleware();
+
+// Prepare response in json-api format
+//$app->pipe(Middleware\PrepareResponseMiddleware::class);
 
 // At this point, if no Response is return by any middleware, the
 // NotFoundHandler kicks in; alternately, you can provide other fallback
