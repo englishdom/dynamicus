@@ -1,6 +1,6 @@
 <?php
 
-namespace Dictionary;
+namespace Imagenaties;
 
 class ConfigProvider
 {
@@ -20,8 +20,7 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                Action\DictionaryAction::class => Factory\DictionaryActionFactory::class,
-                Adapter\AdapterManager::class => Factory\AdapterFactory::class,
+                Action\ListAction::class => Factory\ListActionFactory::class,
             ],
         ];
     }

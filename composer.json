@@ -10,6 +10,7 @@
     "require": {
         "php": "^5.6 || ^7.1",
         "http-interop/http-middleware": "^0.4.1",
+        "lcobucci/jwt": "^3.2",
         "league/flysystem": "^1.0",
         "league/fractal": "^0.17.0",
         "roave/security-advisories": "dev-master",
@@ -31,12 +32,12 @@
     "autoload": {
         "psr-4": {
             "Common\\": "library/Common/",
-            "Dictionary\\": "src/Dictionary/v1/"
+            "Imagenaties\\": "src/Imagenaties/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AppTest\\": "test/AppTest/"
+            "ImagenatiesTest\\": "test/ImagenatiesTest/"
         }
     },
     "scripts": {

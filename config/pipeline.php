@@ -51,7 +51,7 @@ $app->pipe(UrlHelperMiddleware::class);
 $app->pipeDispatchMiddleware();
 
 // Prepare response in json-api format
-//$app->pipe(Middleware\PrepareResponseMiddleware::class);
+$app->pipe(Middleware\PrepareResponseMiddleware::class);
 
 // At this point, if no Response is return by any middleware, the
 // NotFoundHandler kicks in; alternately, you can provide other fallback

@@ -13,7 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class PrepareImageMiddleware implements MiddlewareInterface
 {
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         // TODO: Implement process() method.
     }

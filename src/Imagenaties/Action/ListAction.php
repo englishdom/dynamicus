@@ -1,10 +1,11 @@
 <?php
 
-namespace Dictionary\Action;
+namespace Imagenaties\Action;
 
 use Common\Action\ActionInterface;
-use Dictionary\Adapter\AdapterManager;
-use Dictionary\Transformer\DictionaryTransformer;
+use Common\Container\ConfigInterface;
+use Imagenaties\Entity\ImageDataObject;
+use Imagenaties\Transformer\ImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Fractal\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
@@ -15,22 +16,20 @@ use Zend\Http\Response;
  * Class OfflineDictionary
  * @package Common\Adapter
  */
-class DictionaryAction implements ActionInterface
+class ListAction implements ActionInterface
 {
     /**
-     * @var AdapterManager
+     * @var ConfigInterface
      */
-    private $manager;
+    private $config;
 
     /**
-     * OfflineDictionaryAction constructor.
-     * @param AdapterManager $manager
+     * @param ConfigInterface $config
      */
-    public function __construct(AdapterManager $manager)
+    public function __construct(ConfigInterface $config)
     {
-        $this->manager = $manager;
+        $this->config = $config;
     }
-
 
     /**
      * @param ServerRequestInterface $request
@@ -39,10 +38,12 @@ class DictionaryAction implements ActionInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        $adapter = $this->manager->getAdapter((string)$request->getAttribute('adapter'));
-        $dictionary = $adapter(urldecode((string)$request->getAttribute('text')));
+        $DO = new ImageDataObject();
+        $DO->setId(1);
+        $DO->setEntityName('word');
+        $DO->setImagesPath(['/dfgdfg/dfgdfg/dfgdfg.jpg']);
 
-        $item = new Item($dictionary, new DictionaryTransformer(), $this->getResourceName());
+        $item = new Item($DO, new ImageTransformer(), $this->getResourceName());
 
         $request = $request
             ->withAttribute(self::RESPONSE, $item)
@@ -53,6 +54,6 @@ class DictionaryAction implements ActionInterface
 
     public function getResourceName(): string
     {
-        return 'stardict';
+        return 'list';
     }
 }

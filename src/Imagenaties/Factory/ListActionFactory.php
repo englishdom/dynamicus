@@ -1,16 +1,16 @@
 <?php
 
-namespace Dictionary\Factory;
+namespace Imagenaties\Factory;
 
 use Common\Container\ConfigInterface;
-use Dictionary\Adapter\AdapterManager;
+use Imagenaties\Action\ListAction;
 use Psr\Container\ContainerInterface;
 
-class AdapterFactory
+class ListActionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
         $config = $container->get(ConfigInterface::class);
-        return new AdapterManager($config);
+        return new ListAction($config);
     }
 }

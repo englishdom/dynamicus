@@ -12,6 +12,7 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Serializer\JsonApiSerializer;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response;
 use Zend\Http\Response as HttpResponse;
 use Zend\Diactoros\Stream;
@@ -32,7 +33,13 @@ class PrepareResponseMiddleware implements MiddlewareInterface
         $this->config = $config;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface      $delegate
+     * @return ResponseInterface
+     * @throws RuntimeException
+     */
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         /* Get HTTP code */
         $httpCode = $request->getAttribute(ActionInterface::HTTP_CODE);

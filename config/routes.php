@@ -27,9 +27,10 @@
  */
 /* @var $app \Zend\Expressive\Application */
 
-/* /api/v1/stardict/cat */
-$app->get(
-    '/api/{version:v1}/{adapter:stardict|apresyan}/{text}',
-    Dictionary\Action\DictionaryAction::class,
-    'dictionary'
+/* /api/list/word/34 */
+$app->route(
+    '/api/list/{entity}/{entity_id}',
+    [Imagenaties\Action\ListAction::class],
+    ['GET'],
+    'list'
 );
