@@ -30,7 +30,7 @@
 /* /api/list/word/34 */
 $app->route(
     '/api/list/{entity}/{entity_id}',
-    [Imagenaties\Action\ListAction::class],
+    [Dinamicus\Action\ListAction::class],
     ['GET'],
     'list'
 );

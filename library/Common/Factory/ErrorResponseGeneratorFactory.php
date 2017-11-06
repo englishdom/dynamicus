@@ -16,7 +16,8 @@ class ErrorResponseGeneratorFactory
     {
         $config = $container->get(ConfigInterface::class);
         $responseCode = $config->get('error-handler.response-code', []);
+        $loggingExceptions = $config->get('error-handler.write-to-log', []);
 
-        return new ErrorResponseGenerator($responseCode);
+        return new ErrorResponseGenerator($container, $responseCode, $loggingExceptions);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Imagenaties\Transformer;
+namespace Dinamicus\Transformer;
 
-use Imagenaties\Entity\ImageDataObject;
+use Dinamicus\Entity\ImageDataObject;
 use League\Fractal\TransformerAbstract;
 
 class ImageTransformer extends TransformerAbstract

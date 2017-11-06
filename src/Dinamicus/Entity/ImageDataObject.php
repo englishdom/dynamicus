@@ -1,6 +1,6 @@
 <?php
 
-namespace Imagenaties\Entity;
+namespace Dinamicus\Entity;
 
 use Common\Entity\EntityInterface;
 

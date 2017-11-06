@@ -1,6 +1,6 @@
 <?php
 
-namespace Imagenaties;
+namespace Dinamicus;
 
 class ConfigProvider
 {

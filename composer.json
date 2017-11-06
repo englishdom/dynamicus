@@ -9,6 +9,7 @@
     },
     "require": {
         "php": "^5.6 || ^7.1",
+        "graylog2/gelf-php": "^1.5",
         "http-interop/http-middleware": "^0.4.1",
         "lcobucci/jwt": "^3.2",
         "league/flysystem": "^1.0",
@@ -32,12 +33,12 @@
     "autoload": {
         "psr-4": {
             "Common\\": "library/Common/",
-            "Imagenaties\\": "src/Imagenaties/"
+            "Dinamicus\\": "src/Dinamicus/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ImagenatiesTest\\": "test/ImagenatiesTest/"
+            "DinamicusTest\\": "test/DinamicusTest/"
         }
     },
     "scripts": {

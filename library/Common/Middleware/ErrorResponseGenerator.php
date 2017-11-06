@@ -2,6 +2,7 @@
 namespace Common\Middleware;
 
 use Common\Exception;
+use Interop\Container\ContainerInterface;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,14 +17,26 @@ final class ErrorResponseGenerator
      * @var array
      */
     private $responseCode;
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+    /**
+     * @var array
+     */
+    private $loggingExceptions;
 
     /**
      * ErrorResponseGenerator constructor.
-     * @param array $codeMap
+     * @param ContainerInterface $container
+     * @param array              $responseCodes
+     * @param array              $loggingExceptions
      */
-    public function __construct(array $codeMap)
+    public function __construct(ContainerInterface $container, array $responseCodes, array $loggingExceptions)
     {
-        $this->responseCode = $codeMap;
+        $this->responseCode = $responseCodes;
+        $this->container = $container;
+        $this->loggingExceptions = $loggingExceptions;
     }
 
 
@@ -42,19 +55,13 @@ final class ErrorResponseGenerator
     }
 
     /**
-     * @param int $identifier
      * @param Throwable $exception
-     * @return string
+     * @param Throwable $exception
      */
-    protected function writeToLog($identifier, $exception): string
+    protected function writeToLog($exception)
     {
-        $logUrl = 'data/logs/' . $identifier;
-        $logger = new Log\Logger;
-        $writer = new Log\Writer\Stream($logUrl);
-
-        $logger->addWriter($writer);
-        $logger->log(Log\Logger::INFO, $exception->getMessage() . ': ' . $exception->getTraceAsString());
-        return $logUrl;
+        $logger = $this->container->get(Log\LoggerInterface::class);
+        $logger->err('Dinamicus: '.$exception->getMessage(), ['StackTrace' => $exception->getTraceAsString()]);
     }
 
     /**
@@ -105,6 +112,11 @@ final class ErrorResponseGenerator
             $result = $this->fillTemplate($request, $exception, Http\Response::STATUS_CODE_503);
             $httpCode = 200;
             $result = json_encode($result);
+        }
+
+        /* Write to log exceptions */
+        if (in_array($exceptionName, $this->loggingExceptions)) {
+            $this->writeToLog($exception);
         }
 
         $newResponse = $response

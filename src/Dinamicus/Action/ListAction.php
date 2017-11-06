@@ -1,11 +1,12 @@
 <?php
 
-namespace Imagenaties\Action;
+namespace Dinamicus\Action;
 
 use Common\Action\ActionInterface;
 use Common\Container\ConfigInterface;
-use Imagenaties\Entity\ImageDataObject;
-use Imagenaties\Transformer\ImageTransformer;
+use Common\Exception\BadRequestException;
+use Dinamicus\Entity\ImageDataObject;
+use Dinamicus\Transformer\ImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Fractal\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
@@ -38,6 +39,8 @@ class ListAction implements ActionInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
+        throw new \Exception('exception');
+
         $DO = new ImageDataObject();
         $DO->setId(1);
         $DO->setEntityName('word');

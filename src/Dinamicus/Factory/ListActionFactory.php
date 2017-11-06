@@ -1,9 +1,9 @@
 <?php
 
-namespace Imagenaties\Factory;
+namespace Dinamicus\Factory;
 
 use Common\Container\ConfigInterface;
-use Imagenaties\Action\ListAction;
+use Dinamicus\Action\ListAction;
 use Psr\Container\ContainerInterface;
 
 class ListActionFactory

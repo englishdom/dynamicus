@@ -26,9 +26,9 @@ return [
             Exception\UnsupportedMediaException::class => Http\Response::STATUS_CODE_415,
             Exception\NotAcceptableException::class => Http\Response::STATUS_CODE_406,
         ],
-        'logging-path' => 'data/log',
-        'logging-exceptions' => [
+        'write-to-log' => [
             \Exception::class,
+            \Zend\ServiceManager\Exception\ServiceNotCreatedException::class,
         ],
     ]
 ];
