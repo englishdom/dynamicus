@@ -39,8 +39,6 @@ class ListAction implements ActionInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        throw new \Exception('exception');
-
         $DO = new ImageDataObject();
         $DO->setId(1);
         $DO->setEntityName('word');
