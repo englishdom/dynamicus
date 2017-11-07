@@ -4,7 +4,7 @@ namespace Common\Factory;
 
 use Common\Container\ConfigInterface;
 use Common\Middleware\ErrorResponseGenerator;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 class ErrorResponseGeneratorFactory
 {
@@ -16,8 +16,7 @@ class ErrorResponseGeneratorFactory
     {
         $config = $container->get(ConfigInterface::class);
         $responseCode = $config->get('error-handler.response-code', []);
-        $loggingExceptions = $config->get('error-handler.write-to-log', []);
 
-        return new ErrorResponseGenerator($container, $responseCode, $loggingExceptions);
+        return new ErrorResponseGenerator($responseCode);
     }
 }

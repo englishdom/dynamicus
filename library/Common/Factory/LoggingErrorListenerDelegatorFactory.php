@@ -4,7 +4,8 @@ namespace Common\Factory;
 
 use Common\Container\ConfigInterface;
 use Common\Container\LoggingErrorListener;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
+use Zend\Log\LoggerInterface;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
 class LoggingErrorListenerDelegatorFactory
@@ -17,10 +18,9 @@ class LoggingErrorListenerDelegatorFactory
      */
     public function __invoke(ContainerInterface $container, $name, callable $callback)
     {
-        $config = $container->get(ConfigInterface::class);
         $listener = new LoggingErrorListener(
-            $config->get('error-handler.logging-path', ""),
-            $config->get('error-handler.logging-exceptions', [])
+            $container->get(ConfigInterface::class),
+            $container->get(LoggerInterface::class)
         );
         /* @var $repository ErrorHandler */
         $repository = $callback();

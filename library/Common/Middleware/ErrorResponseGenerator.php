@@ -2,14 +2,12 @@
 namespace Common\Middleware;
 
 use Common\Exception;
-use Interop\Container\ContainerInterface;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Router\RouteResult;
 use Throwable;
 use Zend\Http;
-use Zend\Log;
 
 final class ErrorResponseGenerator
 {
@@ -17,26 +15,14 @@ final class ErrorResponseGenerator
      * @var array
      */
     private $responseCode;
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-    /**
-     * @var array
-     */
-    private $loggingExceptions;
 
     /**
      * ErrorResponseGenerator constructor.
-     * @param ContainerInterface $container
      * @param array              $responseCodes
-     * @param array              $loggingExceptions
      */
-    public function __construct(ContainerInterface $container, array $responseCodes, array $loggingExceptions)
+    public function __construct(array $responseCodes)
     {
         $this->responseCode = $responseCodes;
-        $this->container = $container;
-        $this->loggingExceptions = $loggingExceptions;
     }
 
 
@@ -52,16 +38,6 @@ final class ErrorResponseGenerator
         }
 
         return $this->prepareJson($request, $response, $err);
-    }
-
-    /**
-     * @param Throwable $exception
-     * @param Throwable $exception
-     */
-    protected function writeToLog($exception)
-    {
-        $logger = $this->container->get(Log\LoggerInterface::class);
-        $logger->err('Dinamicus: '.$exception->getMessage(), ['StackTrace' => $exception->getTraceAsString()]);
     }
 
     /**
@@ -112,11 +88,6 @@ final class ErrorResponseGenerator
             $result = $this->fillTemplate($request, $exception, Http\Response::STATUS_CODE_503);
             $httpCode = 200;
             $result = json_encode($result);
-        }
-
-        /* Write to log exceptions */
-        if (in_array($exceptionName, $this->loggingExceptions)) {
-            $this->writeToLog($exception);
         }
 
         $newResponse = $response
