@@ -27,10 +27,17 @@
  */
 /* @var $app \Zend\Expressive\Application */
 
-/* /api/list/word/34 */
+/* GET /list/word/34 */
 $app->route(
-    '/api/list/{entity}/{entity_id}',
+    '/list/{entity}/{entity_id}',
     [Dinamicus\Action\ListAction::class],
     ['GET'],
     'list'
+);
+/* DELETE /word/34 */
+$app->route(
+    '/{entity}/{entity_id}',
+    [Dinamicus\Action\DeleteAction::class],
+    ['DELETE'],
+    'delete'
 );

@@ -17,6 +17,7 @@ class ConfigProvider
             'factories'  => [
                 Container\ConfigInterface::class => Factory\ConfigFactory::class,
                 Middleware\PrepareResponseMiddleware::class => Factory\PrepareResponseMiddlewareFactory::class,
+                Middleware\ShardingMiddleware::class => Factory\ShardingMiddlewareFactory::class,
             ],
         ];
     }

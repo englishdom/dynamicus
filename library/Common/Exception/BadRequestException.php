@@ -1,4 +1,5 @@
 <?php
+
 namespace Common\Exception;
 
 class BadRequestException extends AbstractException implements ExceptionInterface, ExceptionDetailInterface

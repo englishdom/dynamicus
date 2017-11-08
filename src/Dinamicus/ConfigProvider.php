@@ -19,9 +19,6 @@ class ConfigProvider
     public function getDependencies()
     {
         return [
-            'factories' => [
-                Action\ListAction::class => Factory\ListActionFactory::class,
-            ],
         ];
     }
 }

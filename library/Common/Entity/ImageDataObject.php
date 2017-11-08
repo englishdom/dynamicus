@@ -20,9 +20,22 @@ class ImageDataObject implements EntityInterface
     private $entityId;
 
     /**
+     * Путь который был построен при шардировании
      * @var string
      */
-    private $relativePath;
+    private $shardingPath;
+
+    /**
+     * Абсолютный путь к директории имиджей
+     * @var string
+     */
+    private $absoluteDirectoryPath;
+
+    /**
+     * Относительный URL к директории имиджей
+     * @var string
+     */
+    private $relativeDirectoryUrl;
 
     /**
      * @var \SplObjectStorage
@@ -74,17 +87,49 @@ class ImageDataObject implements EntityInterface
     /**
      * @return null|string
      */
-    public function getRelativePath(): ?string
+    public function getShardingPath(): ?string
     {
-        return $this->relativePath;
+        return $this->shardingPath;
     }
 
     /**
-     * @param string $relativePath
+     * @param string $shardingPath
      */
-    public function setRelativePath(string $relativePath)
+    public function setShardingPath(string $shardingPath)
     {
-        $this->relativePath = $relativePath;
+        $this->shardingPath = $shardingPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbsoluteDirectoryPath(): string
+    {
+        return $this->absoluteDirectoryPath;
+    }
+
+    /**
+     * @param string $absoluteDirectoryPath
+     */
+    public function setAbsoluteDirectoryPath(string $absoluteDirectoryPath)
+    {
+        $this->absoluteDirectoryPath = $absoluteDirectoryPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRelativeDirectoryUrl(): string
+    {
+        return $this->relativeDirectoryUrl;
+    }
+
+    /**
+     * @param string $relativeDirectoryUrl
+     */
+    public function setRelativeDirectoryUrl(string $relativeDirectoryUrl)
+    {
+        $this->relativeDirectoryUrl = $relativeDirectoryUrl;
     }
 
     /**

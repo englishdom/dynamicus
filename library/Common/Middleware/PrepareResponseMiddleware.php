@@ -49,6 +49,10 @@ class PrepareResponseMiddleware implements MiddlewareInterface
 
         $response = (new Response())->withStatus($httpCode)->withHeader('Content-Type', 'application/vnd.api+json');
 
+        if (in_array($httpCode, [HttpResponse::STATUS_CODE_204, HttpResponse::STATUS_CODE_400])) {
+            return $response;
+        }
+
         $fractal = $request->getAttribute(ActionInterface::RESPONSE);
         if (!$fractal instanceof Item && !$fractal instanceof Collection) {
             throw new RuntimeException('Unsupported type');
