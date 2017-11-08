@@ -50,6 +50,7 @@ $app->pipe(UrlHelperMiddleware::class);
 // Prepare response in json-api format
 $app->pipe(Middleware\PrepareDataObjectMiddleware::class);
 $app->pipe(Middleware\ShardingMiddleware::class);
+$app->pipe(Middleware\InitFilesystemMiddleware::class);
 //$app->pipe(Middleware\PostPathPrepareMiddleware::class);
 
 // Register the dispatch middleware in the middleware pipeline
