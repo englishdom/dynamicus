@@ -49,7 +49,7 @@ class ListAction implements ActionInterface
          *   'filename' => '34',
          * )
          */
-        foreach ($filesystem->listFiles() as $file) {
+        foreach ($filesystem->listFiles($do->getShardingPath()) as $file) {
             $pathObject = new PathObject();
             $pathObject->setEntity($do->getEntityName());
             $pathObject->setUrl($do->getRelativeDirectoryUrl() . $file['basename']);
