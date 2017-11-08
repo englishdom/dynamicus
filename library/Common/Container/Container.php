@@ -3,7 +3,6 @@
 namespace Common\Container;
 
 use Common\Exception\RuntimeException;
-use Psr\Container\ContainerInterface;
 
 final class Container implements ContainerInterface
 {

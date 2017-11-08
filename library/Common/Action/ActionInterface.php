@@ -2,6 +2,7 @@
 
 namespace Common\Action;
 
+use Common\Entity\ImageDataObject;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -19,5 +20,5 @@ interface ActionInterface extends MiddlewareInterface
      * Get resource name
      * @return string
      */
-    public function getResourceName(): string;
+    public function getResourceName(ImageDataObject $do): string;
 }

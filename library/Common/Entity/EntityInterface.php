@@ -6,9 +6,9 @@ interface EntityInterface
 {
     /**
      * Get user identifier
-     * @return int
+     * @return null|int
      */
-    public function getId(): int;
+    public function getId(): ?int;
 
     /**
      * Set user identifier
@@ -16,5 +16,5 @@ interface EntityInterface
      * @param int $identifier
      * @return self
      */
-    public function setId($identifier);
+    public function setId(int $identifier);
 }

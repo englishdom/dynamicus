@@ -47,6 +47,11 @@ $app->pipe(UrlHelperMiddleware::class);
 // - route-based validation
 // - etc.
 
+// Prepare response in json-api format
+$app->pipe(Middleware\PrepareDataObjectMiddleware::class);
+$app->pipe(Middleware\ShardingMiddleware::class);
+//$app->pipe(Middleware\PostPathPrepareMiddleware::class);
+
 // Register the dispatch middleware in the middleware pipeline
 $app->pipeDispatchMiddleware();
 

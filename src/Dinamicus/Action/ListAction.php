@@ -4,8 +4,8 @@ namespace Dinamicus\Action;
 
 use Common\Action\ActionInterface;
 use Common\Container\ConfigInterface;
-use Common\Exception\BadRequestException;
-use Dinamicus\Entity\ImageDataObject;
+use Common\Entity\PathObject;
+use Common\Entity\ImageDataObject;
 use Dinamicus\Transformer\ImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Fractal\Resource\Item;
@@ -33,18 +33,32 @@ class ListAction implements ActionInterface
     }
 
     /**
+     * Чтение файлов из файловой системы. Потому как мы не храним расширение файлов в базе.
+     * В базе нет информации о именах всех файлов для текущего id
+     *
      * @param ServerRequestInterface $request
      * @param DelegateInterface $delegate
      * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        $DO = new ImageDataObject();
-        $DO->setId(1);
-        $DO->setEntityName('word');
-        $DO->setImagesPath(['/dfgdfg/dfgdfg/dfgdfg.jpg']);
+        /* @var ImageDataObject $do */
+        $do = $request->getAttribute(ImageDataObject::class);
+        $path = $this->getAbsolutePath($do);
+        $do->setAbsolutePath($path);
 
-        $item = new Item($DO, new ImageTransformer(), $this->getResourceName());
+        foreach (glob($path . '*') as $fileName) {
+            $pathObject = new PathObject();
+            $pathObject->setEntity($do->getEntityName());
+            $pathObject->setPath($fileName);
+            $pathObject->setDirectory($path);
+
+            /* @var ImageDataObject $do */
+            $do = $request->getAttribute(ImageDataObject::class);
+            $do->attachImagePath($pathObject);
+        }
+
+        $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));
 
         $request = $request
             ->withAttribute(self::RESPONSE, $item)
@@ -53,8 +67,21 @@ class ListAction implements ActionInterface
         return $delegate->process($request);
     }
 
-    public function getResourceName(): string
+    /**
+     * Получение абсолютного пути к файлам /images/word/000/000/000/001/1
+     * @param ImageDataObject $do
+     * @return string
+     */
+    private function getAbsolutePath(ImageDataObject $do): string
     {
-        return 'list';
+        return str_replace('//', '/', $this->config->get('images-path.absolute-path', '')
+            . DIRECTORY_SEPARATOR . $do->getRelativePath()
+            . DIRECTORY_SEPARATOR . $do->getEntityId()
+        );
+    }
+
+    public function getResourceName(ImageDataObject $do): string
+    {
+        return 'list/'.$do->getEntityName();
     }
 }

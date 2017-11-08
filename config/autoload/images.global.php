@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'images-path' => [
+        'absolute-path' => '/var/www/', /* /var/www/translation/000/000/000/001/1.jpg */
+        'relative-url' => '/images/', /* /images/translation/000/000/000/001/1.jpg */
+        'absolute-url' => 'https://englishdom.com/images/', /* https://englishdom.com/images/translation/000/000/000/001/1.jpg */
+    ],
     'images' => [
         'translation' => [
             'default' => [

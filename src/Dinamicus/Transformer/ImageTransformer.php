@@ -2,17 +2,27 @@
 
 namespace Dinamicus\Transformer;
 
-use Dinamicus\Entity\ImageDataObject;
+use Common\Entity\ImageDataObject;
+use Common\Entity\PathObject;
 use League\Fractal\TransformerAbstract;
 
 class ImageTransformer extends TransformerAbstract
 {
     public function transform(ImageDataObject $entity)
     {
-        return [
+        $data = [
             'id' => $entity->getId(),
             'entity' => $entity->getEntityName(),
-            'paths' => $entity->getImagesPath(),
         ];
+        /* @var PathObject $image */
+        foreach ($entity->getImagesPath() as $image) {
+            $data['images'][] = $this->getImage($image);
+        }
+        return $data;
+    }
+
+    private function getImage(PathObject $image)
+    {
+        return $image->getPath();
     }
 }
