@@ -18,6 +18,7 @@ interface ActionInterface extends MiddlewareInterface
 
     /**
      * Get resource name
+     * @param ImageDataObject $do
      * @return string
      */
     public function getResourceName(ImageDataObject $do): string;

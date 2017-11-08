@@ -11,10 +11,7 @@ class PathObject
     protected $entity;
     protected $variant;
     protected $path;
-    protected $directory;
-    protected $fileName;
-    protected $fileNameSuffix;
-    protected $fileExtension;
+    protected $url;
 
     /**
      * @return mixed
@@ -67,64 +64,16 @@ class PathObject
     /**
      * @return mixed
      */
-    public function getDirectory()
+    public function getUrl()
     {
-        return $this->directory;
+        return $this->url;
     }
 
     /**
-     * @param mixed $directory
+     * @param mixed $url
      */
-    public function setDirectory($directory)
+    public function setUrl($url)
     {
-        $this->directory = $directory;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFileName()
-    {
-        return $this->fileName;
-    }
-
-    /**
-     * @param mixed $fileName
-     */
-    public function setFileName($fileName)
-    {
-        $this->fileName = $fileName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFileNameSuffix()
-    {
-        return $this->fileNameSuffix;
-    }
-
-    /**
-     * @param mixed $fileNameSuffix
-     */
-    public function setFileNameSuffix($fileNameSuffix)
-    {
-        $this->fileNameSuffix = $fileNameSuffix;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFileExtension()
-    {
-        return $this->fileExtension;
-    }
-
-    /**
-     * @param mixed $fileExtension
-     */
-    public function setFileExtension($fileExtension)
-    {
-        $this->fileExtension = $fileExtension;
+        $this->url = $url;
     }
 }

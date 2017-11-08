@@ -25,11 +25,6 @@ class ImageDataObject implements EntityInterface
     private $relativePath;
 
     /**
-     * @var string
-     */
-    private $absolutePath;
-
-    /**
      * @var \SplObjectStorage
      */
     private $imagesPath;
@@ -93,25 +88,9 @@ class ImageDataObject implements EntityInterface
     }
 
     /**
-     * @return string
-     */
-    public function getAbsolutePath(): ?string
-    {
-        return $this->absolutePath;
-    }
-
-    /**
-     * @param string $absolutePath
-     */
-    public function setAbsolutePath(string $absolutePath)
-    {
-        $this->absolutePath = $absolutePath;
-    }
-
-    /**
      * @return \SplObjectStorage
      */
-    public function getImagesPath(): \SplObjectStorage
+    public function getImagesPath(): ?\SplObjectStorage
     {
         return $this->imagesPath;
     }

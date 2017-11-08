@@ -57,7 +57,8 @@ final class ErrorResponseGenerator
             'errors' => [
                 'id' => (string)$identifier,
                 'status' => (string)$httpCode,
-                'title' => (string)$exception->getMessage(),
+                'title' => (string)get_class($exception) . ': ' . $exception->getMessage(),
+                'file' => (string)$exception->getFile() . ':' . $exception->getLine(),
                 'code' => (string)$exception->getCode(),
                 'source' => [
                     'pointer' => $request->getUri()->getPath(),

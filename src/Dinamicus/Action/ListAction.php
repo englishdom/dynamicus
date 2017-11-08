@@ -44,14 +44,15 @@ class ListAction implements ActionInterface
     {
         /* @var ImageDataObject $do */
         $do = $request->getAttribute(ImageDataObject::class);
-        $path = $this->getAbsolutePath($do);
-        $do->setAbsolutePath($path);
+        $path = $this->getAbsolutePathPrefix($do);
 
-        foreach (glob($path . '*') as $fileName) {
+        foreach (glob($path . $do->getEntityId() . '*') as $fileName) {
+            $pathInfo = pathinfo($fileName);
+
             $pathObject = new PathObject();
             $pathObject->setEntity($do->getEntityName());
             $pathObject->setPath($fileName);
-            $pathObject->setDirectory($path);
+            $pathObject->setUrl($this->getRelativeUrlPrefix($do) . $pathInfo['basename']);
 
             /* @var ImageDataObject $do */
             $do = $request->getAttribute(ImageDataObject::class);
@@ -68,15 +69,28 @@ class ListAction implements ActionInterface
     }
 
     /**
-     * Получение абсолютного пути к файлам /images/word/000/000/000/001/1
+     * Получение абсолютного пути к папке в файловой системе /var/www/images/word/000/000/000/001/
      * @param ImageDataObject $do
      * @return string
      */
-    private function getAbsolutePath(ImageDataObject $do): string
+    private function getAbsolutePathPrefix(ImageDataObject $do): string
     {
         return str_replace('//', '/', $this->config->get('images-path.absolute-path', '')
             . DIRECTORY_SEPARATOR . $do->getRelativePath()
-            . DIRECTORY_SEPARATOR . $do->getEntityId()
+            . DIRECTORY_SEPARATOR
+        );
+    }
+
+    /**
+     * Получение относительного урла к рисункам /images/word/000/000/000/001/
+     * @param ImageDataObject $do
+     * @return string
+     */
+    private function getRelativeUrlPrefix(ImageDataObject $do): string
+    {
+        return str_replace('//', '/', $this->config->get('images-path.relative-url', '')
+            . DIRECTORY_SEPARATOR . $do->getRelativePath()
+            . DIRECTORY_SEPARATOR
         );
     }
 
