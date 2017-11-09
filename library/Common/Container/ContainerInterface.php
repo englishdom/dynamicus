@@ -11,6 +11,8 @@ use Psr\Container\ContainerInterface AS PsrContainerInterface;
  */
 interface ContainerInterface extends PsrContainerInterface
 {
+    const APPEND = 1;
+    const PREPEND = 0;
 
     /**
      * @param string $key

@@ -29,7 +29,7 @@ class ImageDataObject implements EntityInterface
      * Абсолютный путь к директории имиджей
      * @var string
      */
-    private $absoluteDirectoryPath;
+    private $tmpDirectoryPath;
 
     /**
      * Относительный URL к директории имиджей
@@ -38,14 +38,15 @@ class ImageDataObject implements EntityInterface
     private $relativeDirectoryUrl;
 
     /**
+     * Расширение оригинального файла
      * @var string
      */
-    private $imageExtension;
+    private $extension;
 
     /**
      * @var \SplObjectStorage
      */
-    private $imagesPath;
+    private $imageFile;
 
     public function getId(): ?int
     {
@@ -108,17 +109,17 @@ class ImageDataObject implements EntityInterface
     /**
      * @return string
      */
-    public function getAbsoluteDirectoryPath(): string
+    public function getTmpDirectoryPath(): string
     {
-        return $this->absoluteDirectoryPath;
+        return $this->tmpDirectoryPath;
     }
 
     /**
-     * @param string $absoluteDirectoryPath
+     * @param string $tmpDirectoryPath
      */
-    public function setAbsoluteDirectoryPath(string $absoluteDirectoryPath)
+    public function setTmpDirectoryPath(string $tmpDirectoryPath)
     {
-        $this->absoluteDirectoryPath = $absoluteDirectoryPath;
+        $this->tmpDirectoryPath = $tmpDirectoryPath;
     }
 
     /**
@@ -140,52 +141,52 @@ class ImageDataObject implements EntityInterface
     /**
      * @return string
      */
-    public function getImageExtension(): string
+    public function getExtension(): string
     {
-        return $this->imageExtension;
+        return $this->extension;
     }
 
     /**
-     * @param string $imageExtension
+     * @param string $extension
      */
-    public function setImageExtension(string $imageExtension)
+    public function setExtension(string $extension)
     {
-        $this->imageExtension = $imageExtension;
+        $this->extension = $extension;
     }
 
     /**
      * @return \SplObjectStorage
      */
-    public function getImagesPath(): ?\SplObjectStorage
+    public function getImageFiles(): ?\SplObjectStorage
     {
-        return $this->imagesPath;
+        return $this->imageFile;
     }
 
     /**
-     * @param \SplObjectStorage $imagesPath
+     * @param \SplObjectStorage $imageFile
      */
-    public function setImagesPath(\SplObjectStorage $imagesPath)
+    public function setImageFiles(\SplObjectStorage $imageFile)
     {
-        $this->imagesPath = $imagesPath;
+        $this->imageFile = $imageFile;
     }
 
     /**
      * Fluent Interface
-     * @param PathObject $object
-     * @param bool       $replace
+     * @param ImageFile $image
+     * @param bool      $replace
      * @return $this
      * @throws RuntimeException
      */
-    public function attachImagePath(PathObject $object, $replace = false)
+    public function attachImageFile(ImageFile $image, $replace = false)
     {
-        if (!$this->imagesPath instanceof \SplObjectStorage) {
-            $this->setImagesPath(new \SplObjectStorage());
+        if (!$this->imageFile instanceof \SplObjectStorage) {
+            $this->setImageFiles(new \SplObjectStorage());
         }
 
-        if ($this->imagesPath->offsetExists($object) && !$replace) {
+        if ($this->imageFile->offsetExists($image) && !$replace) {
             throw new RuntimeException('The PathObject is exist in a storage!');
         }
-        $this->imagesPath->attach($object);
+        $this->imageFile->attach($image);
         return $this;
     }
 }

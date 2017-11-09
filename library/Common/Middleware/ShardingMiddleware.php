@@ -35,7 +35,7 @@ class ShardingMiddleware implements MiddlewareInterface
         $shardingPath = $this->getFolder($do->getEntityId(), $do->getEntityName());
         $do->setShardingPath($shardingPath);
         $do->setRelativeDirectoryUrl($this->getRelativeUrlPrefix($do));
-        $do->setAbsoluteDirectoryPath($this->getAbsolutePathPrefix($do));
+        $do->setTmpDirectoryPath($this->getTmpPathPrefix($do));
 
         return $delegate->process($request);
     }
@@ -60,9 +60,9 @@ class ShardingMiddleware implements MiddlewareInterface
      * @param ImageDataObject $do
      * @return string
      */
-    private function getAbsolutePathPrefix(ImageDataObject $do): string
+    private function getTmpPathPrefix(ImageDataObject $do): string
     {
-        return str_replace('//', '/', $this->config->get('images-path.absolute-path', '')
+        return str_replace('//', '/', $this->config->get('images-path.absolute-tmp-path', '')
             . DIRECTORY_SEPARATOR . $do->getShardingPath()
             . DIRECTORY_SEPARATOR
         );

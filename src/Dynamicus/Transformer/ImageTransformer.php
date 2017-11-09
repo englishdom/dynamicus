@@ -1,9 +1,9 @@
 <?php
 
-namespace Dinamicus\Transformer;
+namespace Dynamicus\Transformer;
 
 use Common\Entity\ImageDataObject;
-use Common\Entity\PathObject;
+use Common\Entity\ImageFile;
 use League\Fractal\TransformerAbstract;
 
 class ImageTransformer extends TransformerAbstract
@@ -13,8 +13,8 @@ class ImageTransformer extends TransformerAbstract
         $data = [
             'id' => $entity->getId(),
         ];
-        /* @var PathObject $image */
-        foreach ($entity->getImagesPath() as $image) {
+        /* @var ImageFile $image */
+        foreach ($entity->getImageFiles() as $image) {
             $fileInfo = $this->getFileInfo($image->getUrl());
             if (!$fileInfo['size']) {
                 $data['links'][$fileInfo['variant']] = $image->getUrl();

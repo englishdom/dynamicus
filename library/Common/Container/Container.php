@@ -6,9 +6,6 @@ use Common\Exception\RuntimeException;
 
 final class Container implements ContainerInterface
 {
-    const APPEND = 1;
-    const PREPEND = 0;
-
     private $container;
 
     /**

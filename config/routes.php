@@ -30,14 +30,14 @@
 /* GET /list/translation/34 */
 $app->route(
     '/list/{entity}/{entity_id}',
-    [Dinamicus\Action\ListAction::class],
+    [Dynamicus\Action\ListAction::class],
     ['GET'],
     'list'
 );
 /* DELETE /translation/34 */
 $app->route(
     '/{entity}/{entity_id}',
-    [Dinamicus\Action\DeleteAction::class],
+    [Dynamicus\Action\DeleteAction::class],
     ['DELETE'],
     'delete'
 );
@@ -46,7 +46,9 @@ $app->route(
     '/{entity}/{entity_id}',
     [
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
-        \Dinamicus\Middleware\DownloadImageMiddleware::class,
+        \Dynamicus\Middleware\DownloadImageMiddleware::class,
+        \Dynamicus\Middleware\ProcessImageMiddleware::class,
+//        \Dynamicus\Middleware\WriteImagesMiddleware::class,
     ],
     ['POST'],
     'create'

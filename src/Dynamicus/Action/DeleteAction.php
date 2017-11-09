@@ -1,6 +1,6 @@
 <?php
 
-namespace Dinamicus\Action;
+namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
 use Common\Entity\ImageDataObject;

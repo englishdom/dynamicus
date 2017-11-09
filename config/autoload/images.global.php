@@ -1,37 +1,43 @@
 <?php
 
+const WIDTH = 'width';
+const HEIGHT = 'height';
+const COMPRESSION_QUALITY = 'quality';
+
 return [
     'images-path' => [
+        /* @TODO нужно перенести absolute-path в фабрику адаптера для Flysystem */
         'absolute-path' => '/var/www/', /* /var/www/translation/000/000/000/001/1.jpg */
+        'absolute-tmp-path' => '/tmp/images/', /* /tmp/images/translation/000/000/001/1.jpg */
         'relative-url' => '/images/', /* /images/translation/000/000/000/001/1.jpg */
     ],
     'images' => [
         'translation' => [
             'default' => [
-                [66, 50], // skills/glossary/learning/18014/ translations images in list
-                [240, 168], // skills/glossary/learning/18014/#word/like images for translations
+                [WIDTH => 66, HEIGHT => 50, COMPRESSION_QUALITY => 80], // skills/glossary/learning/18014/ translations images in list
+                [WIDTH => 240, HEIGHT => 168, COMPRESSION_QUALITY => 80], // skills/glossary/learning/18014/#word/like images for translations
             ],
         ],
         'word-set' => [
             'default' => [
-                [180, 115], // skills/glossary/ word sets list
+                [WIDTH => 180, HEIGHT => 115, COMPRESSION_QUALITY => 80], // skills/glossary/ word sets list
             ]
         ],
         'course-int' => [
             'default' => [
-                [960, 172], // Course lesson header new image
+                [WIDTH => 960, HEIGHT => 172, COMPRESSION_QUALITY => 80], // Course lesson header new image
             ],
             'exercise' => [
-                [940, 532], // Courses-int, exercises, group B
-                [600, 432], // Courses-int, exercises, group C
-                [940, 293], // Courses-int, LifeStory
+                [WIDTH => 940, HEIGHT => 532, COMPRESSION_QUALITY => 80], // Courses-int, exercises, group B
+                [WIDTH => 600, HEIGHT => 432, COMPRESSION_QUALITY => 80], // Courses-int, exercises, group C
+                [WIDTH => 940, HEIGHT => 293, COMPRESSION_QUALITY => 80], // Courses-int, LifeStory
             ]
         ],
         'ed-class' => [
             'default' => [
-                [300, 181], // Ed Class small image
-                [940, 384], // Ed Class big image
-                [940, 172], // Ed lesson
+                [WIDTH => 300, HEIGHT => 181, COMPRESSION_QUALITY => 80], // Ed Class small image
+                [WIDTH => 940, HEIGHT => 384, COMPRESSION_QUALITY => 80], // Ed Class big image
+                [WIDTH => 940, HEIGHT => 172, COMPRESSION_QUALITY => 80], // Ed lesson
             ]
         ]
     ]

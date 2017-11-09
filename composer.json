@@ -34,7 +34,7 @@
     "autoload": {
         "psr-4": {
             "Common\\": "library/Common/",
-            "Dinamicus\\": "src/Dinamicus/"
+            "Dynamicus\\": "src/Dynamicus/"
         }
     },
     "autoload-dev": {

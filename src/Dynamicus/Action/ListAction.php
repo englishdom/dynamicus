@@ -1,12 +1,12 @@
 <?php
 
-namespace Dinamicus\Action;
+namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
-use Common\Entity\PathObject;
+use Common\Entity\ImageFile;
 use Common\Entity\ImageDataObject;
 use Common\Exception\RuntimeException;
-use Dinamicus\Transformer\ImageTransformer;
+use Dynamicus\Transformer\ImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\Plugin\ListFiles;
@@ -50,17 +50,16 @@ class ListAction implements ActionInterface
          * )
          */
         foreach ($filesystem->listFiles($do->getShardingPath()) as $file) {
-            $pathObject = new PathObject();
-            $pathObject->setEntity($do->getEntityName());
+            $pathObject = new ImageFile();
             $pathObject->setUrl($do->getRelativeDirectoryUrl() . $file['basename']);
 
             /* @var ImageDataObject $do */
             $do = $request->getAttribute(ImageDataObject::class);
-            $do->attachImagePath($pathObject);
+            $do->attachImageFile($pathObject);
         }
 
         /* @TODO бросать исключение или возвращать пустой links ? */
-        if (!$do->getImagesPath()) {
+        if (!$do->getImageFiles()) {
             throw new RuntimeException('Images not found!');
         }
 
