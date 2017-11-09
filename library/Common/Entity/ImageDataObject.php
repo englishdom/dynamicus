@@ -38,6 +38,11 @@ class ImageDataObject implements EntityInterface
     private $relativeDirectoryUrl;
 
     /**
+     * @var string
+     */
+    private $imageExtension;
+
+    /**
      * @var \SplObjectStorage
      */
     private $imagesPath;
@@ -130,6 +135,22 @@ class ImageDataObject implements EntityInterface
     public function setRelativeDirectoryUrl(string $relativeDirectoryUrl)
     {
         $this->relativeDirectoryUrl = $relativeDirectoryUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageExtension(): string
+    {
+        return $this->imageExtension;
+    }
+
+    /**
+     * @param string $imageExtension
+     */
+    public function setImageExtension(string $imageExtension)
+    {
+        $this->imageExtension = $imageExtension;
     }
 
     /**

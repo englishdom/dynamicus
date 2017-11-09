@@ -27,17 +27,27 @@
  */
 /* @var $app \Zend\Expressive\Application */
 
-/* GET /list/word/34 */
+/* GET /list/translation/34 */
 $app->route(
     '/list/{entity}/{entity_id}',
     [Dinamicus\Action\ListAction::class],
     ['GET'],
     'list'
 );
-/* DELETE /word/34 */
+/* DELETE /translation/34 */
 $app->route(
     '/{entity}/{entity_id}',
     [Dinamicus\Action\DeleteAction::class],
     ['DELETE'],
     'delete'
+);
+/* POST /translation/35 */
+$app->route(
+    '/{entity}/{entity_id}',
+    [
+        \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
+        \Dinamicus\Middleware\DownloadImageMiddleware::class,
+    ],
+    ['POST'],
+    'create'
 );
