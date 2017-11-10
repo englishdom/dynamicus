@@ -20,10 +20,6 @@ class ParsingPostArray implements TransformerPluginInterface
         foreach ($options as $optionsRow) {
             $options = new Options();
             $options->setVariant('default');
-            /* Для проверки авторесайза */
-//            $options->setAutoResize(
-//                explode('x', $optionsRow['size'])
-//            );
             $options->setSize(
                 explode('x', $optionsRow['size'])
             );

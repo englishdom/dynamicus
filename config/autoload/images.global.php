@@ -6,9 +6,11 @@ const COMPRESSION_QUALITY = 'quality';
 
 return [
     'images-path' => [
-        /* @TODO нужно перенести absolute-path в фабрику адаптера для Flysystem */
-        'absolute-path' => '/var/www/', /* /var/www/translation/000/000/000/001/1.jpg */
+        /* используется для локального адаптера в Flysystem */
+        'root-path' => '/var/www/', /* /var/www/translation/000/000/000/001/1.jpg */
+        /* для временного аплоада и манипуляций с имиджами */
         'absolute-tmp-path' => '/tmp/images/', /* /tmp/images/translation/000/000/001/1.jpg */
+        /* используется в ответе, подставляется в путь к имиджам */
         'relative-url' => '/images/', /* /images/translation/000/000/000/001/1.jpg */
     ],
     'images' => [

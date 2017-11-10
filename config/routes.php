@@ -46,9 +46,10 @@ $app->route(
     '/{entity}/{entity_id}',
     [
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
-        \Dynamicus\Middleware\DownloadImageMiddleware::class,
-        \Dynamicus\Middleware\ProcessImageMiddleware::class,
-//        \Dynamicus\Middleware\WriteImagesMiddleware::class,
+        Dynamicus\Middleware\DownloadImageMiddleware::class,
+        Dynamicus\Middleware\ProcessImageMiddleware::class,
+        Dynamicus\Middleware\WriteImagesMiddleware::class,
+        Dynamicus\Action\PostAction::class,
     ],
     ['POST'],
     'create'

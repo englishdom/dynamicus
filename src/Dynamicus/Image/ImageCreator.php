@@ -32,8 +32,8 @@ class ImageCreator implements ImageCreatorInterface
     private $processMap = [
         CleanImage::class,
         CompressImage::class,
-//        CropImage::class,
-//        ResizeImage::class,
+        CropImage::class,
+        ResizeImage::class,
         AutoResizeImage::class,
     ];
 
@@ -46,6 +46,13 @@ class ImageCreator implements ImageCreatorInterface
         $this->config = $config;
     }
 
+    /**
+     * Преобразования имиджей из оригинального файла и добавление новых имиджей в коллекцию
+     *
+     * @param ImageDataObject $do
+     * @param array           $request
+     * @return bool
+     */
     public function process(ImageDataObject $do, array $request)
     {
         $originalImageFile = $do->getImageFiles()->current();
@@ -56,6 +63,7 @@ class ImageCreator implements ImageCreatorInterface
             copy($originalImageFile->getPath(), $newImageFile->getPath());
             /* Выполнение процессоров для нового имиджа */
             $this->callProcessors($newImageFile, $options);
+            $do->attachImageFile($newImageFile);
         }
 
         return true;

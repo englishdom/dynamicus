@@ -2,8 +2,11 @@
 
 namespace Dynamicus\Middleware;
 
+use Common\Entity\ImageDataObject;
+use Common\Entity\ImageFile;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use League\Flysystem\FilesystemInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -15,22 +18,50 @@ class WriteImagesMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
+        /* @var ImageDataObject $do */
         $do = $request->getAttribute(ImageDataObject::class);
+        /* @var FilesystemInterface $filesystem */
         $filesystem = $request->getAttribute(FilesystemInterface::class);
-        $this->writeImage($do, $filesystem, $stream);
 
+        /* @var ImageFile $imageFile */
+        foreach ($do->getImageFiles() as $imageFile) {
+            $this->moveImage(
+                $filesystem,
+                $imageFile->getPath(),
+                $this->createNewPath($do->getShardingPath(), $imageFile->getPath())
+            );
+        }
+
+        return $delegate->process($request);
     }
 
-    private function setExtension(ImageDataObject $do, $queryData)
+    /**
+     * Создание нового пути для имиджа
+     * @param $shardingPath
+     * @param $imagePath
+     * @return string
+     */
+    private function createNewPath($shardingPath, $imagePath): string
     {
-        $extension = pathinfo($queryData['data']['links']['url'], PATHINFO_EXTENSION);
-        $do->setImageExtension($extension);
+        $baseName = pathinfo($imagePath, PATHINFO_BASENAME);
+        return $shardingPath . DIRECTORY_SEPARATOR . $baseName;
     }
 
-    private function writeImage(ImageDataObject $do, FilesystemInterface $filesystem, $stream)
+    /**
+     * Копирование имиджа и удаление темпового
+     * @param FilesystemInterface $filesystem
+     * @param string              $tmpFilePath
+     * @param string              $newFilePath
+     * @return bool
+     */
+    private function moveImage(FilesystemInterface $filesystem, string $tmpFilePath, string $newFilePath): bool
     {
-        $filePath = $do->getShardingPath() . DIRECTORY_SEPARATOR
-            . $do->getEntityId() . '.' . $do->getImageExtension();
-        $filesystem->write($filePath, $stream);
+        $resource = fopen($tmpFilePath, 'r');
+        $result = $filesystem->writeStream($newFilePath, $resource);
+        fclose($resource);
+        if ($result) {
+            unlink($tmpFilePath);
+        }
+        return $result;
     }
 }

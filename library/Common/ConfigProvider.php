@@ -2,6 +2,8 @@
 
 namespace Common;
 
+use League\Flysystem\AdapterInterface;
+
 class ConfigProvider
 {
     public function __invoke()
@@ -19,6 +21,7 @@ class ConfigProvider
                 Middleware\PrepareResponseMiddleware::class => Factory\PrepareResponseMiddlewareFactory::class,
                 Middleware\ShardingMiddleware::class => Factory\ShardingMiddlewareFactory::class,
                 Middleware\PrepareFilesystemMiddleware::class => Factory\PrepareFilesystemMiddlewareFactory::class,
+                AdapterInterface::class => Factory\FilesystemAdapterFactory::class,
             ],
         ];
     }

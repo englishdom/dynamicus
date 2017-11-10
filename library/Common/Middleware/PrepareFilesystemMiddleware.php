@@ -2,53 +2,41 @@
 
 namespace Common\Middleware;
 
-use Common\Container\ConfigInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
-use League\Flysystem\Adapter\Local;
+use League\Flysystem\AdapterInterface;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Инициализация flysystem с локальным адаптером
+ * Инициализация flysystem с установленным адаптером
  * @package Common\Middleware
  */
 class PrepareFilesystemMiddleware implements MiddlewareInterface
 {
     /**
-     * @var ConfigInterface
+     * @var AdapterInterface
      */
-    private $config;
+    private $adapter;
 
     /**
      * PrepareFilesystemMiddleware constructor.
-     * @param ConfigInterface $config
+     * @param AdapterInterface $adapter
      */
-    public function __construct(ConfigInterface $config)
+    public function __construct(AdapterInterface $adapter)
     {
-        $this->config = $config;
+        $this->adapter = $adapter;
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $request = $request->withAttribute(
             FilesystemInterface::class,
-            $this->createLocalFilesystem()
+            new Filesystem($this->adapter)
         );
 
         return $delegate->process($request);
-    }
-
-    private function createLocalFilesystem(): FilesystemInterface
-    {
-        $adapter = new Local($this->readRootDirectory());
-        return new Filesystem($adapter);
-    }
-
-    private function readRootDirectory(): string
-    {
-        return $this->config->get('images-path.absolute-path', null);
     }
 }
