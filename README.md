@@ -1,5 +1,9 @@
 # Dynamicus
 
+### Requirements
+* PHP >= 7.1
+* Imagick => 6.0
+
 ### Start server
 `php -S localhost:8888 -t public public/index.php`
 
@@ -11,8 +15,8 @@
 
 Example: /list/translation/34
 
-Response:
-```
+Response [200]:
+```json
 {
   "data": {
     "type": "list/translation",
@@ -44,17 +48,17 @@ Response: 204
 
 Request:
 
-```
+```json
 {
    "data": {
      "resize": [
-       { # Первый имидж для кропа и ресайза
-         "size": "240x168", #Размер необходимого имиджа
+       { /* Первый имидж для кропа и ресайза */
+         "size": "240x168", /* Размер необходимого имиджа */
          "crop": "100x100x580x436"
-          #344x122 - верхняя левая точка отсчета для кропа
-          #542x378 - нижняя правая точка отсчета для кропа
+          /* 344x122 - верхняя левая точка отсчета для кропа */
+          /* 542x378 - нижняя правая точка отсчета для кропа */
        },
-       { # Второй имидж для кропа и ресайза
+       { /* Второй имидж для кропа и ресайза */
          "size": "200x150",
          "crop": "100x100x1100x850"
        }
@@ -65,5 +69,35 @@ Request:
    }
  }
  ```
+ Если не будет прислан массив "resize", тогда будут кропнуты имиджи всех размеров из конфига
+ для указаной ентити.
 
 Response: 204
+
+## Search
+`GET /search/{urlencode(search_text)}`
+
+Response [200]:
+```json
+{
+  "data": {
+    "id": null,
+    "links": [
+      "https:\/\/cdn.pixabay.com\/...",
+      "http:\/\/www.citizensh...",
+      "http:\/\/www.cbcdundalk.o...",
+      "https:\/\/my-personality-te...",
+      "https:\/\/cdn.pixabay.com\/ph...",
+      "https:\/\/www.av-test.org\/filea...",
+      "http:\/\/www.toptieradmissions.com...",
+      "https:\/\/my-personality-test.com...",
+      "http:\/\/mandevilleprimary.edu.jm\/wp...",
+      "https:\/\/cdn.psychologytoday.com\/site..."
+    ]
+  },
+  "meta": {
+    "engine": "Google Search"
+  }
+}
+```
+В лог пишется строка `Dynamicus: Request to Image API`

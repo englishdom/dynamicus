@@ -22,9 +22,4 @@ class PostAction implements ActionInterface
 
         return $delegate->process($request);
     }
-
-    public function getResourceName(ImageDataObject $do): string
-    {
-        return 'post/'.$do->getEntityName();
-    }
 }

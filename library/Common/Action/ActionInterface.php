@@ -15,11 +15,4 @@ interface ActionInterface extends MiddlewareInterface
     const HTTP_CODE = 'http-code';
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface;
-
-    /**
-     * Get resource name
-     * @param ImageDataObject $do
-     * @return string
-     */
-    public function getResourceName(ImageDataObject $do): string;
 }

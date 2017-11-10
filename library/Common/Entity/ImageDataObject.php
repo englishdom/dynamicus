@@ -155,7 +155,7 @@ class ImageDataObject implements EntityInterface
     }
 
     /**
-     * @return \SplObjectStorage
+     * @return \SplObjectStorage|ImageFile[]
      */
     public function getImageFiles(): ?\SplObjectStorage
     {

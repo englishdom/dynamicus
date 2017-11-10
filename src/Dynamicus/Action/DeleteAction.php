@@ -31,9 +31,4 @@ class DeleteAction implements ActionInterface
 
         return $delegate->process($request);
     }
-
-    public function getResourceName(ImageDataObject $do): string
-    {
-        return 'delete/'.$do->getEntityName();
-    }
 }

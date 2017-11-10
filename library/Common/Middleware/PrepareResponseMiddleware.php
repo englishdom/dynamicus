@@ -65,7 +65,6 @@ class PrepareResponseMiddleware implements MiddlewareInterface
         }
 
         $fractalManager = new Manager();
-        $fractalManager->setSerializer(new JsonApiSerializer($this->config->get('host') . 'api'));
         $jsonData = $fractalManager->createData($fractal)->toJson();
 
         $stream = new Stream('php://memory', 'w');

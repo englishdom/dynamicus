@@ -34,7 +34,7 @@ class LoggingErrorListener
     {
         if (in_array(get_class($throwable), $this->config->get('error-handler.logging-exceptions'))) {
             $this->logger->err(
-                'Dinamicus: '.$throwable->getMessage(),
+                'Dynamicus: '.$throwable->getMessage(),
                 ['StackTrace' => $throwable->getTraceAsString()]
             );
         }

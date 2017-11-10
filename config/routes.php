@@ -30,14 +30,24 @@
 /* GET /list/translation/34 */
 $app->route(
     '/list/{entity}/{entity_id}',
-    [Dynamicus\Action\ListAction::class],
+    [
+        \Common\Middleware\PrepareDataObjectMiddleware::class,
+        \Common\Middleware\PrepareFilesystemMiddleware::class,
+        \Common\Middleware\ShardingMiddleware::class,
+        Dynamicus\Action\ListAction::class
+    ],
     ['GET'],
     'list'
 );
 /* DELETE /translation/34 */
 $app->route(
     '/{entity}/{entity_id}',
-    [Dynamicus\Action\DeleteAction::class],
+    [
+        \Common\Middleware\PrepareDataObjectMiddleware::class,
+        \Common\Middleware\PrepareFilesystemMiddleware::class,
+        \Common\Middleware\ShardingMiddleware::class,
+        Dynamicus\Action\DeleteAction::class
+    ],
     ['DELETE'],
     'delete'
 );
@@ -45,6 +55,9 @@ $app->route(
 $app->route(
     '/{entity}/{entity_id}',
     [
+        \Common\Middleware\PrepareDataObjectMiddleware::class,
+        \Common\Middleware\PrepareFilesystemMiddleware::class,
+        \Common\Middleware\ShardingMiddleware::class,
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         Dynamicus\Middleware\DownloadImageMiddleware::class,
         Dynamicus\Middleware\ProcessImageMiddleware::class,
@@ -53,4 +66,13 @@ $app->route(
     ],
     ['POST'],
     'create'
+);
+/* GET /search/{urlencode('search text')} */
+$app->route(
+    '/search/{search_text}',
+    [
+        \Dynamicus\Action\SearchAction::class
+    ],
+    ['GET'],
+    'search'
 );

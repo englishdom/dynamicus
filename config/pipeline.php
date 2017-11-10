@@ -48,11 +48,6 @@ $app->pipe(UrlHelperMiddleware::class);
 // - etc.
 
 // Prepare response in json-api format
-$app->pipe(Middleware\PrepareDataObjectMiddleware::class);
-$app->pipe(Middleware\PrepareFilesystemMiddleware::class);
-/* Получение шардированого пути используется везде */
-$app->pipe(Middleware\ShardingMiddleware::class);
-
 // Register the dispatch middleware in the middleware pipeline
 $app->pipeDispatchMiddleware();
 

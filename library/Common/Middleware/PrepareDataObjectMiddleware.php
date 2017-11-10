@@ -18,7 +18,7 @@ class PrepareDataObjectMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        /* @TODO сделать валидатор. Сейчас не срабатывает exception */
+        /* @TODO сделать валидатор параметров. */
 //        if (!$this->validate($request->getAttribute(RouteResult::class))) {
 //            throw new BadRequestException('entity_id or entity does not exist in url');
 //        }

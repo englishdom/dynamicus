@@ -3,7 +3,7 @@
 namespace Dynamicus\Transformer;
 
 use Common\Entity\ImageDataObject;
-use Common\Entity\ImageFile;
+use Common\Exception\RuntimeException;
 use League\Fractal\TransformerAbstract;
 
 class ImageTransformer extends TransformerAbstract
@@ -13,13 +13,20 @@ class ImageTransformer extends TransformerAbstract
         $data = [
             'id' => $entity->getId(),
         ];
-        /* @var ImageFile $image */
-        foreach ($entity->getImageFiles() as $image) {
-            $fileInfo = $this->getFileInfo($image->getUrl());
-            if (!$fileInfo['size']) {
-                $data['links'][$fileInfo['variant']] = $image->getUrl();
-            } else {
-                $data['links'][$fileInfo['variant']][$fileInfo['size']] = $image->getUrl();
+
+        /* @TODO бросать исключение или возвращать пустой links ? */
+        if (!$entity->getImageFiles()) {
+            throw new RuntimeException('Images not found!');
+        }
+
+        if ($entity->getImageFiles()) {
+            foreach ($entity->getImageFiles() as $image) {
+                $fileInfo = $this->getFileInfo($image->getUrl());
+                if (!$fileInfo['size']) {
+                    $data['links'][$fileInfo['variant']] = $image->getUrl();
+                } else {
+                    $data['links'][$fileInfo['variant']][$fileInfo['size']] = $image->getUrl();
+                }
             }
         }
         return $data;

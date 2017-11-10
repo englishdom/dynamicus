@@ -58,11 +58,6 @@ class ListAction implements ActionInterface
             $do->attachImageFile($pathObject);
         }
 
-        /* @TODO бросать исключение или возвращать пустой links ? */
-        if (!$do->getImageFiles()) {
-            throw new RuntimeException('Images not found!');
-        }
-
         $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));
 
         $request = $request
