@@ -5,6 +5,7 @@ namespace Dynamicus\Image;
 use Common\Container\ConfigInterface;
 use Common\Entity\ImageDataObject;
 use Common\Entity\ImageFile;
+use Common\Exception\NotFoundException;
 use Dynamicus\Image\Processor\AutoResizeImage;
 use Dynamicus\Image\Processor\CleanImage;
 use Dynamicus\Image\Processor\CompressImage;
@@ -57,7 +58,8 @@ class ImageCreator implements ImageCreatorInterface
     {
         $originalImageFile = $do->getImageFiles()->current();
 
-        foreach ($this->getOptionsContainer($request) as $options) {
+        /* @var Options $options */
+        foreach ($this->getOptionsContainer($request, $do->getEntityName()) as $options) {
             $newImageFile = $this->createImageFile($options, $do);
             /* Копирование оригинального имиджа в новый файл */
             copy($originalImageFile->getPath(), $newImageFile->getPath());
@@ -71,17 +73,23 @@ class ImageCreator implements ImageCreatorInterface
 
     /**
      * Получение контейнера с опциами ресайза и кропа
-     * @param array $request
-     * @return \SplObjectStorage|Options[]
+     * @param array  $request
+     * @param string $entityName
+     * @return \SplObjectStorage
+     * @throws NotFoundException
      */
-    private function getOptionsContainer(array $request): \SplObjectStorage
+    private function getOptionsContainer(array $request, string $entityName): \SplObjectStorage
     {
-        if (isset($request['data']['crop']) && !empty($request['data']['crop'])) {
+        if (isset($request['data']['resize']) && !empty($request['data']['resize'])) {
             $plugin = new ParsingPostArray();
-            $transformationParams = $request['data']['crop'];
+            $transformationParams = $request['data']['resize'];
         } else {
             $plugin = new ParsingConfigArray();
-            $transformationParams = $this->config->get('images.'.$request['data']['type']);
+            $transformationParams = $this->config->get('images.'.$entityName);
+            /* Ошибка если в конфиге не найдены размеры для указаной entity */
+            if (!$transformationParams) {
+                throw new NotFoundException('The image\'s config does not exist for entity: '.$entityName);
+            }
         }
         $transformer = new Transformer();
         $transformer->setPlugin($plugin);

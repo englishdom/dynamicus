@@ -24,10 +24,7 @@ class ParsingPostArray implements TransformerPluginInterface
                 explode('x', $optionsRow['size'])
             );
             $options->setCrop(
-                array_merge(
-                    explode('x', $optionsRow['point']),
-                    explode('x', $optionsRow['select'])
-                )
+                explode('x', $optionsRow['crop'])
             );
 
             $storage->attach($options);

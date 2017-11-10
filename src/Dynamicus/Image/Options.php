@@ -8,14 +8,13 @@ namespace Dynamicus\Image;
 class Options
 {
     private $variant;
-    /* Размер для ресайза рисунка от центра и кропа лишних граней */
     private $autoResize = [];
     private $size = [];
     private $crop = [];
     private $quality;
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getVariant(): string
     {
@@ -23,7 +22,7 @@ class Options
     }
 
     /**
-     * @param mixed $variant
+     * @param string $variant
      */
     public function setVariant(string $variant)
     {
@@ -31,7 +30,7 @@ class Options
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getSize(): ?array
     {
@@ -39,7 +38,9 @@ class Options
     }
 
     /**
-     * @param mixed $size
+     * Массив из 2х значений.
+     * 1е значение - ширина, 2е значение - высота
+     * @param array $size
      */
     public function setSize(array $size)
     {
@@ -47,7 +48,7 @@ class Options
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getCrop(): ?array
     {
@@ -55,7 +56,10 @@ class Options
     }
 
     /**
-     * @param mixed $crop
+     * Массив из 4х значений.
+     * 1,2 значения - координаты верхней левой точки изображения
+     * 3,4 значения - координаты нижней правой точки изображения
+     * @param array $crop
      */
     public function setCrop(array $crop)
     {
@@ -71,6 +75,11 @@ class Options
     }
 
     /**
+     * Массив из 2х значений
+     * 1е значение - ширина
+     * 2е значение - высота
+     * Необходимо для автоматического ресайза и кропа.
+     * @see \Dynamicus\Image\Processor\AutoResizeImage
      * @param array $autoResize
      */
     public function setAutoResize(array $autoResize)
