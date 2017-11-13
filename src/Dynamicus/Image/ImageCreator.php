@@ -49,7 +49,7 @@ class ImageCreator implements ImageCreatorInterface
 
     /**
      * Преобразования имиджей из оригинального файла и добавление новых имиджей в коллекцию
-     *
+     * @TODO: добавить возможность нарезки других форматов картинок
      * @param ImageDataObject $do
      * @param array           $request
      * @return bool

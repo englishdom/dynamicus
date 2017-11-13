@@ -32,6 +32,7 @@ class LoggingErrorListener
 
     public function __invoke(Throwable $throwable, ServerRequestInterface $request, ResponseInterface $response)
     {
+        // пишем в грей лог только те ошибки, которые описанны в конфиге
         if (in_array(get_class($throwable), $this->config->get('error-handler.logging-exceptions'))) {
             $this->logger->err(
                 'Dynamicus: '.$throwable->getMessage(),

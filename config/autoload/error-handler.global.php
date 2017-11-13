@@ -37,6 +37,8 @@ return [
             ErrorException::class,
             \Exception::class,
             \Zend\ServiceManager\Exception\ServiceNotCreatedException::class,
+            /* Неправильный размер имиджа */
+            Exception\WrongImageSizeException::class,
         ],
     ]
 ];

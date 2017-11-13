@@ -1,30 +1,4 @@
 <?php
-/**
- * Setup routes with a single request method:
- *
- * $app->get('/', App\Action\HomePageAction::class, 'home');
- * $app->post('/album', App\Action\AlbumCreateAction::class, 'album.create');
- * $app->put('/album/:id', App\Action\AlbumUpdateAction::class, 'album.put');
- * $app->patch('/album/:id', App\Action\AlbumUpdateAction::class, 'album.patch');
- * $app->delete('/album/:id', App\Action\AlbumDeleteAction::class, 'album.delete');
- *
- * Or with multiple request methods:
- *
- * $app->route('/contact', App\Action\ContactAction::class, ['GET', 'POST', ...], 'contact');
- *
- * Or handling all request methods:
- *
- * $app->route('/contact', App\Action\ContactAction::class)->setName('contact');
- *
- * or:
- *
- * $app->route(
- *     '/contact',
- *     App\Action\ContactAction::class,
- *     Zend\Expressive\Router\Route::HTTP_METHOD_ANY,
- *     'contact'
- * );
- */
 /* @var $app \Zend\Expressive\Application */
 
 /* GET /list/translation/34 */
@@ -55,13 +29,23 @@ $app->route(
 $app->route(
     '/{entity}/{entity_id}',
     [
+        /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
-        \Common\Middleware\PrepareFilesystemMiddleware::class,
-        \Common\Middleware\ShardingMiddleware::class,
+        /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
+        /* Сверка разрешенных размеров имиджа с конфигом */
+        \Dynamicus\Middleware\CheckImageSizeMiddleware::class,
+        /* Подготовка Flysystem */
+        \Common\Middleware\PrepareFilesystemMiddleware::class,
+        /* Шардирование */
+        \Common\Middleware\ShardingMiddleware::class,
+        /* Загрузка имиджа и проверка типа */
         Dynamicus\Middleware\DownloadImageMiddleware::class,
+        /* Обработка имиджа */
         Dynamicus\Middleware\ProcessImageMiddleware::class,
+        /* Запись имиджа в установленную файловую систему */
         Dynamicus\Middleware\WriteImagesMiddleware::class,
+        /* Ответ */
         Dynamicus\Action\PostAction::class,
     ],
     ['POST'],

@@ -27,7 +27,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
 
         /* Объект ImageFile с путями */
         $image = $this->getImageFile($do, $queryData['data']['links']['url']);
-        /* Загрузка имиджа в стрим */
+        /* Загрузка имиджа в tmp */
         $this->uploadImage($queryData['data']['links']['url'], $image->getPath());
 
         /* Добавление имиджа в коллекцию имиджей */
@@ -81,7 +81,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
     {
         $result = null;
         if (!file_exists($path)) {
-            $result = mkdir($path, 0777, true);
+            $result = mkdir($path, 0775, true);
         }
 
         return $result;

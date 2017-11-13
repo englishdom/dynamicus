@@ -11,13 +11,14 @@ return [
         /* для временного аплоада и манипуляций с имиджами */
         'absolute-tmp-path' => '/tmp/images/', /* /tmp/images/translation/000/000/001/1.jpg */
         /* используется в ответе, подставляется в путь к имиджам */
-        'relative-url' => '/dynamicus/', /* /images/translation/000/000/000/001/1.jpg */
+        'relative-url' => '/dynamicus/', /* /dynamicus/translation/000/000/000/001/1.jpg */
     ],
     'images' => [
         'translation' => [
             'default' => [
-                [WIDTH => 66, HEIGHT => 50, COMPRESSION_QUALITY => 80], // skills/glossary/learning/18014/ translations images in list
-                [WIDTH => 240, HEIGHT => 168, COMPRESSION_QUALITY => 80], // skills/glossary/learning/18014/#word/like images for translations
+                [WIDTH => 66, HEIGHT => 50], // skills/glossary/learning/18014/ translations images in list
+                [WIDTH => 240, HEIGHT => 168, COMPRESSION_QUALITY => 90], // skills/glossary/learning/18014/#word/like images for translations
+                [WIDTH => 600, HEIGHT => 432, COMPRESSION_QUALITY => 80], // skills/glossary/learning/18014/#word/like images for translations
             ],
         ],
         'word-set' => [
