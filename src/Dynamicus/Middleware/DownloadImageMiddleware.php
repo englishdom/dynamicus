@@ -41,7 +41,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
         if (!$this->validImageType($image->getPath())) {
             /* Удаление файла с неправильным типом */
             unlink($image->getPath());
-            throw new RuntimeException('Filetype is not a image. It was been removed!');
+            throw new RuntimeException('Filetype is not an image. It has been removed!');
         }
 
         /* Добавление имиджа в коллекцию имиджей */
@@ -108,6 +108,11 @@ class DownloadImageMiddleware implements MiddlewareInterface
         return new Client(['handler' => $stack]);
     }
 
+    /**
+     * Получение размера удаленного файла в байтах
+     * @param $fileUrl
+     * @return bool
+     */
     private function checkFileSize($fileUrl): bool
     {
         $response = $this->getGuzzleClient()->head($fileUrl);
@@ -115,10 +120,16 @@ class DownloadImageMiddleware implements MiddlewareInterface
         return $length < self::MAX_FILE_SIZE;
     }
 
-    private function validImageType($filePath)
+    /**
+     * Проверка типа файла из разрешенных
+     * @param $filePath
+     * @return bool
+     */
+    private function validImageType($filePath): bool
     {
-        $allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
-        $detectedType = exif_imagetype($filePath);
+        $allowedTypes = array('image/jpeg', 'image/jpg', 'image/png', 'image/svg');
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $detectedType = finfo_file($finfo, $filePath);
         return in_array($detectedType, $allowedTypes);
     }
 }
