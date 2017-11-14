@@ -12,8 +12,6 @@ $cacheConfig = [
 
 $aggregator = new ConfigAggregator([
     \Zend\Log\ConfigProvider::class,
-    // Include cache configuration
-    new ArrayProvider($cacheConfig),
     // Base config provider
     Common\ConfigProvider::class,
     Dynamicus\ConfigProvider::class,
@@ -28,6 +26,6 @@ $aggregator = new ConfigAggregator([
 
     // Load development config if it exists
     new PhpFileProvider('config/development.config.php'),
-], $cacheConfig['config_cache_path']);
+]);
 
 return $aggregator->getMergedConfig();
