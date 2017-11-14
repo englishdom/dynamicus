@@ -4,8 +4,8 @@ namespace Dynamicus\Middleware;
 
 use Common\Entity\ImageDataObject;
 use Common\Entity\ImageFile;
+use Common\Exception\RuntimeException;
 use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -19,16 +19,30 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class DownloadImageMiddleware implements MiddlewareInterface
 {
+    const MAX_FILE_SIZE = 10485760 /* 10Mb */;
+
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         /* @var ImageDataObject $do */
         $do = $request->getAttribute(ImageDataObject::class);
         $queryData = $request->getParsedBody();
 
+        /* Проверка размера загружаемого имиджа */
+        if (!$this->checkFileSize($queryData['data']['links']['url'])) {
+            throw new RuntimeException('The downloading file size is more than 10Mb');
+        }
+
         /* Объект ImageFile с путями */
         $image = $this->getImageFile($do, $queryData['data']['links']['url']);
         /* Загрузка имиджа в tmp */
         $this->uploadImage($queryData['data']['links']['url'], $image->getPath());
+
+        /* Проверка типа имиджа */
+        if (!$this->validImageType($image->getPath())) {
+            /* Удаление файла с неправильным типом */
+            unlink($image->getPath());
+            throw new RuntimeException('Filetype is not a image. It was been removed!');
+        }
 
         /* Добавление имиджа в коллекцию имиджей */
         $do->attachImageFile($image);
@@ -87,10 +101,24 @@ class DownloadImageMiddleware implements MiddlewareInterface
         return $result;
     }
 
-    private function getGuzzleClient(): ClientInterface
+    private function getGuzzleClient(): Client
     {
         $handler = new CurlHandler();
         $stack = HandlerStack::create($handler);
         return new Client(['handler' => $stack]);
+    }
+
+    private function checkFileSize($fileUrl): bool
+    {
+        $response = $this->getGuzzleClient()->head($fileUrl);
+        $length = $response->getHeader('Content-Length')[0];
+        return $length < self::MAX_FILE_SIZE;
+    }
+
+    private function validImageType($filePath)
+    {
+        $allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
+        $detectedType = exif_imagetype($filePath);
+        return in_array($detectedType, $allowedTypes);
     }
 }
