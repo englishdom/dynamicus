@@ -47,7 +47,7 @@ class SearchAction implements ActionInterface
         $collection = $this->adapter->search($searchText);
         $do->setImageFiles($collection);
 
-        $this->writeToLog();
+        $this->writeToLog($searchText);
 
         $item = new Item($do, new SearchImageTransformer(), 'search');
 
@@ -60,11 +60,12 @@ class SearchAction implements ActionInterface
 
     /**
      * @TODO какую инфу нцжно писать в лог ?
+     * @param $searchQuery
      */
-    private function writeToLog()
+    private function writeToLog($searchQuery)
     {
         $this->logger->err(
-            'Dynamicus: Request to Image API',
+            'Dynamicus: Request to Image API for `'.$searchQuery.'`',
             ['StackTrace' => '']
         );
     }

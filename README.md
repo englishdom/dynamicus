@@ -1,9 +1,3 @@
-- Взять у Антона дев конфиг для имаджей (поставлю на него лимит)
-   и переделать загрузку конфига (через енв)
-- зжатие имаджей tiny png спросить у Антона
-
-- параметры в лог - кто дёргает search
- 
 # Dynamicus
 
 ### Requirements
@@ -106,4 +100,4 @@ Response [200]:
   }
 }
 ```
-В лог пишется строка `Dynamicus: Request to Image API`
+В лог пишется строка `Dynamicus: Request to Image API for {search query}`
