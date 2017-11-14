@@ -61,7 +61,7 @@ class CheckImageSizeMiddleware implements MiddlewareInterface
         $result = false;
         foreach ($fromConfig as $variant) {
             foreach ($variant as $options) {
-                $sizeFromConfig = $options[WIDTH] . 'x' . $options[HEIGHT];
+                $sizeFromConfig = $options['width'] . 'x' . $options['height'];
                 if ($sizeFromConfig == $size) {
                     $result = true;
                     break 2;
