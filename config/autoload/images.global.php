@@ -16,14 +16,16 @@ return [
     'images' => [
         'translation' => [
             'default' => [
-                [WIDTH => 66, HEIGHT => 50], // skills/glossary/learning/18014/ translations images in list
-                [WIDTH => 240, HEIGHT => 168, COMPRESSION_QUALITY => 90], // skills/glossary/learning/18014/#word/like images for translations
-                [WIDTH => 600, HEIGHT => 432, COMPRESSION_QUALITY => 80], // skills/glossary/learning/18014/#word/like images for translations
+                [WIDTH => 66, HEIGHT => 50], // размер на списке слов
+                [WIDTH => 240, HEIGHT => 168, COMPRESSION_QUALITY => 90], // размер для карточки слова
+                [WIDTH => 256, HEIGHT => 190, COMPRESSION_QUALITY => 90], // размер для тренировки для веб версии
+                [WIDTH => 600, HEIGHT => 432, COMPRESSION_QUALITY => 80], // размер для тренировки для мобильной версии
             ],
         ],
         'word-set' => [
             'default' => [
-                [WIDTH => 180, HEIGHT => 115, COMPRESSION_QUALITY => 80], // skills/glossary/ word sets list
+                [WIDTH => 180, HEIGHT => 115, COMPRESSION_QUALITY => 80], // skills/glossary/ список вордсетов
+                [WIDTH => 220, HEIGHT => 141, COMPRESSION_QUALITY => 80], // Картинка на /home в списке заданий
             ]
         ],
         'course-int' => [
