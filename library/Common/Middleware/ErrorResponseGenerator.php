@@ -86,8 +86,8 @@ final class ErrorResponseGenerator
             $httpCode = $this->responseCode[$exceptionName];
             $result = null;
         } else {
-            $result = $this->fillTemplate($request, $exception, Http\Response::STATUS_CODE_503);
-            $httpCode = 200;
+            $result = $this->fillTemplate($request, $exception, Http\Response::STATUS_CODE_400);
+            $httpCode = Http\Response::STATUS_CODE_400;
             $result = json_encode($result);
         }
 
