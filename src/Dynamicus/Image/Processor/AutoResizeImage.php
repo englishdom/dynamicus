@@ -17,9 +17,11 @@ class AutoResizeImage extends AbstractImage implements ProcessorInterface
             $imagick = $this->getImagick($imageFile->getPath());
             $newSizes = $this->getBiggerSizes($imagick, $options);
             /* Ресайз имиджа по большей стороне */
-            $imagick->adaptiveResizeImage(
+            $imagick->resizeImage(
                 $newSizes[0],
-                $newSizes[1]
+                $newSizes[1],
+                \Imagick::FILTER_LANCZOS,
+                1
             );
             /* Кроп имиджа от центра */
             $newCoordinates = $this->getCoordinatesFromCenter($imagick, $options);
