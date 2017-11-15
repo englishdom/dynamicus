@@ -77,7 +77,7 @@ Response: 204
 ## Search
 `GET /search/{urlencode(search_text)}`
 
-Response [200]:
+Response [204]:
 ```json
 {
   "data": {
