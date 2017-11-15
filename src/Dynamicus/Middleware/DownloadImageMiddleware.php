@@ -59,7 +59,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
      */
     private function getImageFile(ImageDataObject $do, $imageUrl): ImageFile
     {
-        $extension = pathinfo($imageUrl, PATHINFO_EXTENSION);
+        $extension = pathinfo(parse_url($imageUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
         $do->setExtension($extension);
 
         /* Создание директорий */
