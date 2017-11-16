@@ -2,6 +2,7 @@
 
 namespace Dynamicus\Image\Transformer;
 
+use Common\Entity\ImageDataObject;
 use Dynamicus\Image\Options;
 use Dynamicus\Image\Transformer\Plugin\TransformerPluginInterface;
 
@@ -22,8 +23,9 @@ interface TransformerInterface
     public function setPlugin(TransformerPluginInterface $plugin);
 
     /**
-     * @param array $options
+     * @param ImageDataObject $do
+     * @param array           $options
      * @return \SplObjectStorage|Options[]
      */
-    public function transform(array $options): \SplObjectStorage;
+    public function transform(ImageDataObject $do, array $options): \SplObjectStorage;
 }

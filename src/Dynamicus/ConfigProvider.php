@@ -2,6 +2,7 @@
 
 namespace Dynamicus;
 
+use Dynamicus\Action\ListAction;
 use Dynamicus\Action\SearchAction;
 use Dynamicus\Factory;
 use Dynamicus\Image\ImageCreatorInterface;
@@ -30,6 +31,7 @@ class ConfigProvider
                 ImageCreatorInterface::class => Factory\ImageCreatorFactory::class,
                 ProcessImageMiddleware::class => Factory\ProcessImageMiddlewareFactory::class,
                 CheckImageSizeMiddleware::class => Factory\CheckImageSizeMiddlewareFactory::class,
+                ListAction::class => Factory\ListActionFactory::class,
                 SearchAction::class => Factory\SearchActionFactory::class,
                 /* Устанавливается только 1 адаптер GoogleSearchAdapter. */
                 SearchAdapterInterface::class => Factory\SearchAdapterFactory::class,

@@ -22,6 +22,8 @@ use Dynamicus\Image\Transformer\Transformer;
  */
 class ImageCreator implements ImageCreatorInterface
 {
+    use ImageCreatorTrait;
+
     /**
      * @var ConfigInterface
      */
@@ -59,7 +61,7 @@ class ImageCreator implements ImageCreatorInterface
         $originalImageFile = $do->getImageFiles()->current();
 
         /* @var Options $options */
-        foreach ($this->getOptionsContainer($request, $do->getEntityName()) as $options) {
+        foreach ($this->getOptionsContainer($do, $request) as $options) {
             $newImageFile = $this->createImageFile($options, $do);
             /* Копирование оригинального имиджа в новый файл */
             copy($originalImageFile->getPath(), $newImageFile->getPath());
@@ -73,28 +75,28 @@ class ImageCreator implements ImageCreatorInterface
 
     /**
      * Получение контейнера с опциами ресайза и кропа
-     * @param array  $request
-     * @param string $entityName
+     * @param ImageDataObject $do
+     * @param array           $request
      * @return \SplObjectStorage
      * @throws NotFoundException
      */
-    private function getOptionsContainer(array $request, string $entityName): \SplObjectStorage
+    private function getOptionsContainer(ImageDataObject $do, array $request): \SplObjectStorage
     {
         if (isset($request['data']['resize']) && !empty($request['data']['resize'])) {
             $plugin = new ParsingPostArray();
             $transformationParams = $request['data']['resize'];
         } else {
             $plugin = new ParsingConfigArray();
-            $transformationParams = $this->config->get('images.'.$entityName);
+            $transformationParams = $this->config->get('images.'.$do->getEntityName());
             /* Ошибка если в конфиге не найдены размеры для указаной entity */
             if (!$transformationParams) {
-                throw new NotFoundException('The image\'s config does not exist for entity: '.$entityName);
+                throw new NotFoundException('The image\'s config does not exist for entity: '.$do->getEntityName());
             }
         }
         $transformer = new Transformer();
         $transformer->setPlugin($plugin);
 
-        return $transformer->transform($transformationParams);
+        return $transformer->transform($do, $transformationParams);
     }
 
     /**
@@ -106,13 +108,7 @@ class ImageCreator implements ImageCreatorInterface
     private function createImageFile(Options $options, ImageDataObject $do): ImageFile
     {
         $imageFile = new ImageFile();
-        $fileName = sprintf(
-            '%s_%s_%s.%s',
-            $do->getEntityId(),
-            $options->getVariant(),
-            $options->getSize() ? implode('x', $options->getSize()) : implode('x', $options->getAutoResize()),
-            $do->getExtension()
-        );
+        $fileName = $this->makeFileName($do, $options);
         $path = $do->getTmpDirectoryPath() . $fileName;
         $imageFile->setPath($path);
 

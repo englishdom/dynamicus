@@ -1,8 +1,11 @@
 <?php
 
-const WIDTH = 'width';
-const HEIGHT = 'height';
-const COMPRESSION_QUALITY = 'quality';
+define('WIDTH', 'width');
+define('HEIGHT', 'height');
+define('QUALITY', 'quality');
+define('FILE_TYPE', 'file_type');
+define('TYPE_JPG', 'jpg');
+define('TYPE_PNG', 'png');
 
 return [
     'images-path' => [
@@ -16,33 +19,38 @@ return [
     'images' => [
         'translation' => [
             'default' => [
+                FILE_TYPE => TYPE_JPG,
                 [WIDTH => 66, HEIGHT => 50], // размер на списке слов
-                [WIDTH => 240, HEIGHT => 168, COMPRESSION_QUALITY => 90], // размер для карточки слова
-                [WIDTH => 256, HEIGHT => 190, COMPRESSION_QUALITY => 90], // размер для тренировки для веб версии
-                [WIDTH => 600, HEIGHT => 432, COMPRESSION_QUALITY => 80], // размер для тренировки для мобильной версии
+                [WIDTH => 240, HEIGHT => 168, QUALITY => 90], // размер для карточки слова
+                [WIDTH => 256, HEIGHT => 190, QUALITY => 90], // размер для тренировки для веб версии
+                [WIDTH => 600, HEIGHT => 432, QUALITY => 80], // размер для тренировки для мобильной версии
             ],
         ],
         'word-set' => [
             'default' => [
-                [WIDTH => 180, HEIGHT => 115, COMPRESSION_QUALITY => 80], // skills/glossary/ список вордсетов
-                [WIDTH => 220, HEIGHT => 141, COMPRESSION_QUALITY => 80], // Картинка на /home в списке заданий
+                FILE_TYPE => TYPE_JPG,
+                [WIDTH => 180, HEIGHT => 115, QUALITY => 80], // skills/glossary/ список вордсетов
+                [WIDTH => 220, HEIGHT => 141, QUALITY => 80], // Картинка на /home в списке заданий
             ]
         ],
         'course-int' => [
             'default' => [
-                [WIDTH => 960, HEIGHT => 172, COMPRESSION_QUALITY => 80], // Course lesson header new image
+                FILE_TYPE => TYPE_JPG,
+                [WIDTH => 960, HEIGHT => 172, QUALITY => 80,FILE_TYPE => TYPE_JPG], // Course lesson header new image
             ],
             'exercise' => [
-                [WIDTH => 940, HEIGHT => 532, COMPRESSION_QUALITY => 80], // Courses-int, exercises, group B
-                [WIDTH => 600, HEIGHT => 432, COMPRESSION_QUALITY => 80], // Courses-int, exercises, group C
-                [WIDTH => 940, HEIGHT => 293, COMPRESSION_QUALITY => 80], // Courses-int, LifeStory
+                FILE_TYPE => TYPE_JPG,
+                [WIDTH => 940, HEIGHT => 532, QUALITY => 80], // Courses-int, exercises, group B
+                [WIDTH => 600, HEIGHT => 432, QUALITY => 80], // Courses-int, exercises, group C
+                [WIDTH => 940, HEIGHT => 293, QUALITY => 80], // Courses-int, LifeStory
             ]
         ],
         'ed-class' => [
             'default' => [
-                [WIDTH => 300, HEIGHT => 181, COMPRESSION_QUALITY => 80], // Ed Class small image
-                [WIDTH => 940, HEIGHT => 384, COMPRESSION_QUALITY => 80], // Ed Class big image
-                [WIDTH => 940, HEIGHT => 172, COMPRESSION_QUALITY => 80], // Ed lesson
+                FILE_TYPE => TYPE_JPG,
+                [WIDTH => 300, HEIGHT => 181, QUALITY => 80], // Ed Class small image
+                [WIDTH => 940, HEIGHT => 384, QUALITY => 80], // Ed Class big image
+                [WIDTH => 940, HEIGHT => 172, QUALITY => 80], // Ed lesson
             ]
         ]
     ]
