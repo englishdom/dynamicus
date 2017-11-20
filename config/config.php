@@ -4,6 +4,9 @@ use Zend\ConfigAggregator\ArrayProvider;
 use Zend\ConfigAggregator\ConfigAggregator;
 use Zend\ConfigAggregator\PhpFileProvider;
 
+$dotenv = new Dotenv\Dotenv('./');
+$dotenv->load();
+
 $aggregator = new ConfigAggregator([
     \Zend\Log\ConfigProvider::class,
     // Base config provider

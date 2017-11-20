@@ -15,6 +15,7 @@
         "league/flysystem": "^1.0",
         "league/fractal": "^0.17.0",
         "roave/security-advisories": "dev-master",
+        "vlucas/phpdotenv": "^2.4",
         "zendframework/zend-component-installer": "^1.0",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-expressive": "^2.0.5",
@@ -31,6 +32,9 @@
         "zfcampus/zf-development-mode": "^3.1"
     },
     "autoload": {
+        "files": [
+            "library/Common/Config/env.php"
+        ],
         "psr-4": {
             "Common\\": "library/Common/",
             "Dynamicus\\": "src/Dynamicus/"
