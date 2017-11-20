@@ -27,15 +27,11 @@ class DownloadImageMiddleware implements MiddlewareInterface
         $do = $request->getAttribute(ImageDataObject::class);
         $queryData = $request->getParsedBody();
 
-        /* Проверка размера загружаемого имиджа */
-        if (!$this->checkFileSize($queryData['data']['links']['url'])) {
-            throw new RuntimeException('The downloading file size is more than 10Mb');
-        }
-
         /* Объект ImageFile с путями */
         $image = $this->getImageFile($do, $queryData['data']['links']['url']);
         /* Загрузка имиджа в tmp */
-        $this->uploadImage($queryData['data']['links']['url'], $image->getPath());
+        $response = $this->uploadImage($queryData['data']['links']['url']);
+        $this->allowDownloadingSize($response, $image->getPath());
 
         /* Проверка типа имиджа */
         if (!$this->validImageType($image->getPath())) {
@@ -79,16 +75,46 @@ class DownloadImageMiddleware implements MiddlewareInterface
      * Загрузка файла в локальную папку
      * http://guzzle.readthedocs.io/en/latest/request-options.html#sink-option
      * @param string $fromFile
-     * @param string $toFile
+     * @return ResponseInterface
      */
-    private function uploadImage($fromFile, $toFile)
+    private function uploadImage($fromFile): ResponseInterface
     {
-        $resource = fopen($toFile, 'w');
-        $this->getGuzzleClient()->request(
+        $response = $this->getGuzzleClient()->request(
             'GET',
             $fromFile,
-            ['sink' => $resource]
+            ['stream' => true]
         );
+        return $response;
+    }
+
+    /**
+     * Открытие ресурса на запись
+     * Чтение из потока по 1Кб
+     * Запись в ресурс или Exception с удалением файла
+     * Закрытие ресурса
+     * @param ResponseInterface $response
+     * @param                   $toFile
+     * @throws \Exception
+     */
+    private function allowDownloadingSize(ResponseInterface $response, $toFile)
+    {
+        $resource = fopen($toFile, 'w');
+        $body = $response->getBody();
+
+        $bytesRead = 0;
+        $dataRead = "";
+        while (!$body->eof()) {
+            $data = $body->read(1024);
+            $dataRead .= $data;
+            $bytesRead += strlen($data);
+            if($bytesRead >= self::MAX_FILE_SIZE) {
+                fclose($resource);
+                unlink($toFile);
+                throw new RuntimeException('The image\'s file size more 10Mb');
+            }
+            fwrite($resource, $data);
+        }
+        fclose($resource);
     }
 
     private function createFoldersRecursive($path): ?bool
@@ -106,18 +132,6 @@ class DownloadImageMiddleware implements MiddlewareInterface
         $handler = new CurlHandler();
         $stack = HandlerStack::create($handler);
         return new Client(['handler' => $stack]);
-    }
-
-    /**
-     * Получение размера удаленного файла в байтах
-     * @param $fileUrl
-     * @return bool
-     */
-    private function checkFileSize($fileUrl): bool
-    {
-        $response = $this->getGuzzleClient()->head($fileUrl);
-        $length = $response->getHeader('Content-Length')[0];
-        return $length < self::MAX_FILE_SIZE;
     }
 
     /**

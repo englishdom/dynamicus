@@ -10,5 +10,14 @@
  * `composer development-enable`.
  */
 
+$host = (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+$ip = (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '');
+
 return [
+    'graylog' => [
+        'host' => 'graylog.lc',
+        'port' => '12202',
+        'protocol' => 'TCP',
+        'facility' => 'Dinamicus. HOST: ' . $host . ' IP:' . $ip,
+    ]
 ];

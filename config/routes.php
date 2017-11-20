@@ -60,3 +60,29 @@ $app->route(
     ['GET'],
     'search'
 );
+/* POST /generate/{entity}/{entity_id}/{urlencode('search text')} - Search images and upload */
+$app->route(
+    '/generate/{entity}/{entity_id}/{search_text}',
+    [
+        /* Поиск имиджей в гугле */
+        \Dynamicus\Action\SearchAction::class,
+        /* Подготовка DO */
+        \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Подготовка json массива */
+        \Dynamicus\Action\GenerateAction::class,
+        /* Подготовка Flysystem */
+        \Common\Middleware\PrepareFilesystemMiddleware::class,
+        /* Шардирование */
+        \Common\Middleware\ShardingMiddleware::class,
+        /* Загрузка имиджа и проверка типа */
+        Dynamicus\Middleware\DownloadImageMiddleware::class,
+        /* Обработка имиджа */
+        Dynamicus\Middleware\ProcessImageMiddleware::class,
+        /* Запись имиджа в установленную файловую систему */
+        Dynamicus\Middleware\WriteImagesMiddleware::class,
+        /* Ответ */
+        Dynamicus\Action\PostAction::class,
+    ],
+    ['POST'],
+    'generate'
+);

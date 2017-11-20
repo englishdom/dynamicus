@@ -14,7 +14,7 @@ return [
         ],
     ],
     'graylog' => [
-        'host' => 'graylog.lc',
+        'host' => '148.251.1.228',
         'port' => '12202',
         'protocol' => 'TCP',
         'facility' => 'Dinamicus. HOST: ' . $host . ' IP:' . $ip,
