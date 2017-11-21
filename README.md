@@ -74,13 +74,6 @@ Request:
 
 Response: 204
 
-## Generate
-`POST /generate/{entity}/{entity_id}/{urlencode(search_text)}`
-
-Получает 1 имидж из гугла по поисковой фразе и резайзит для указанной entity
-
-Response [204]
-
 ## Search
 `GET /search/{urlencode(search_text)}`
 
