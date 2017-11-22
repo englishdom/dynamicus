@@ -24,13 +24,6 @@ class Transformer implements TransformerInterface
      */
     public function transform(ImageDataObject $do, array $options): \SplObjectStorage
     {
-        foreach ($options as $variant => $sizes) {
-            if (isset($options[$variant][FILE_TYPE])) {
-                $do->setExtension($options[$variant][FILE_TYPE]);
-                unset($options[$variant][FILE_TYPE]);
-            }
-        }
-
         return $this->getPlugin()->transform($options);
     }
 

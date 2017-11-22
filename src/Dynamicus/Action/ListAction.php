@@ -54,6 +54,8 @@ class ListAction implements ActionInterface
     {
         /* @var ImageDataObject $do */
         $do = $request->getAttribute(ImageDataObject::class);
+        /* Добавление расширения, так как мы не читаем файловую систему и не знаем реальное расширение */
+        $do->setExtension(TYPE_JPG);
         $this->createImagesPath($do);
 
         $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));
