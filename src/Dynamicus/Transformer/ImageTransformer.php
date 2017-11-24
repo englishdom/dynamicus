@@ -14,7 +14,6 @@ class ImageTransformer extends TransformerAbstract
             'id' => $entity->getId(),
         ];
 
-        /* @TODO бросать исключение или возвращать пустой links ? */
         if (!$entity->getImageFiles()) {
             throw new RuntimeException('Images not found!');
         }

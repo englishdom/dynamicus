@@ -73,6 +73,12 @@ class ListAction implements ActionInterface
      */
     private function createImagesPath(ImageDataObject $do)
     {
+        /* Добавление оригинального имиджа */
+        $pathObject = new ImageFile();
+        $pathObject->setUrl($do->getRelativeDirectoryUrl() . $this->makeFileName($do, null));
+        $do->attachImageFile($pathObject);
+
+        /* Добавление остальных имиджей */
         foreach ($this->createOptions($do) as $options) {
             $pathObject = new ImageFile();
             $pathObject->setUrl($do->getRelativeDirectoryUrl() . $this->makeFileName($do, $options));

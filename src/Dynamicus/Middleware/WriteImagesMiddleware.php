@@ -57,7 +57,11 @@ class WriteImagesMiddleware implements MiddlewareInterface
     private function moveImage(FilesystemInterface $filesystem, string $tmpFilePath, string $newFilePath): bool
     {
         $resource = fopen($tmpFilePath, 'r');
-        $result = $filesystem->writeStream($newFilePath, $resource);
+        if ($filesystem->has($tmpFilePath)) {
+            $result = $filesystem->writeStream($newFilePath, $resource);
+        } else {
+            $result = $filesystem->putStream($newFilePath, $resource);
+        }
         fclose($resource);
         if ($result) {
             unlink($tmpFilePath);

@@ -10,15 +10,23 @@ use Common\Entity\ImageDataObject;
  */
 trait ImageCreatorTrait
 {
-    protected function makeFileName(ImageDataObject $do, Options $options): string
+    protected function makeFileName(ImageDataObject $do, ?Options $options): string
     {
-        $fileName = sprintf(
-            '%s_%s_%s.%s',
-            $do->getEntityId(),
-            $options->getVariant(),
-            $options->getSize() ? implode('x', $options->getSize()) : implode('x', $options->getAutoResize()),
-            $do->getExtension()
-        );
+        if (!$options) {
+            $fileName = sprintf(
+                '%s.%s',
+                $do->getEntityId(),
+                $do->getExtension()
+            );
+        } else {
+            $fileName = sprintf(
+                '%s_%s_%s.%s',
+                $do->getEntityId(),
+                $options->getVariant(),
+                $options->getSize() ? implode('x', $options->getSize()) : implode('x', $options->getAutoResize()),
+                $do->getExtension()
+            );
+        }
         return $fileName;
     }
 }

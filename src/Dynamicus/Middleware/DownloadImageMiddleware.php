@@ -5,6 +5,7 @@ namespace Dynamicus\Middleware;
 use Common\Entity\ImageDataObject;
 use Common\Entity\ImageFile;
 use Common\Exception\RuntimeException;
+use Common\Exception\UnsupportedMediaException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
@@ -52,17 +53,21 @@ class DownloadImageMiddleware implements MiddlewareInterface
      * @param ImageDataObject $do
      * @param string          $imageUrl
      * @return ImageFile
+     * @throws UnsupportedMediaException
      */
     private function getImageFile(ImageDataObject $do, $imageUrl): ImageFile
     {
         $extension = pathinfo(parse_url($imageUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
-        $do->setExtension($extension);
+        if (!in_array($extension, ['jpeg', 'jpg'])) {
+            throw new UnsupportedMediaException('The image unsupported with type: '.$extension);
+        }
+        $do->setExtension(TYPE_JPG);
 
         /* Создание директорий */
         $this->createFoldersRecursive($do->getTmpDirectoryPath());
 
-        $path = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . $extension;
-        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . $extension;
+        $path = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . TYPE_JPG;
+        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . TYPE_JPG;
 
         $image = new ImageFile();
         $image->setPath($path);
@@ -98,7 +103,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
      */
     private function allowDownloadingSize(ResponseInterface $response, $toFile)
     {
-        $resource = fopen($toFile, 'w');
+        $resource = fopen($toFile, 'c');
         $body = $response->getBody();
 
         $bytesRead = 0;
