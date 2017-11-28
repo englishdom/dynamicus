@@ -1,4 +1,5 @@
 <?php
+
 namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
