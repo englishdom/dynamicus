@@ -60,3 +60,13 @@ $app->route(
     ['GET'],
     'search'
 );
+
+/* GET /testlog/{type} */
+$app->route(
+    '/test-log/{type:.*}',
+    [
+        \Dynamicus\Action\TestLogAction::class
+    ],
+    ['GET'],
+    'test-log'
+);

@@ -4,6 +4,7 @@ namespace Dynamicus;
 
 use Dynamicus\Action\ListAction;
 use Dynamicus\Action\SearchAction;
+use Dynamicus\Action\TestLogAction;
 use Dynamicus\Factory;
 use Dynamicus\Image\ImageCreatorInterface;
 use Dynamicus\Image\Search\SearchAdapterInterface;
@@ -35,6 +36,7 @@ class ConfigProvider
                 SearchAction::class => Factory\SearchActionFactory::class,
                 /* Устанавливается только 1 адаптер GoogleSearchAdapter. */
                 SearchAdapterInterface::class => Factory\SearchAdapterFactory::class,
+                TestLogAction::class => Factory\TestLogActionFactory::class,
             ]
         ];
     }

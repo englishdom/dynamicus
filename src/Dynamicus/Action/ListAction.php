@@ -13,8 +13,6 @@ use Dynamicus\Image\Transformer\Plugin\ParsingConfigArray;
 use Dynamicus\Image\Transformer\Transformer;
 use Dynamicus\Transformer\ImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
-use League\Flysystem\FilesystemInterface;
-use League\Flysystem\Plugin\ListFiles;
 use League\Fractal\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

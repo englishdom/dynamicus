@@ -101,3 +101,34 @@ Response [200]:
 }
 ```
 В лог пишется строка `Dynamicus: Request to Image API for {search query}`
+
+
+## TestLog
+`GET /test-log/{type}`
+
+`http 127.0.0.1:8889/test-log/div-zero` -> 400
+`http 127.0.0.1:8889/test-log/ob-clean` -> 204
+`http 127.0.0.1:8889/test-log/object` -> 400
+`http 127.0.0.1:8889/test-log/file` -> 500
+`http 127.0.0.1:8889/test-log/log` -> 204
+`http 127.0.0.1:8889/test-log/exception` -> 400
+`http 127.0.0.1:8889/test-log/` -> 204
+
+
+
+Response [400]:
+```json
+{
+    "errors": {
+        "code": "0",
+        "file": "/var/www/stv2/library/Common/Middleware/PrepareResponseMiddleware.php:57",
+        "id": "90b396e4c78983693a2c189b6788da35",
+        "source": {
+            "parameter": "",
+            "pointer": "/test-log"
+        },
+        "status": "400",
+        "title": "Common\\Exception\\RuntimeException: Unsupported type"
+    }
+}
+```

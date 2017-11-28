@@ -59,7 +59,7 @@
         "clear-config-cache": "php bin/clear-config-cache.php",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "serve": "php -S localhost:8888 -t public public/index.php",
+        "serve": "php -S localhost:8889 -t public public/index.php",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "upload-coverage": "coveralls -v"
