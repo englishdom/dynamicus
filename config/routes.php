@@ -3,7 +3,7 @@
 
 /* GET /list/translation/34 */
 $app->route(
-    '/list/{entity}/{entity_id}',
+    '/list/{entity}/{entity_id}[/]',
     [
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         \Common\Middleware\PrepareFilesystemMiddleware::class,
@@ -15,7 +15,7 @@ $app->route(
 );
 /* DELETE /translation/34 */
 $app->route(
-    '/{entity}/{entity_id}',
+    '/{entity}/{entity_id}[/]',
     [
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         \Common\Middleware\PrepareFilesystemMiddleware::class,
@@ -27,7 +27,7 @@ $app->route(
 );
 /* POST /translation/35 */
 $app->route(
-    '/{entity}/{entity_id}',
+    '/{entity}/{entity_id}[/]',
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
@@ -53,7 +53,7 @@ $app->route(
 );
 /* GET /search/{urlencode('search text')} */
 $app->route(
-    '/search/{search_text}',
+    '/search/{search_text}[/]',
     [
         \Dynamicus\Action\SearchAction::class
     ],
@@ -63,7 +63,7 @@ $app->route(
 
 /* GET /testlog/{type} */
 $app->route(
-    '/test-log/{type:.*}',
+    '/test-log/{type:.*}[/]',
     [
         \Dynamicus\Action\TestLogAction::class
     ],
