@@ -4,6 +4,7 @@ namespace Dynamicus\Image\Search;
 
 use Common\Container\ConfigInterface;
 use Common\Entity\ImageFile;
+use Common\Exception\NotFoundException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
@@ -39,6 +40,7 @@ class GoogleSearchAdapter implements SearchAdapterInterface
     /**
      * @param $searchText
      * @return \SplObjectStorage|ImageFile[]
+     * @throws NotFoundException
      */
     public function search($searchText): \SplObjectStorage
     {
@@ -50,9 +52,17 @@ class GoogleSearchAdapter implements SearchAdapterInterface
     /**
      * @param array $resultArray
      * @return \SplObjectStorage
+     * @throws NotFoundException
      */
     private function parseResult(array $resultArray): \SplObjectStorage
     {
+        if (!isset($resultArray['items'])) {
+            if (isset($resultArray['searchInformation']['totalResults'])) {
+                throw new NotFoundException('Found images: '.$resultArray['searchInformation']['totalResults']);
+            }
+            throw new NotFoundException('Not found `items` in response');
+        }
+
         $collection = new \SplObjectStorage();
         foreach ($resultArray['items'] as $item) {
             $imageFile = new ImageFile();
