@@ -4,6 +4,10 @@
 * PHP >= 7.1
 * Imagick => 6.0
 
+### Preparing
+1. Make `.env` file from `.env.develop`
+2. Add values to parameters `GOOGLE_API_KEY, GOOGLE_API_CX`. If you want to search images on google
+
 ### Start server
 `php -S localhost:8888 -t public public/index.php`
 
