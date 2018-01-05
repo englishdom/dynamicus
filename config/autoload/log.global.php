@@ -17,6 +17,6 @@ return [
         'host' => env('GRAYLOG_HOST'),
         'port' => env('GRAYLOG_PORT'),
         'protocol' => 'TCP',
-        'facility' => 'Dinamicus. HOST: ' . $host . ' IP:' . $ip,
+        'facility' => 'Dynamicus. HOST: ' . $host . ' IP:' . $ip,
     ],
 ];

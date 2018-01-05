@@ -4,15 +4,24 @@
 * PHP >= 7.1
 * Imagick => 6.0
 
-### Preparing
-1. Make `.env` file from `.env.develop`
+## Manual Preparing
+1. Copy `.env` file from `.env.develop`
 2. Add values to parameters `GOOGLE_API_KEY, GOOGLE_API_CX`. If you want to search images on google
+3. Install composer's dependencies
 
 ### Start server
 `php -S localhost:8888 -t public public/index.php`
 
 ### Debugging
 `export XDEBUG_CONFIG="remote_enable=1 remote_mode=req remote_port=9000 remote_host=127.0.0.1 remote_connect_back=0"`
+
+## Preparing with docker
+1. `docker-compose up`
+2. `docker exec -it <CONTAINER_ID> bash`
+3. `composer install` in container
+4. Copy `.env` file from `.env.develop`
+5. Add values to parameters `GOOGLE_API_KEY, GOOGLE_API_CX` to file `.env`. If you want to search images on google
+6. Open `http://localhost:80`
 
 ## List
 `GET /list/{entity}/{entity_id}`
