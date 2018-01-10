@@ -65,13 +65,11 @@ Request:
 {
    "data": {
      "resize": [
-       { /* Первый имидж для кропа и ресайза */
-         "size": "240x168", /* Размер необходимого имиджа */
+       {
+         "size": "240x168",
          "crop": "100x100x580x436"
-          /* 344x122 - верхняя левая точка отсчета для кропа */
-          /* 542x378 - нижняя правая точка отсчета для кропа */
        },
-       { /* Второй имидж для кропа и ресайза */
+       {
          "size": "200x150",
          "crop": "100x100x1100x850"
        }
@@ -82,8 +80,10 @@ Request:
    }
  }
  ```
- Если не будет прислан массив "resize", тогда будут кропнуты имиджи всех размеров из конфига
- для указаной ентити.
+ `data.resize.0.size` the image size.
+ `data.resize.0.crop` crop points from top-left.
+ 
+ If an element `resize` does not exist. The image will crop for all sizes from config.
 
 Response: 204
 
@@ -113,7 +113,7 @@ Response [200]:
   }
 }
 ```
-В лог пишется строка `Dynamicus: Request to Image API for {search query}`
+A string will write to log `Dynamicus: Request to Image API for {search query}`
 
 
 ## TestLog
@@ -142,7 +142,7 @@ Response [400]:
             "pointer": "/test-log/exception"
         },
         "status": "400",
-        "title": "Exception: тестирование throw"
+        "title": "Exception: throw testing"
     }
 }
 ```
