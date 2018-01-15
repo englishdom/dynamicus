@@ -22,26 +22,34 @@ class DownloadImageMiddleware implements MiddlewareInterface
 {
     const MAX_FILE_SIZE = 10485760 /* 10Mb */;
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface      $delegate
+     * @return ResponseInterface
+     * @throws RuntimeException
+     * @throws UnsupportedMediaException
+     * @throws \Exception
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         /* @var ImageDataObject $do */
         $do = $request->getAttribute(ImageDataObject::class);
         $queryData = $request->getParsedBody();
 
-        /* Объект ImageFile с путями */
+        /* Object ImageFile with paths */
         $image = $this->getImageFile($do, $queryData['data']['links']['url']);
-        /* Загрузка имиджа в tmp */
+        /* Image uploading to tmp */
         $response = $this->uploadImage($queryData['data']['links']['url']);
         $this->allowDownloadingSize($response, $image->getPath());
 
-        /* Проверка типа имиджа */
+        /* Image type check */
         if (!$this->validImageType($image->getPath())) {
-            /* Удаление файла с неправильным типом */
+            /* Image remove with wrong type */
             unlink($image->getPath());
             throw new RuntimeException('Filetype is not an image. It has been removed!');
         }
 
-        /* Добавление имиджа в коллекцию имиджей */
+        /* Image set to collection */
         $do->attachImageFile($image);
         $do->getImageFiles()->rewind();
 
@@ -49,7 +57,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Получение объекта ImageFile с путями к файлу
+     * Object ImageFile get with paths to files
      * @param ImageDataObject $do
      * @param string          $imageUrl
      * @return ImageFile
@@ -63,7 +71,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
         }
         $do->setExtension(TYPE_JPG);
 
-        /* Создание директорий */
+        /* Directory creating */
         $this->createFoldersRecursive($do->getTmpDirectoryPath());
 
         $path = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . TYPE_JPG;
@@ -77,7 +85,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Загрузка файла в локальную папку
+     * File uploading to folder
      * http://guzzle.readthedocs.io/en/latest/request-options.html#sink-option
      * @param string $fromFile
      * @return ResponseInterface
@@ -93,10 +101,10 @@ class DownloadImageMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Открытие ресурса на запись
-     * Чтение из потока по 1Кб
-     * Запись в ресурс или Exception с удалением файла
-     * Закрытие ресурса
+     * Resource open
+     * 1Kb reading from resource
+     * Resource write with remove file
+     * Resource clo
      * @param ResponseInterface $response
      * @param                   $toFile
      * @throws \Exception
@@ -140,7 +148,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Проверка типа файла из разрешенных
+     * Image type checking
      * @param $filePath
      * @return bool
      */

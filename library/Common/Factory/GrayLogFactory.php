@@ -16,6 +16,13 @@ use Zend\Log\Logger;
  */
 class GrayLogFactory
 {
+    /**
+     * @param ContainerInterface $container
+     * @return Logger
+     * @throws RuntimeException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
     public function __invoke(ContainerInterface $container): Logger
     {
         $config = $container->get(ConfigInterface::class);
@@ -28,7 +35,7 @@ class GrayLogFactory
             $facility = $config->get('graylog.facility');
         }
         if (!$host) {
-            throw new RuntimeException('Не задан хост логгера Graylog');
+            throw new RuntimeException('Graylog host not exist in config');
         }
 
         return $this->getGrayLogLogger($host, $port, $facility, $protocol);

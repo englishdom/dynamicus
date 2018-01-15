@@ -16,7 +16,7 @@ class GrayLogWriter extends AbstractWriter
     private $publisher;
 
     /**
-     * @var Common\Log\Formatter\Gelf
+     * @var \Common\Log\Formatter\Gelf
      */
     protected $formatter;
 

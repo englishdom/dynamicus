@@ -25,7 +25,7 @@ return [
         'word-set' => [
             'default' => [
                 [WIDTH => 180, HEIGHT => 115, QUALITY => 85], // skills/glossary/ список вордсетов
-                [WIDTH => 220, HEIGHT => 141, QUALITY => 85], // Картинка на /home в списке заданий
+                [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
             ]
         ],
         'course-int' => [
