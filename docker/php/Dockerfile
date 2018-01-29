@@ -1,27 +1,22 @@
 FROM php:7.1-fpm
 
-RUN apt-get update
-
-# Some basic extensions
-RUN docker-php-ext-install -j$(nproc) json mbstring
-
-# Curl
-RUN apt-get install -y libcurl4-openssl-dev
-RUN docker-php-ext-install -j$(nproc) curl
-
-# IMagick
-RUN apt-get update && apt-get -y install libmagickwand-dev imagemagick --no-install-recommends \
-   && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update \
+   && apt-get install -y --no-install-recommends \
+       libcurl4-openssl-dev \
+       libmagickwand-dev \
+       imagemagick \
+   && docker-php-ext-install -j$(nproc) json mbstring \
+   && docker-php-ext-install -j$(nproc) curl \
+   && docker-php-ext-install -j$(nproc) zip \
    && pecl install imagick \
-   && docker-php-ext-enable imagick
-
-# Zip
-RUN docker-php-ext-install -j$(nproc) zip
+   && docker-php-ext-enable imagick \
+   && rm -rf /var/lib/apt/lists/*
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php \
    && mv composer.phar /usr/local/bin/composer \
-   && chmod +x /usr/local/bin/composer
+   && chmod +x /usr/local/bin/composer \
+   && composer global require hirak/prestissimo
 
 #xDebug
 RUN yes | pecl install xdebug \

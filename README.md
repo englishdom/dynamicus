@@ -17,11 +17,10 @@
 
 ## Preparing with docker
 1. `docker-compose up`
-2. `docker exec -it <CONTAINER_ID> bash`
-3. `composer install` in container
-4. Copy `.env` file from `.env.develop`
-5. Add values to parameters `GOOGLE_API_KEY, GOOGLE_API_CX` to file `.env`. If you want to search images on google
-6. Open `http://localhost:80`
+2. `docker exec -it php composer install`
+3.  Copy `.env` file from `.env.develop`
+4. Add values to parameters `GOOGLE_API_KEY, GOOGLE_API_CX` to file `.env`. If you want to search images on google
+5. Open `http://localhost:80`
 
 ## List
 `GET /list/{entity}/{entity_id}`

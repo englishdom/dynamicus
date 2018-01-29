@@ -64,7 +64,7 @@ class SearchAction implements ActionInterface
      */
     private function writeToLog($searchQuery)
     {
-        $this->logger->err(
+        $this->logger->info(
             'Dynamicus: Request to Image API for `'.$searchQuery.'`',
             ['StackTrace' => '']
         );
