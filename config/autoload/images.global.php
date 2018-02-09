@@ -28,6 +28,18 @@ return [
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
             ]
         ],
+        'grammar' => [
+            'default' => [
+                [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
+                [WIDTH => 300, HEIGHT => 194, QUALITY => 85], // Картинка на /grammarcards
+            ],
+        ],
+        'video-practicum' => [
+            'default' => [
+                [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
+                [WIDTH => 300, HEIGHT => 194, QUALITY => 85], // Картинка на /video-practicum
+            ],
+        ],
         'course-int' => [
             'default' => [
                 [WIDTH => 960, HEIGHT => 172, QUALITY => 85], // Course lesson header new image
