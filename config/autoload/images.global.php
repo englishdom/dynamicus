@@ -53,12 +53,13 @@ return [
         'ed-class' => [
             'default' => [
                 [WIDTH => 300, HEIGHT => 181, QUALITY => 85], // Ed Class small image
-                [WIDTH => 940, HEIGHT => 384, QUALITY => 85], // Ed Class big image
+                [WIDTH => 940, HEIGHT => 384, QUALITY => 85], // Ed Class big image internal
             ]
         ],
         'ed-class-lesson' => [
             'default' => [
-                [WIDTH => 940, HEIGHT => 172, QUALITY => 85], // Ed lesson
+                [WIDTH => 940, HEIGHT => 172, QUALITY => 85], // Ed lesson lesson internal
+                [WIDTH => 175, HEIGHT => 230, QUALITY => 85], // Ed lesson lesson
             ]
         ],
     ]
