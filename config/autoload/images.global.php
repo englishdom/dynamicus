@@ -44,11 +44,17 @@ return [
             'default' => [
                 [WIDTH => 960, HEIGHT => 172, QUALITY => 85], // Course lesson header new image
             ],
-            'exercise' => [
-                [WIDTH => 940, HEIGHT => 532, QUALITY => 85], // Courses-int, exercises, group B
-                [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // Courses-int, exercises, group C
-                [WIDTH => 940, HEIGHT => 293, QUALITY => 85], // Courses-int, LifeStory
-            ]
+        ],
+        'exercise' => [
+            'group_b' => [
+                [WIDTH => 940, HEIGHT => 532, QUALITY => 85], // Exercise, group B
+            ],
+            'group_c' => [
+                [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // Exercise, group C
+            ],
+            'life-story' => [
+                [WIDTH => 940, HEIGHT => 293, QUALITY => 85], // Exercise, LifeStory
+            ],
         ],
         'ed-class' => [
             'default' => [
