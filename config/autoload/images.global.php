@@ -46,14 +46,10 @@ return [
             ],
         ],
         'exercise' => [
-            'group_b' => [
-                [WIDTH => 940, HEIGHT => 532, QUALITY => 85], // Exercise, group B
-            ],
-            'group_c' => [
-                [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // Exercise, group C
-            ],
-            'life-story' => [
+            'default' => [
+                [WIDTH => 600, HEIGHT => 432, QUALITY => 85],
                 [WIDTH => 940, HEIGHT => 293, QUALITY => 85], // Exercise, LifeStory
+                [WIDTH => 940, HEIGHT => 532, QUALITY => 85], // Exercise, LifeStory
             ],
         ],
         'ed-class' => [
