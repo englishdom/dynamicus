@@ -47,7 +47,9 @@ return [
         ],
         'exercise' => [
             'default' => [
-                [WIDTH => 600, HEIGHT => 432, QUALITY => 85],
+                [WIDTH => 66, HEIGHT => 50, QUALITY => 85], // размер на списке слов
+                [WIDTH => 240, HEIGHT => 168, QUALITY => 85], // размер для карточки слова
+                [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // размер для тренировки для мобильной версии
                 [WIDTH => 940, HEIGHT => 293, QUALITY => 85], // Exercise, LifeStory
                 [WIDTH => 940, HEIGHT => 532, QUALITY => 85], // Exercise, LifeStory
             ],
