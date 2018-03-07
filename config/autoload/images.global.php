@@ -67,9 +67,15 @@ return [
             ]
         ],
         'meta_info' => [
-            'og_image' => [WIDTH => 1200, HEIGHT => 628, QUALITY => 85],
-            'vk_image' => [WIDTH => 537, HEIGHT => 240, QUALITY => 85],
-            'tw_image' => [WIDTH => 1024, HEIGHT => 512, QUALITY => 85],
+            'og' => [
+                [WIDTH => 1200, HEIGHT => 628, QUALITY => 85],
+            ],
+            'vk' => [
+                [WIDTH => 537, HEIGHT => 240, QUALITY => 85],
+            ],
+            'tw' => [
+                [WIDTH => 1024, HEIGHT => 512, QUALITY => 85],
+            ],
         ]
     ]
 ];

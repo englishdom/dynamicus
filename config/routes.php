@@ -25,7 +25,7 @@ $app->route(
     ['DELETE'],
     'delete'
 );
-/* POST /translation/35 */
+/* POST /translation/35 or with namespace /meta_info:og/34 */
 $app->route(
     '/{entity}/{entity_id}[/]',
     [

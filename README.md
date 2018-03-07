@@ -57,6 +57,8 @@ Response: 204
 
 ## Create
 `POST /{entity}/{entity_id}`
+or create with specific namespace
+`POST /{entity:namespace}/{entity_id}` example `/meta_info:og/34/`
 
 Request:
 

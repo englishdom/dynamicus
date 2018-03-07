@@ -68,6 +68,7 @@ class ListAction implements ActionInterface
     /**
      * Будет работать только если имиджи локально
      * @param ImageDataObject $do
+     * @throws RuntimeException
      */
     private function createImagesPath(ImageDataObject $do)
     {

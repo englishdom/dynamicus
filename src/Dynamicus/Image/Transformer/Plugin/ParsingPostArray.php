@@ -2,6 +2,7 @@
 
 namespace Dynamicus\Image\Transformer\Plugin;
 
+use Common\Entity\ImageDataObject;
 use Dynamicus\Image\Options;
 
 /**
@@ -9,17 +10,24 @@ use Dynamicus\Image\Options;
  */
 class ParsingPostArray implements TransformerPluginInterface
 {
+    const DEFAULT_NAMESPACE = 'default';
+
     /**
-     * @param array $options
+     * @param ImageDataObject $do
+     * @param array           $options
      * @return \SplObjectStorage|Options[]
      */
-    public function transform(array $options): \SplObjectStorage
+    public function transform(ImageDataObject $do, array $options): \SplObjectStorage
     {
         $storage = new \SplObjectStorage();
 
         foreach ($options as $optionsRow) {
             $options = new Options();
-            $options->setVariant('default');
+            if ($do->getNamespace()) {
+                $options->setVariant($do->getNamespace());
+            } else {
+                $options->setVariant(self::DEFAULT_NAMESPACE);
+            }
             $options->setSize(
                 explode('x', $optionsRow['size'])
             );

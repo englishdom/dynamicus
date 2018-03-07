@@ -24,7 +24,7 @@ class Transformer implements TransformerInterface
      */
     public function transform(ImageDataObject $do, array $options): \SplObjectStorage
     {
-        return $this->getPlugin()->transform($options);
+        return $this->getPlugin()->transform($do, $options);
     }
 
     /**

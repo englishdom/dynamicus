@@ -2,6 +2,7 @@
 
 namespace Dynamicus\Image\Transformer\Plugin;
 
+use Common\Entity\ImageDataObject;
 use Dynamicus\Image\Options;
 
 /**
@@ -9,7 +10,7 @@ use Dynamicus\Image\Options;
  */
 class ParsingConfigArray implements TransformerPluginInterface
 {
-    public function transform(array $options): \SplObjectStorage
+    public function transform(ImageDataObject $do, array $options): \SplObjectStorage
     {
         $storage = new \SplObjectStorage();
 

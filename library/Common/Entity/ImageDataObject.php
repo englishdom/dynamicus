@@ -14,6 +14,8 @@ class ImageDataObject implements EntityInterface
      */
     private $entityName;
 
+    private $namespace;
+
     /**
      * @var int
      */
@@ -72,6 +74,22 @@ class ImageDataObject implements EntityInterface
     public function setEntityName(string $entityName)
     {
         $this->entityName = $entityName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    /**
+     * @param mixed $namespace
+     */
+    public function setNamespace($namespace): void
+    {
+        $this->namespace = $namespace;
     }
 
     /**

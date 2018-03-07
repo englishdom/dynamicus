@@ -25,7 +25,15 @@ class PrepareDataObjectMiddleware implements MiddlewareInterface
 
         $do = new ImageDataObject();
         $do->setEntityId((int)$request->getAttribute('entity_id'));
-        $do->setEntityName((string)$request->getAttribute('entity'));
+        $entityName = (string)$request->getAttribute('entity');
+        /* Если приходит название с неймспейсом meta_info:og_image */
+        if (stristr($entityName, ':')) {
+            $entityParts = explode(':', $entityName);
+            $do->setEntityName($entityParts[0]);
+            $do->setNamespace($entityParts[1] ?? null);
+        } else {
+            $do->setEntityName($entityName);
+        }
 
         $request = $request->withAttribute(get_class($do), $do);
         return $delegate->process($request);
