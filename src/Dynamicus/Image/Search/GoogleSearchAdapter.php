@@ -20,7 +20,8 @@ class GoogleSearchAdapter implements SearchAdapterInterface
     const GOOGLE_SEARCH_IMAGE_SIZE = 'xlarge';
     const GOOGLE_SEARCH_RESPONSE_FORMAT = 'json';
     const GOOGLE_SEARCH_REQUEST_METHOD = 'GET';
-    const GOOGLE_SEARCH_PARAM_SAFE = 'medium';
+    // "high": Enables highest level of SafeSearch filtering.
+    const GOOGLE_SEARCH_PARAM_SAFE = 'high';
     const CURSOR_DEFAULT = 1;
 
     /**
@@ -84,6 +85,9 @@ class GoogleSearchAdapter implements SearchAdapterInterface
         return null;
     }
 
+    /*
+     * @TODO: use CSE php library
+    */
     private function prepareUrl($searchText): string
     {
         $arguments = [
