@@ -6,14 +6,6 @@ define('QUALITY', 'quality');
 define('TYPE_JPG', 'jpg');
 
 return [
-    'images-path' => [
-        /* используется для локального адаптера в Flysystem */
-        'root-path' => '/var/www/static/dynamicus/', /* /var/www/translation/000/000/000/001/1.jpg */
-        /* для временного аплоада и манипуляций с имиджами */
-        'absolute-tmp-path' => '/tmp/images/', /* /tmp/images/translation/000/000/001/1.jpg */
-        /* используется в ответе, подставляется в путь к имиджам */
-        'relative-url' => '/dynamicus/', /* /dynamicus/translation/000/000/000/001/1.jpg */
-    ],
     'images' => [
         'translation' => [
             'default' => [
