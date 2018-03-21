@@ -6,7 +6,7 @@ $app->route(
     '/list/{entity}/{entity_id}[/]',
     [
         \Common\Middleware\PrepareDataObjectMiddleware::class,
-        \Common\Middleware\PrepareFilesystemMiddleware::class,
+        // \Common\Middleware\PrepareFilesystemMiddleware::class,
         \Common\Middleware\ShardingMiddleware::class,
         Dynamicus\Action\ListAction::class
     ],

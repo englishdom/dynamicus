@@ -14,6 +14,7 @@ class PrepareFilesystemMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        return new PrepareFilesystemMiddleware($container->get(AdapterInterface::class));
-    }
+        $fileSystemAdapter = $container->get(AdapterInterface::class);
+        return new PrepareFilesystemMiddleware($fileSystemAdapter);
+   }
 }
