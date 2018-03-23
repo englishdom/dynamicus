@@ -92,6 +92,12 @@ class ImageCreator implements ImageCreatorInterface
             if (!$transformationParams) {
                 throw new NotFoundException('The image\'s config does not exist for entity: '.$do->getEntityName());
             }
+            /* Выбрать только указанный namespace */
+            if ($do->getNamespace() && isset($transformationParams[$do->getNamespace()])) {
+                $transformationParams = [
+                    $do->getNamespace() => $transformationParams[$do->getNamespace()]
+                ];
+            }
         }
         $transformer = new Transformer();
         $transformer->setPlugin($plugin);
