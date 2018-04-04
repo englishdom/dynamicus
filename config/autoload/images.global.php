@@ -4,41 +4,44 @@ define('WIDTH', 'width');
 define('HEIGHT', 'height');
 define('QUALITY', 'quality');
 define('TYPE_JPG', 'jpg');
+/* ключевые слова */
+define('KEY_DEFAULT', 'default');
+define('KEY_CONTENT', 'content');
 
 return [
     'images' => [
         'translation' => [
-            'default' => [
+            KEY_DEFAULT => [
                 [WIDTH => 66, HEIGHT => 50, QUALITY => 85], // размер на списке слов
                 [WIDTH => 240, HEIGHT => 168, QUALITY => 85], // размер для карточки слова
                 [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // размер для тренировки для мобильной версии
             ],
         ],
         'word-set' => [
-            'default' => [
+            KEY_DEFAULT => [
                 [WIDTH => 180, HEIGHT => 115, QUALITY => 85], // skills/glossary/ список вордсетов
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
             ]
         ],
         'grammar' => [
-            'default' => [
+            KEY_DEFAULT => [
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
                 [WIDTH => 300, HEIGHT => 194, QUALITY => 85], // Картинка на /grammarcards
             ],
         ],
         'video-practicum' => [
-            'default' => [
+            KEY_DEFAULT => [
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
                 [WIDTH => 300, HEIGHT => 194, QUALITY => 85], // Картинка на /video-practicum
             ],
         ],
         'course-int' => [
-            'default' => [
+            KEY_DEFAULT => [
                 [WIDTH => 960, HEIGHT => 172, QUALITY => 85], // Course lesson header new image
             ],
         ],
         'exercise' => [
-            'default' => [
+            KEY_DEFAULT => [
                 [WIDTH => 66, HEIGHT => 50, QUALITY => 85], // размер на списке слов
                 [WIDTH => 240, HEIGHT => 168, QUALITY => 85], // размер для карточки слова
                 [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // размер для тренировки для мобильной версии
@@ -47,13 +50,13 @@ return [
             ],
         ],
         'ed-class' => [
-            'default' => [
+            KEY_DEFAULT => [
                 [WIDTH => 300, HEIGHT => 181, QUALITY => 85], // Ed Class small image
                 [WIDTH => 940, HEIGHT => 384, QUALITY => 85], // Ed Class big image internal
             ]
         ],
         'ed-class-lesson' => [
-            'default' => [
+            KEY_DEFAULT => [
                 [WIDTH => 940, HEIGHT => 172, QUALITY => 85], // Ed lesson lesson internal
                 [WIDTH => 175, HEIGHT => 230, QUALITY => 85], // Ed lesson lesson
             ]
@@ -68,7 +71,26 @@ return [
             'tw' => [
                 [WIDTH => 1024, HEIGHT => 512, QUALITY => 85],
             ],
-        ]
+        ],
+        'blog-post' => [
+            KEY_DEFAULT => [
+                [WIDTH => 300, HEIGHT => 285, QUALITY => 85], // Список блог постов
+            ],
+            KEY_CONTENT => [
+                [WIDTH => 700, HEIGHT => 445, QUALITY => 85], // В начале блог поста
+                [WIDTH => 620, HEIGHT => 403, QUALITY => 85], // Внутри блог поста
+            ]
+        ],
+        'faq' => [
+            KEY_CONTENT => [
+
+            ]
+        ],
+        'lesson-element' => [
+            KEY_CONTENT => [
+
+            ]
+        ],
     ]
 ];
 

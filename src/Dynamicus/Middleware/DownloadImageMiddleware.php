@@ -28,7 +28,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
      * @return ResponseInterface
      * @throws RuntimeException
      * @throws UnsupportedMediaException
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
@@ -89,6 +89,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
      * http://guzzle.readthedocs.io/en/latest/request-options.html#sink-option
      * @param string $fromFile
      * @return ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function uploadImage($fromFile): ResponseInterface
     {
@@ -104,10 +105,10 @@ class DownloadImageMiddleware implements MiddlewareInterface
      * Resource open
      * 1Kb reading from resource
      * Resource write with remove file
-     * Resource clo
+     * Resource close
      * @param ResponseInterface $response
      * @param                   $toFile
-     * @throws \Exception
+     * @throws RuntimeException
      */
     private function allowDownloadingSize(ResponseInterface $response, $toFile)
     {

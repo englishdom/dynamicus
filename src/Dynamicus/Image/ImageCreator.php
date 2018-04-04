@@ -55,6 +55,8 @@ class ImageCreator implements ImageCreatorInterface
      * @param ImageDataObject $do
      * @param array           $request
      * @return bool
+     * @throws NotFoundException
+     * @throws \Common\Exception\RuntimeException
      */
     public function process(ImageDataObject $do, array $request)
     {
@@ -115,8 +117,8 @@ class ImageCreator implements ImageCreatorInterface
     {
         $imageFile = new ImageFile();
         $fileName = $this->makeFileName($do, $options);
-        $path = $do->getTmpDirectoryPath() . $fileName;
-        $imageFile->setPath($path);
+        $imageFile->setPath($do->getTmpDirectoryPath() . $fileName);
+        $imageFile->setUrl($do->getRelativeDirectoryUrl() . $fileName);
 
         return $imageFile;
     }

@@ -30,6 +30,12 @@ class CheckImageSizeMiddleware implements MiddlewareInterface
         $this->config = $config;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface      $delegate
+     * @return ResponseInterface
+     * @throws WrongImageSizeException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         /* @var ImageDataObject $do */

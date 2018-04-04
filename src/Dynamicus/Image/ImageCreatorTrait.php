@@ -21,7 +21,7 @@ trait ImageCreatorTrait
         } else {
             $fileName = sprintf(
                 '%s_%s_%s.%s',
-                $do->getEntityId(),
+                $do->getNamespace() == KEY_CONTENT ? time() : $do->getEntityId(),
                 $options->getVariant(),
                 $options->getSize() ? implode('x', $options->getSize()) : implode('x', $options->getAutoResize()),
                 $do->getExtension()

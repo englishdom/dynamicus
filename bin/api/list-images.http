@@ -1,0 +1,5 @@
+GET http://localhost:9999/list/blog-post/1
+Accept: application/json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+###

@@ -23,8 +23,14 @@ class WriteImagesMiddleware implements MiddlewareInterface
         /* @var FilesystemInterface $filesystem */
         $filesystem = $request->getAttribute(FilesystemInterface::class);
 
+        $images = $do->getImageFiles();
+        /* Original image remove from collection if NAMESPACE = content */
+        if ($do->getNamespace() == KEY_CONTENT) {
+            $images->detach($images->current());
+        }
+
         /* @var ImageFile $imageFile */
-        foreach ($do->getImageFiles() as $imageFile) {
+        foreach ($images as $imageFile) {
             $this->moveImage(
                 $filesystem,
                 $imageFile->getPath(),
