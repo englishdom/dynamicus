@@ -75,20 +75,20 @@ return [
         'blog-post' => [
             KEY_DEFAULT => [
                 [WIDTH => 300, HEIGHT => 285, QUALITY => 85], // Список блог постов
+                [WIDTH => 700, HEIGHT => 445, QUALITY => 85], // В начале блог поста
             ],
             KEY_CONTENT => [
-                [WIDTH => 700, HEIGHT => 445, QUALITY => 85], // В начале блог поста
                 [WIDTH => 620, HEIGHT => 403, QUALITY => 85], // Внутри блог поста
             ]
         ],
         'faq' => [
             KEY_CONTENT => [
-
+                [WIDTH => 400, HEIGHT => 250, QUALITY => 85], // Внутри раздела FAQ
             ]
         ],
         'lesson-element' => [
             KEY_CONTENT => [
-
+                [WIDTH => 816, HEIGHT => 789, QUALITY => 85], // В уроке need-to-know
             ]
         ],
     ]
