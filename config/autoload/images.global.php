@@ -82,7 +82,7 @@ return [
             ]
         ],
         'faq' => [
-            KEY_CONTENT => [
+            KEY_DEFAULT => [
                 [WIDTH => 400, HEIGHT => 250, QUALITY => 85], // Внутри раздела FAQ
             ]
         ],
