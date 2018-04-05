@@ -20,7 +20,7 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class DownloadImageMiddleware implements MiddlewareInterface
 {
-    const MAX_FILE_SIZE = 10485760 /* 10Mb */;
+    const MAX_FILE_SIZE = 5242880 /* 5Mb */;
 
     /**
      * @param ServerRequestInterface $request

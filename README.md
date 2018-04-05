@@ -10,7 +10,7 @@
 3. Install composer's dependencies
 
 ### Start server
-`php -S localhost:8888 -t public public/index.php`
+`composer serve`
 
 ### Debugging
 `export XDEBUG_CONFIG="remote_enable=1 remote_mode=req remote_port=9000 remote_host=127.0.0.1 remote_connect_back=0"`
@@ -86,7 +86,42 @@ Request:
  
  If an element `resize` does not exist. The image will crop for all sizes from config.
 
-Response: 204
+Response: 201
+
+```json
+{
+  "data": {
+    "id": 1,
+    "links": {
+      "original": "\/dynamicus\/blog-post\/000\/000\/001\/1.jpg",
+      "default": {
+        "300x285": "\/dynamicus\/blog-post\/000\/000\/001\/1_default_300x285.jpg"
+      }
+    }
+  }
+}
+```
+
+## Create content images
+`POST /{entity}:content/{entity_id}` example `/blog_post:content/34/`
+
+It does not create original image and does not return this image in list.
+ 
+Request: like [Create](#create)
+
+Response: 201
+```json
+{
+  "data": {
+    "id": 1,
+    "links": {
+      "content": {
+        "700x445": "\/dynamicus\/blog-post\/000\/000\/001\/1522913218_content_700x445.jpg"
+      }
+    }
+  }
+}
+```
 
 ## Search
 `GET /search/{urlencode(search_text)}`

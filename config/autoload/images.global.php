@@ -88,7 +88,14 @@ return [
         ],
         'lesson-element' => [
             KEY_CONTENT => [
-                [WIDTH => 816, HEIGHT => 789, QUALITY => 85], // В уроке need-to-know
+                // /dynamicus/lesson-element/000/000/001/1522844313_content_0x0.jpg
+                // /dynamicus/lesson-element/000/000/001/1522844313_content_0x789.jpg
+                // /dynamicus/lesson-element/000/000/001/1522844313_content_816x0.jpg
+                // размеры оставляем как есть, но если пришли координаты - тогда РЕЖЕМ
+                // {"size":"700x445","crop":"0x0x700x445"}
+                // меняем качестово
+                // удаляем екзиф инфу
+                [WIDTH => 816, HEIGHT => false, QUALITY => 85], // В уроке need-to-know
             ]
         ],
     ]

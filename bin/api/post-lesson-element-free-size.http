@@ -1,0 +1,8 @@
+POST http://localhost:9999/lesson-element:content/1
+Content-Type: application/json
+Accept: application/json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+{"data":{"resize":[{"size":"816x600","crop":"0x0x816x600"}],"links":{"url":"https://robbreportedit.files.wordpress.com/2016/04/01-ford-gt-front-three-quarter1.jpg"}}}
+
+###
