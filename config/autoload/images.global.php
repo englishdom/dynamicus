@@ -35,7 +35,7 @@ return [
                 [WIDTH => 300, HEIGHT => 194, QUALITY => 85], // Картинка на /video-practicum
             ],
         ],
-        'course-int' => [
+        'course-int-lesson' => [
             KEY_DEFAULT => [
                 [WIDTH => 960, HEIGHT => 172, QUALITY => 85], // Course lesson header new image
             ],
