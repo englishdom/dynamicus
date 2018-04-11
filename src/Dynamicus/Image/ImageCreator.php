@@ -79,21 +79,23 @@ class ImageCreator implements ImageCreatorInterface
      * Получение контейнера с опциами ресайза и кропа
      * @param ImageDataObject $do
      * @param array           $request
-     * @return \SplObjectStorage
+     * @return \SplObjectStorage|Options[]
      * @throws NotFoundException
      */
     private function getOptionsContainer(ImageDataObject $do, array $request): \SplObjectStorage
     {
+        $configSizes = $this->config->get('images.'.$do->getEntityName());
+        /* Ошибка если в конфиге не найдены размеры для указаной entity */
+        if (!$configSizes) {
+            throw new NotFoundException('The image\'s config does not exist for entity: '.$do->getEntityName());
+        }
+
         if (isset($request['data']['resize']) && !empty($request['data']['resize'])) {
-            $plugin = new ParsingPostArray();
+            $plugin = new ParsingPostArray($configSizes);
             $transformationParams = $request['data']['resize'];
         } else {
             $plugin = new ParsingConfigArray();
-            $transformationParams = $this->config->get('images.'.$do->getEntityName());
-            /* Ошибка если в конфиге не найдены размеры для указаной entity */
-            if (!$transformationParams) {
-                throw new NotFoundException('The image\'s config does not exist for entity: '.$do->getEntityName());
-            }
+            $transformationParams = $configSizes;
             /* Выбрать только указанный namespace */
             if ($do->getNamespace() && isset($transformationParams[$do->getNamespace()])) {
                 $transformationParams = [

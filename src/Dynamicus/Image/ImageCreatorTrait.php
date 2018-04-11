@@ -23,7 +23,7 @@ trait ImageCreatorTrait
                 '%s_%s_%s.%s',
                 $do->getNamespace() == KEY_CONTENT ? time() : $do->getEntityId(),
                 $options->getVariant(),
-                $options->getSize() ? implode('x', $options->getSize()) : implode('x', $options->getAutoResize()),
+                implode('x', $options->getFileNameSizes()),
                 $do->getExtension()
             );
         }

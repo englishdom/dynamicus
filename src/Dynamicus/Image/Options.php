@@ -12,6 +12,7 @@ class Options
     private $size = [];
     private $crop = [];
     private $quality;
+    private $fileNameSizes = [];
 
     /**
      * @return string
@@ -101,5 +102,21 @@ class Options
     public function setQuality(int $quality)
     {
         $this->quality = $quality;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFileNameSizes(): array
+    {
+        return $this->fileNameSizes;
+    }
+
+    /**
+     * @param array $fileNameSizes
+     */
+    public function setFileNameSizes(array $fileNameSizes)
+    {
+        $this->fileNameSizes = $fileNameSizes;
     }
 }

@@ -11,6 +11,19 @@ use Dynamicus\Image\Options;
 class ParsingPostArray implements TransformerPluginInterface
 {
     const DEFAULT_NAMESPACE = 'default';
+    /**
+     * @var array
+     */
+    private $optionsSize;
+
+    /**
+     * ParsingPostArray constructor.
+     * @param array $optionsSize
+     */
+    public function __construct(array $optionsSize)
+    {
+        $this->optionsSize = $optionsSize;
+    }
 
     /**
      * @param ImageDataObject $do
@@ -35,6 +48,8 @@ class ParsingPostArray implements TransformerPluginInterface
                 explode('x', $optionsRow['crop'])
             );
 
+            $fileNameSizes = array_shift($this->optionsSize[$options->getVariant()]);
+            $options->setFileNameSizes([$fileNameSizes[WIDTH], $fileNameSizes[HEIGHT]]);
             $storage->attach($options);
         }
 

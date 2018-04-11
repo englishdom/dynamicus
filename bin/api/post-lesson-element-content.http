@@ -1,8 +1,8 @@
-POST http://localhost:9999/lesson-element:content/1
+POST http://localhost:9999/lesson-element:content/2
 Content-Type: application/json
 Accept: application/json
 Cookie: XDEBUG_SESSION=PHPSTORM
 
-{"data":{"resize":[{"size":"816x816","crop":"255x186x1071x1002"}],"links":{"url":"https://robbreportedit.files.wordpress.com/2016/04/01-ford-gt-front-three-quarter1.jpg"}}}
+{"data":{"resize":[{"size":"816x150","crop":"255x186x1071x336"}],"links":{"url":"https://robbreportedit.files.wordpress.com/2016/04/01-ford-gt-front-three-quarter1.jpg"}}}
 
 ###

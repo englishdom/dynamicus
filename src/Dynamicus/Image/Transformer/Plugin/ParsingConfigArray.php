@@ -26,6 +26,7 @@ class ParsingConfigArray implements TransformerPluginInterface
                     $options->setQuality($dimensions[QUALITY]);
                 }
                 $options->setAutoResize([$dimensions[WIDTH], $dimensions[HEIGHT]]);
+                $options->setFileNameSizes([$dimensions[WIDTH], $dimensions[HEIGHT]]);
                 $storage->attach($options);
             }
         }
