@@ -84,6 +84,11 @@ return [
                 [WIDTH => 700, HEIGHT => 455, QUALITY => 100], // Внутри блог поста
             ]
         ],
+        'blog-author' => [
+            KEY_DEFAULT => [
+                [WIDTH => 100, HEIGHT => 100, QUALITY => 85],
+            ]
+        ],
         'faq' => [
             KEY_DEFAULT => [
                 [WIDTH => 400, HEIGHT => 250, QUALITY => 85], // Внутри раздела FAQ
