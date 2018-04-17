@@ -74,11 +74,11 @@ return [
         ],
         'blog-post' => [
             KEY_DEFAULT => [
-                [WIDTH => 300, HEIGHT => false, QUALITY => 85], // Список блог постов
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Вывод на главной "пост из блога"
                 [WIDTH => 700, HEIGHT => 445, QUALITY => 100], // В начале блог поста
                 [WIDTH => 220, HEIGHT => 138, QUALITY => 85], // вывод на странице поста с права и с низу
                 [WIDTH => 180, HEIGHT => 114, QUALITY => 85], // вывод на dashboard
+                [WIDTH => 300, HEIGHT => false, QUALITY => 85], // Список блог постов
             ],
             KEY_CONTENT => [
                 [WIDTH => 700, HEIGHT => 455, QUALITY => 100], // Внутри блог поста
