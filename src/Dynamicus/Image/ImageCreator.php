@@ -3,8 +3,8 @@
 namespace Dynamicus\Image;
 
 use Common\Container\ConfigInterface;
-use Common\Entity\ImageDataObject;
-use Common\Entity\ImageFile;
+use Common\Entity\DataObject;
+use Common\Entity\File;
 use Common\Exception\NotFoundException;
 use Dynamicus\Image\Processor\AutoResizeImage;
 use Dynamicus\Image\Processor\CleanImage;
@@ -52,15 +52,15 @@ class ImageCreator implements ImageCreatorInterface
     /**
      * Преобразования имиджей из оригинального файла и добавление новых имиджей в коллекцию
      * @TODO: добавить возможность нарезки других форматов картинок
-     * @param ImageDataObject $do
-     * @param array           $request
+     * @param DataObject $do
+     * @param array      $request
      * @return bool
      * @throws NotFoundException
      * @throws \Common\Exception\RuntimeException
      */
-    public function process(ImageDataObject $do, array $request)
+    public function process(DataObject $do, array $request)
     {
-        $originalImageFile = $do->getImageFiles()->current();
+        $originalImageFile = $do->getFiles()->current();
 
         /* @var Options $options */
         foreach ($this->getOptionsContainer($do, $request) as $options) {
@@ -69,7 +69,7 @@ class ImageCreator implements ImageCreatorInterface
             copy($originalImageFile->getPath(), $newImageFile->getPath());
             /* Выполнение процессоров для нового имиджа */
             $this->callProcessors($newImageFile, $options);
-            $do->attachImageFile($newImageFile);
+            $do->attachFile($newImageFile);
         }
 
         return true;
@@ -77,12 +77,12 @@ class ImageCreator implements ImageCreatorInterface
 
     /**
      * Получение контейнера с опциами ресайза и кропа
-     * @param ImageDataObject $do
-     * @param array           $request
+     * @param DataObject $do
+     * @param array      $request
      * @return \SplObjectStorage|Options[]
      * @throws NotFoundException
      */
-    private function getOptionsContainer(ImageDataObject $do, array $request): \SplObjectStorage
+    private function getOptionsContainer(DataObject $do, array $request): \SplObjectStorage
     {
         $configSizes = $this->config->get('images.'.$do->getEntityName());
         /* Ошибка если в конфиге не найдены размеры для указаной entity */
@@ -111,13 +111,13 @@ class ImageCreator implements ImageCreatorInterface
 
     /**
      * Генерации имени файла и его пути из опций
-     * @param Options         $options
-     * @param ImageDataObject $do
-     * @return ImageFile
+     * @param Options    $options
+     * @param DataObject $do
+     * @return File
      */
-    private function createImageFile(Options $options, ImageDataObject $do): ImageFile
+    private function createImageFile(Options $options, DataObject $do): File
     {
-        $imageFile = new ImageFile();
+        $imageFile = new File();
         $fileName = $this->makeFileName($do, $options);
         $imageFile->setPath($do->getTmpDirectoryPath() . $fileName);
         $imageFile->setUrl($do->getRelativeDirectoryUrl() . $fileName);
@@ -125,7 +125,7 @@ class ImageCreator implements ImageCreatorInterface
         return $imageFile;
     }
 
-    private function callProcessors(ImageFile $newImage, Options $options)
+    private function callProcessors(File $newImage, Options $options)
     {
         foreach ($this->processMap as $processorClass) {
             /* @var ProcessorInterface $processor */

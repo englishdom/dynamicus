@@ -26,4 +26,11 @@ return [
         /* используется в ответе, подставляется в путь к имиджам */
         'relative-url' => '/dynamicus/', /* /dynamicus/translation/000/000/000/001/1.jpg */
     ],
+    'containers' => [
+        'redis' => [
+            'host' => env('REDIS_HOST'),
+            'port' => env('REDIS_PORT'),
+            'password' => env('REDIS_PASS')
+        ]
+    ]
 ];

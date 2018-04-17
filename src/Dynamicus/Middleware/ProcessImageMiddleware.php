@@ -2,7 +2,7 @@
 
 namespace Dynamicus\Middleware;
 
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Dynamicus\Image\ImageCreatorInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
@@ -32,7 +32,7 @@ class ProcessImageMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $this->imageManager->process(
-            $request->getAttribute(ImageDataObject::class),
+            $request->getAttribute(DataObject::class),
             $request->getParsedBody()
         );
 

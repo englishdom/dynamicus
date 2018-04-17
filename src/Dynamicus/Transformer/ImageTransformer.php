@@ -2,24 +2,24 @@
 
 namespace Dynamicus\Transformer;
 
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Common\Exception\RuntimeException;
 use League\Fractal\TransformerAbstract;
 
 class ImageTransformer extends TransformerAbstract
 {
-    public function transform(ImageDataObject $entity): array
+    public function transform(DataObject $entity): array
     {
         $data = [
             'id' => $entity->getId(),
         ];
 
-        if (!$entity->getImageFiles()) {
+        if (!$entity->getFiles()) {
             throw new RuntimeException('Images not found!');
         }
 
-        if ($entity->getImageFiles()) {
-            foreach ($entity->getImageFiles() as $image) {
+        if ($entity->getFiles()) {
+            foreach ($entity->getFiles() as $image) {
                 $fileInfo = $this->getFileInfo($image->getUrl());
                 if (!$fileInfo['size']) {
                     $data['links'][$fileInfo['variant']] = $image->getUrl();

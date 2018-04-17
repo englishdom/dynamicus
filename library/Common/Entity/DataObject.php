@@ -7,7 +7,7 @@ use Common\Exception\RuntimeException;
 /**
  * @package Imagenaties\Entity
  */
-class ImageDataObject implements EntityInterface
+class DataObject implements EntityInterface
 {
     /**
      * @var string
@@ -48,7 +48,7 @@ class ImageDataObject implements EntityInterface
     /**
      * @var \SplObjectStorage
      */
-    private $imageFile;
+    private $files;
 
     public function getId(): ?int
     {
@@ -173,38 +173,38 @@ class ImageDataObject implements EntityInterface
     }
 
     /**
-     * @return \SplObjectStorage|ImageFile[]
+     * @return \SplObjectStorage|File[]
      */
-    public function getImageFiles(): ?\SplObjectStorage
+    public function getFiles(): ?\SplObjectStorage
     {
-        return $this->imageFile;
+        return $this->files;
     }
 
     /**
      * @param \SplObjectStorage $imageFile
      */
-    public function setImageFiles(\SplObjectStorage $imageFile)
+    public function setFiles(\SplObjectStorage $imageFile)
     {
-        $this->imageFile = $imageFile;
+        $this->files = $imageFile;
     }
 
     /**
      * Fluent Interface
-     * @param ImageFile $image
-     * @param bool      $replace
+     * @param File $file
+     * @param bool $replace
      * @return $this
      * @throws RuntimeException
      */
-    public function attachImageFile(ImageFile $image, $replace = false)
+    public function attachFile(File $file, $replace = false)
     {
-        if (!$this->imageFile instanceof \SplObjectStorage) {
-            $this->setImageFiles(new \SplObjectStorage());
+        if (!$this->files instanceof \SplObjectStorage) {
+            $this->setFiles(new \SplObjectStorage());
         }
 
-        if ($this->imageFile->offsetExists($image) && !$replace) {
+        if ($this->files->offsetExists($file) && !$replace) {
             throw new RuntimeException('The PathObject is exist in a storage!');
         }
-        $this->imageFile->attach($image);
+        $this->files->attach($file);
         return $this;
     }
 }

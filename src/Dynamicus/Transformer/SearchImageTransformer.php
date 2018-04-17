@@ -2,19 +2,19 @@
 
 namespace Dynamicus\Transformer;
 
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use League\Fractal\TransformerAbstract;
 
 class SearchImageTransformer extends TransformerAbstract
 {
-    public function transform(ImageDataObject $entity): array
+    public function transform(DataObject $entity): array
     {
         $data = [
             'id' => null
         ];
 
-        if ($entity->getImageFiles()) {
-            foreach ($entity->getImageFiles() as $image) {
+        if ($entity->getFiles()) {
+            foreach ($entity->getFiles() as $image) {
                 $data['links'][] = $image->getUrl();
             }
         }

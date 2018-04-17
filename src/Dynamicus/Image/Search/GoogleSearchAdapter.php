@@ -3,7 +3,7 @@
 namespace Dynamicus\Image\Search;
 
 use Common\Container\ConfigInterface;
-use Common\Entity\ImageFile;
+use Common\Entity\File;
 use Common\Exception\NotFoundException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
@@ -40,7 +40,7 @@ class GoogleSearchAdapter implements SearchAdapterInterface
 
     /**
      * @param $searchText
-     * @return \SplObjectStorage|ImageFile[]
+     * @return \SplObjectStorage|File[]
      * @throws NotFoundException
      */
     public function search($searchText): \SplObjectStorage
@@ -66,7 +66,7 @@ class GoogleSearchAdapter implements SearchAdapterInterface
 
         $collection = new \SplObjectStorage();
         foreach ($resultArray['items'] as $item) {
-            $imageFile = new ImageFile();
+            $imageFile = new File();
             $imageFile->setUrl($item['link']);
             $collection->attach($imageFile);
         }

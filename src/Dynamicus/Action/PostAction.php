@@ -3,7 +3,7 @@
 namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Dynamicus\Transformer\ImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -17,15 +17,15 @@ use League\Fractal\Resource\Item;
  */
 class PostAction implements ActionInterface
 {
-    public function getResourceName(ImageDataObject $do): string
+    public function getResourceName(DataObject $do): string
     {
         return $do->getEntityName().'/'.$do->getEntityId();
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        /* @var ImageDataObject $do */
-        $do = $request->getAttribute(ImageDataObject::class);
+        /* @var DataObject $do */
+        $do = $request->getAttribute(DataObject::class);
         $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));
 
         $request = $request

@@ -3,7 +3,7 @@
 namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Dynamicus\Image\Search\SearchAdapterInterface;
 use Dynamicus\Transformer\SearchImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -41,11 +41,11 @@ class SearchAction implements ActionInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        $do = new ImageDataObject();
+        $do = new DataObject();
         $searchText = urldecode($request->getAttribute('search_text'));
 
         $collection = $this->adapter->search($searchText);
-        $do->setImageFiles($collection);
+        $do->setFiles($collection);
 
         $this->writeToLog($searchText);
 

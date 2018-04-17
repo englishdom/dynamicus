@@ -2,7 +2,7 @@
 
 namespace Dynamicus\Image\Processor;
 
-use Common\Entity\ImageFile;
+use Common\Entity\File;
 use Dynamicus\Image\Options;
 
 /**
@@ -11,7 +11,7 @@ use Dynamicus\Image\Options;
  */
 class CompressImage extends AbstractImage implements ProcessorInterface
 {
-    public function process(ImageFile $imageFile, Options $options)
+    public function process(File $imageFile, Options $options)
     {
         if ($options->getQuality()) {
             $imagick = $this->getImagick($imageFile->getPath());

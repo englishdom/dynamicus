@@ -2,7 +2,7 @@
 
 namespace Dynamicus\Image;
 
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 
 /**
  * Class ImageCreatorTrait
@@ -10,7 +10,7 @@ use Common\Entity\ImageDataObject;
  */
 trait ImageCreatorTrait
 {
-    protected function makeFileName(ImageDataObject $do, ?Options $options): string
+    protected function makeFileName(DataObject $do, ?Options $options): string
     {
         if (!$options) {
             $fileName = sprintf(

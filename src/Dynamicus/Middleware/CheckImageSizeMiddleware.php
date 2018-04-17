@@ -3,7 +3,7 @@
 namespace Dynamicus\Middleware;
 
 use Common\Container\ConfigInterface;
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Common\Exception\WrongImageSizeException;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
@@ -38,8 +38,8 @@ class CheckImageSizeMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        /* @var ImageDataObject $do */
-        $do = $request->getAttribute(ImageDataObject::class);
+        /* @var DataObject $do */
+        $do = $request->getAttribute(DataObject::class);
         $queryData = $request->getParsedBody();
 
         if (isset($queryData['data']['resize'])) {

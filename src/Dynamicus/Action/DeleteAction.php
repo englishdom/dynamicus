@@ -3,7 +3,7 @@
 namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Flysystem\FilesystemInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -20,8 +20,8 @@ class DeleteAction implements ActionInterface
     {
         /* @var FilesystemInterface $filesystem */
         $filesystem = $request->getAttribute(FilesystemInterface::class);
-        /* @var ImageDataObject $do */
-        $do = $request->getAttribute(ImageDataObject::class);
+        /* @var DataObject $do */
+        $do = $request->getAttribute(DataObject::class);
 
         /* удаляется только указанная директория и все вложения */
         $filesystem->deleteDir($do->getShardingPath());

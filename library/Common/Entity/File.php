@@ -6,7 +6,7 @@ namespace Common\Entity;
  * Class PathObject
  * @package Common\Entity
  */
-class ImageFile
+class File
 {
     protected $path;
     protected $url;

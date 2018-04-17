@@ -4,8 +4,8 @@ namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
 use Common\Container\Config;
-use Common\Entity\ImageFile;
-use Common\Entity\ImageDataObject;
+use Common\Entity\File;
+use Common\Entity\DataObject;
 use Common\Exception\RuntimeException;
 use Dynamicus\Image\ImageCreatorTrait;
 use Dynamicus\Image\Options;
@@ -50,8 +50,8 @@ class ListAction implements ActionInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        /* @var ImageDataObject $do */
-        $do = $request->getAttribute(ImageDataObject::class);
+        /* @var DataObject $do */
+        $do = $request->getAttribute(DataObject::class);
         /* Добавление расширения, так как мы не читаем файловую систему и не знаем реальное расширение */
         $do->setExtension(TYPE_JPG);
         $this->createImagesPath($do);
@@ -67,30 +67,30 @@ class ListAction implements ActionInterface
 
     /**
      * Будет работать только если имиджи локально
-     * @param ImageDataObject $do
+     * @param DataObject $do
      * @throws RuntimeException
      */
-    private function createImagesPath(ImageDataObject $do)
+    private function createImagesPath(DataObject $do)
     {
         /* Добавление оригинального имиджа */
-        $pathObject = new ImageFile();
+        $pathObject = new File();
         $pathObject->setUrl($do->getRelativeDirectoryUrl() . $this->makeFileName($do, null));
-        $do->attachImageFile($pathObject);
+        $do->attachFile($pathObject);
 
         /* Добавление остальных имиджей */
         foreach ($this->createOptions($do) as $options) {
-            $pathObject = new ImageFile();
+            $pathObject = new File();
             $pathObject->setUrl($do->getRelativeDirectoryUrl() . $this->makeFileName($do, $options));
-            $do->attachImageFile($pathObject);
+            $do->attachFile($pathObject);
         }
     }
 
     /**
      * Парсинг конфига имиджей
-     * @param ImageDataObject $do
+     * @param DataObject $do
      * @return \SplObjectStorage|Options[]
      */
-    private function createOptions(ImageDataObject $do): \SplObjectStorage
+    private function createOptions(DataObject $do): \SplObjectStorage
     {
         $transformationParams = $this->config->get('images.'.$do->getEntityName());
 
@@ -99,7 +99,7 @@ class ListAction implements ActionInterface
         return $transformer->transform($do, $transformationParams);
     }
 
-    public function getResourceName(ImageDataObject $do): string
+    public function getResourceName(DataObject $do): string
     {
         return 'list/'.$do->getEntityName();
     }

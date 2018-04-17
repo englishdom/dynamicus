@@ -2,7 +2,7 @@
 
 namespace Dynamicus\Image;
 
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 
 /**
  * Class ImageManagerInterface
@@ -10,5 +10,5 @@ use Common\Entity\ImageDataObject;
  */
 interface ImageCreatorInterface
 {
-    public function process(ImageDataObject $do, array $request);
+    public function process(DataObject $do, array $request);
 }

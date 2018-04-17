@@ -1,5 +1,5 @@
 GET http://localhost:9999/list/blog-post/1
-Accept: application/json
+Accept: application/vnd.api+json
 Cookie: XDEBUG_SESSION=PHPSTORM
 
 ###

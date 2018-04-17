@@ -2,8 +2,8 @@
 
 namespace Dynamicus\Middleware;
 
-use Common\Entity\ImageDataObject;
-use Common\Entity\ImageFile;
+use Common\Entity\DataObject;
+use Common\Entity\File;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use League\Flysystem\FilesystemInterface;
@@ -18,18 +18,18 @@ class WriteImagesMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        /* @var ImageDataObject $do */
-        $do = $request->getAttribute(ImageDataObject::class);
+        /* @var DataObject $do */
+        $do = $request->getAttribute(DataObject::class);
         /* @var FilesystemInterface $filesystem */
         $filesystem = $request->getAttribute(FilesystemInterface::class);
 
-        $images = $do->getImageFiles();
+        $images = $do->getFiles();
         /* Original image remove from collection if NAMESPACE = content */
         if ($do->getNamespace() == KEY_CONTENT) {
             $images->detach($images->current());
         }
 
-        /* @var ImageFile $imageFile */
+        /* @var File $imageFile */
         foreach ($images as $imageFile) {
             $this->moveImage(
                 $filesystem,

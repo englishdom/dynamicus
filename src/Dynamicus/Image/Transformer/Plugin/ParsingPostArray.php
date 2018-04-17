@@ -2,7 +2,7 @@
 
 namespace Dynamicus\Image\Transformer\Plugin;
 
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Dynamicus\Image\Options;
 
 /**
@@ -26,11 +26,11 @@ class ParsingPostArray implements TransformerPluginInterface
     }
 
     /**
-     * @param ImageDataObject $do
-     * @param array           $options
+     * @param DataObject $do
+     * @param array      $options
      * @return \SplObjectStorage|Options[]
      */
-    public function transform(ImageDataObject $do, array $options): \SplObjectStorage
+    public function transform(DataObject $do, array $options): \SplObjectStorage
     {
         $storage = new \SplObjectStorage();
 
@@ -48,8 +48,7 @@ class ParsingPostArray implements TransformerPluginInterface
                 explode('x', $optionsRow['crop'])
             );
 
-            $fileNameSizes = array_shift($this->optionsSize[$options->getVariant()]);
-            $options->setFileNameSizes([$fileNameSizes[WIDTH], $fileNameSizes[HEIGHT]]);
+            $options->setFileNameSizes([$options->getSize()[0], $options->getSize()[1]]);
             $storage->attach($options);
         }
 

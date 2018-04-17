@@ -2,8 +2,8 @@
 
 namespace Dynamicus\Middleware;
 
-use Common\Entity\ImageDataObject;
-use Common\Entity\ImageFile;
+use Common\Entity\DataObject;
+use Common\Entity\File;
 use Common\Exception\RuntimeException;
 use Common\Exception\UnsupportedMediaException;
 use GuzzleHttp\Client;
@@ -32,8 +32,8 @@ class DownloadImageMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        /* @var ImageDataObject $do */
-        $do = $request->getAttribute(ImageDataObject::class);
+        /* @var DataObject $do */
+        $do = $request->getAttribute(DataObject::class);
         $queryData = $request->getParsedBody();
 
         /* Object ImageFile with paths */
@@ -50,20 +50,20 @@ class DownloadImageMiddleware implements MiddlewareInterface
         }
 
         /* Image set to collection */
-        $do->attachImageFile($image);
-        $do->getImageFiles()->rewind();
+        $do->attachFile($image);
+        $do->getFiles()->rewind();
 
         return $delegate->process($request);
     }
 
     /**
      * Object ImageFile get with paths to files
-     * @param ImageDataObject $do
-     * @param string          $imageUrl
-     * @return ImageFile
+     * @param DataObject $do
+     * @param string     $imageUrl
+     * @return File
      * @throws UnsupportedMediaException
      */
-    private function getImageFile(ImageDataObject $do, $imageUrl): ImageFile
+    private function getImageFile(DataObject $do, $imageUrl): File
     {
         $extension = pathinfo(parse_url($imageUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
         if (!in_array($extension, ['jpeg', 'jpg'])) {
@@ -77,7 +77,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
         $path = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . TYPE_JPG;
         $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . TYPE_JPG;
 
-        $image = new ImageFile();
+        $image = new File();
         $image->setPath($path);
         $image->setUrl($url);
 

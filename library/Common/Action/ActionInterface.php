@@ -2,7 +2,7 @@
 
 namespace Common\Action;
 
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;

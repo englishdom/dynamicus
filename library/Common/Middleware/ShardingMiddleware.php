@@ -3,7 +3,7 @@
 namespace Common\Middleware;
 
 use Common\Container\ConfigInterface;
-use Common\Entity\ImageDataObject;
+use Common\Entity\DataObject;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -30,8 +30,8 @@ class ShardingMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        /* @var ImageDataObject $do */
-        $do = $request->getAttribute(ImageDataObject::class);
+        /* @var DataObject $do */
+        $do = $request->getAttribute(DataObject::class);
         $shardingPath = $this->getFolder($do->getEntityId(), $do->getEntityName());
         $do->setShardingPath($shardingPath);
         $do->setRelativeDirectoryUrl($this->getRelativeUrlPrefix($do));
@@ -57,10 +57,10 @@ class ShardingMiddleware implements MiddlewareInterface
 
     /**
      * Получение абсолютного пути к папке в файловой системе /var/www/images/word/000/000/000/001/
-     * @param ImageDataObject $do
+     * @param DataObject $do
      * @return string
      */
-    private function getTmpPathPrefix(ImageDataObject $do): string
+    private function getTmpPathPrefix(DataObject $do): string
     {
         return str_replace('//', '/', $this->config->get('images-path.absolute-tmp-path', '')
             . DIRECTORY_SEPARATOR . $do->getShardingPath()
@@ -70,10 +70,10 @@ class ShardingMiddleware implements MiddlewareInterface
 
     /**
      * Получение относительного урла к рисункам /images/word/000/000/000/001/
-     * @param ImageDataObject $do
+     * @param DataObject $do
      * @return string
      */
-    private function getRelativeUrlPrefix(ImageDataObject $do): string
+    private function getRelativeUrlPrefix(DataObject $do): string
     {
         return str_replace('//', '/', $this->config->get('images-path.relative-url', '')
             . DIRECTORY_SEPARATOR . $do->getShardingPath()

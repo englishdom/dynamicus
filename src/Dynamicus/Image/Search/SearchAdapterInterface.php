@@ -2,7 +2,7 @@
 
 namespace Dynamicus\Image\Search;
 
-use Common\Entity\ImageFile;
+use Common\Entity\File;
 
 /**
  * Class SearchAdapterInterface
@@ -13,7 +13,7 @@ interface SearchAdapterInterface
 
     /**
      * @param $searchText
-     * @return \SplObjectStorage|ImageFile[]
+     * @return \SplObjectStorage|File[]
      */
     public function search($searchText): \SplObjectStorage;
 }
