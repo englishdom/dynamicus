@@ -106,6 +106,13 @@ return [
                 [WIDTH => 816, HEIGHT => false, QUALITY => 85], // В уроке need-to-know
             ]
         ],
+        'user' => [
+            KEY_DEFAULT => [
+                [WIDTH => 40, HEIGHT => 40, QUALITY => 85], // комментарии
+                [WIDTH => 50, HEIGHT => 50, QUALITY => 85], // дашборд. верхний правый угол
+                [WIDTH => 140, HEIGHT => 140, QUALITY => 100], // профиль пользователя, просмотр
+            ]
+        ]
     ]
 ];
 

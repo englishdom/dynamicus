@@ -26,11 +26,10 @@ class UploadFileMiddleware implements MiddlewareInterface, ConstantMiddlewareInt
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $audioContent = $request->getAttribute(self::AUDIO_CONTENT);
+        $do = $request->getAttribute(DataObject::class);
+        $file = $this->attachFile($do, $request);
         /* сохранение файла если контент не пустой */
         if ($audioContent) {
-            $do = $request->getAttribute(DataObject::class);
-            $file = $this->attachFile($do, $request);
-
             $fileSystem = $request->getAttribute(FilesystemInterface::class);
             $fileSystem->put($file->getPath(), $audioContent);
         }
