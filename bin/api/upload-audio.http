@@ -1,0 +1,6 @@
+POST http://localhost:9999/audio/upload/blog-post/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+###

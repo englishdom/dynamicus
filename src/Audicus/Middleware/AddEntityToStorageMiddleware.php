@@ -43,7 +43,7 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
 
         $do = $request->getAttribute(DataObject::class);
         /* Добавить хеш, если хеша нет в ентити */
-        $this->addHash($do->getEntityName(), $do->getEntityId(), $do->getNamespace(), $hash);
+        $this->addHash($do->getEntityName(), $do->getEntityId(), $hash);
 
         return $delegate->process($request);
     }
@@ -63,13 +63,12 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
     /**
      * @param $entityName
      * @param $entityId
-     * @param $namespace
      * @param $hash
      * @return bool
      */
-    protected function addHash($entityName, $entityId, $namespace, $hash):bool
+    protected function addHash($entityName, $entityId, $hash):bool
     {
-        $key = $this->generateKey($entityName, $entityId, $namespace);
+        $key = $this->generateKey($entityName, $entityId);
         $values = $this->redis->lRange($key, 0, -1);
         $hashKey = $this->generateHashKey($hash);
         $hashIsExist = false;

@@ -3,11 +3,10 @@
 namespace Common\Factory;
 
 use Common\Container\ConfigInterface;
+use League\Flysystem\AdapterInterface;
 use Psr\Container\ContainerInterface;
 use Aws\S3\S3Client;
 use \League\Flysystem\AwsS3v3\AwsS3Adapter;
-use \League\Flysystem\Adapter\AbstractAdapter;
-
 
 /**
  * Class FilesystemMailruAdapterFactory
@@ -15,7 +14,7 @@ use \League\Flysystem\Adapter\AbstractAdapter;
  */
 class FilesystemMailruAdapterFactory
 {
-    public function __invoke(ContainerInterface $container) : AbstractAdapter
+    public function __invoke(ContainerInterface $container) : AdapterInterface
     {
         $config = $container->get(ConfigInterface::class);
 

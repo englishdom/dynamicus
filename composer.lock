@@ -4,8 +4,95 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3008a24c7a0a8d3ccbfee8ba1cc2c0a",
+    "content-hash": "8dfc2ce8e20e97925d79bf0013a68414",
     "packages": [
+        {
+            "name": "argentcrusade/flysystem-selectel",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ArgentCrusade/flysystem-selectel.git",
+                "reference": "bc78691626e60296b045cf52777777db80efbd1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ArgentCrusade/flysystem-selectel/zipball/bc78691626e60296b045cf52777777db80efbd1c",
+                "reference": "bc78691626e60296b045cf52777777db80efbd1c",
+                "shasum": ""
+            },
+            "require": {
+                "argentcrusade/selectel-cloud-storage": "~1.1",
+                "league/flysystem": "~1.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ArgentCrusade\\Flysystem\\Selectel\\SelectelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ArgentCrusade\\Flysystem\\Selectel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Flysystem adapter for Selectel Cloud Storage",
+            "homepage": "https://github.com/argentcrusade/flysystem-selectel",
+            "keywords": [
+                "Flysystem",
+                "selectel"
+            ],
+            "time": "2017-09-27T13:16:04+00:00"
+        },
+        {
+            "name": "argentcrusade/selectel-cloud-storage",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ArgentCrusade/selectel-cloud-storage.git",
+                "reference": "f085af14b496463dc30d4804eac8c5f574d121a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ArgentCrusade/selectel-cloud-storage/zipball/f085af14b496463dc30d4804eac8c5f574d121a4",
+                "reference": "f085af14b496463dc30d4804eac8c5f574d121a4",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.2",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ArgentCrusade\\Selectel\\CloudStorage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Selectel Cloud Storage API",
+            "homepage": "https://github.com/argentcrusade/selectel-cloud-storage",
+            "keywords": [
+                "selectel"
+            ],
+            "time": "2017-07-28T17:27:32+00:00"
+        },
         {
             "name": "aws/aws-sdk-php",
             "version": "3.52.25",

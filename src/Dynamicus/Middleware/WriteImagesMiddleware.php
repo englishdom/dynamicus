@@ -63,12 +63,14 @@ class WriteImagesMiddleware implements MiddlewareInterface
     private function moveImage(FilesystemInterface $filesystem, string $tmpFilePath, string $newFilePath): bool
     {
         $resource = fopen($tmpFilePath, 'r');
+        /* Через 10 секунд локальный поток закроется */
+        /* Это сделано потому, что адаптеры могут ломать поток и он потом не закрывается */
+        stream_set_timeout($resource, 10);
         if ($filesystem->has($tmpFilePath)) {
             $result = $filesystem->writeStream($newFilePath, $resource);
         } else {
             $result = $filesystem->putStream($newFilePath, $resource);
         }
-        fclose($resource);
         if ($result) {
             unlink($tmpFilePath);
         }

@@ -24,8 +24,8 @@ class ConfigProvider
                 Middleware\PrepareFilesystemMiddleware::class => Factory\PrepareFilesystemMiddlewareFactory::class,
                 // для работы с локальной ФС
                 AdapterInterface::class => Factory\FilesystemLocalFSAdapterFactory::class,
-                // для работы с s3 совместимым маил ру
-//                AdapterInterface::class => Factory\FilesystemMailruAdapterFactory::class
+                // для работы с selectel
+//                AdapterInterface::class => Factory\FilesystemSelectelAdapterFactory::class
             ],
         ];
     }
