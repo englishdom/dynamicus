@@ -48,10 +48,39 @@ class ParsingPostArray implements TransformerPluginInterface
                 explode('x', $optionsRow['crop'])
             );
 
-            $options->setFileNameSizes([$options->getSize()[0], $options->getSize()[1]]);
+            list ($width, $height) = $this->getSizesFromConfig($options->getSize(), $do);
+            $options->setFileNameSizes([$width, $height]);
             $storage->attach($options);
         }
 
         return $storage;
+    }
+
+    /**
+     * Поиск и получение размеров из конфига размеров.
+     * Потому что имиджи могут быть с динамическими размерами.
+     * Например 300x<любой размер>
+     * @param array      $sizes
+     * @param DataObject $do
+     * @return array
+     */
+    protected function getSizesFromConfig(array $sizes, DataObject $do): array
+    {
+        $namespace = $do->getNamespace() ?? KEY_DEFAULT;
+        /* поиск по точному соответствию размеров */
+        foreach ($this->optionsSize[$namespace] as $configSizes) {
+            if ($configSizes[WIDTH] == $sizes[0] && $configSizes[HEIGHT] == $sizes[1]) {
+                return $sizes;
+            }
+        }
+        /* Поиск по 1 пустому полю */
+        foreach ($this->optionsSize[$namespace] as $configSizes) {
+            if (($configSizes[WIDTH] == $sizes[0] && $configSizes[HEIGHT] === false)
+            || ($configSizes[WIDTH] === false && $configSizes[HEIGHT] == $sizes[1])) {
+                return [$configSizes[WIDTH], $configSizes[HEIGHT]];
+            }
+        }
+
+        return $sizes;
     }
 }

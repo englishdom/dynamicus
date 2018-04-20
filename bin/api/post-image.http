@@ -1,8 +1,18 @@
+# dumanic height
 POST http://localhost:9999/blog-post/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 Cookie: XDEBUG_SESSION=PHPSTORM
 
-{"data":{"resize":[{"size":"300x200","crop":"0x0x300x200"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
+{"data":{"resize":[{"size":"300x215","crop":"0x0x300x215"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
+
+###
+
+POST http://localhost:9999/blog-post/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+{"data":{"resize":[{"size":"300x190","crop":"0x0x300x190"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
 
 ###
