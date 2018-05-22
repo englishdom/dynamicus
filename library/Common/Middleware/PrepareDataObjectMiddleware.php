@@ -16,9 +16,28 @@ class PrepareDataObjectMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
+        if (strstr($request->getAttribute('entity_id'), ',')) {
+            $do = new \SplObjectStorage();
+            foreach (explode(',', $request->getAttribute('entity_id')) as $entityId) {
+                $result = $this->setDataObject($request->getAttribute('entity'), $entityId);
+                $do->attach($result);
+            }
+        } else {
+            $do = $this->setDataObject(
+                $request->getAttribute('entity'),
+                $request->getAttribute('entity_id')
+            );
+        }
+
+        $request = $request->withAttribute(DataObject::class, $do);
+        return $delegate->process($request);
+    }
+
+    protected function setDataObject($entityName, $entityId): DataObject
+    {
         $do = new DataObject();
-        $do->setEntityId((int)$request->getAttribute('entity_id'));
-        $entityName = (string)$request->getAttribute('entity');
+        $do->setEntityId((int)$entityId);
+        $entityName = (string)$entityName;
         /* Если приходит название с неймспейсом meta_info:og_image */
         if (stristr($entityName, ':')) {
             $entityParts = explode(':', $entityName);
@@ -27,8 +46,6 @@ class PrepareDataObjectMiddleware implements MiddlewareInterface
         } else {
             $do->setEntityName($entityName);
         }
-
-        $request = $request->withAttribute(DataObject::class, $do);
-        return $delegate->process($request);
+        return $do;
     }
 }

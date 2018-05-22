@@ -2,6 +2,7 @@
 
 namespace Common;
 
+use Common\Container\SelectelFilesystemAdapter;
 use League\Flysystem\AdapterInterface;
 
 class ConfigProvider
@@ -25,7 +26,8 @@ class ConfigProvider
                 // для работы с локальной ФС
                 AdapterInterface::class => Factory\FilesystemLocalFSAdapterFactory::class,
                 // для работы с selectel
-//                AdapterInterface::class => Factory\FilesystemSelectelAdapterFactory::class
+                /* временный интерфейс */
+                SelectelFilesystemAdapter::class => Factory\FilesystemSelectelAdapterFactory::class
             ],
         ];
     }

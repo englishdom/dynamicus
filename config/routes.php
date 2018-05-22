@@ -15,7 +15,7 @@ $app->route(
 )->setOptions([
     'tokens' => [
         'entity' => '\w+',
-        'entity_id' => '\d+'
+        'entity_id' => '[\d\,]+'
     ],
 ]);
 

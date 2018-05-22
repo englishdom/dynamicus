@@ -3,6 +3,7 @@
 namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
+use Common\Container\Config;
 use Common\Entity\DataObject;
 use Dynamicus\Transformer\ImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -17,6 +18,20 @@ use League\Fractal\Resource\Item;
  */
 class PostAction implements ActionInterface
 {
+    /**
+     * @var Config
+     */
+    private $config;
+
+    /**
+     * ListAction constructor.
+     * @param Config $config
+     */
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
+    }
+
     public function getResourceName(DataObject $do): string
     {
         return $do->getEntityName().'/'.$do->getEntityId();
@@ -26,6 +41,7 @@ class PostAction implements ActionInterface
     {
         /* @var DataObject $do */
         $do = $request->getAttribute(DataObject::class);
+        $this->createImagesPath($do);
         $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));
 
         $request = $request
@@ -33,5 +49,33 @@ class PostAction implements ActionInterface
             ->withAttribute(self::HTTP_CODE, Response::STATUS_CODE_201);
 
         return $delegate->process($request);
+    }
+
+    /**
+     * @param DataObject $do
+     */
+    protected function createImagesPath(DataObject $do)
+    {
+        foreach ($do->getFiles() as $file) {
+            $file->setUrl(
+                $this->getHost($do->getEntityName()) .
+                $file->getUrl()
+            );
+        }
+    }
+
+    /**
+     * Получение хоста из конфига
+     * @param string $entityName
+     * @return string
+     */
+    protected function getHost(string $entityName): string
+    {
+        $configKey = 'hosts.'.$entityName;
+        if ($this->config->get($configKey, null) === null) {
+            $configKey = 'hosts.0';
+        }
+
+        return $this->config->get($configKey);
     }
 }

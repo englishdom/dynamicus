@@ -13,6 +13,7 @@ use Dynamicus\Image\Transformer\Plugin\ParsingConfigArray;
 use Dynamicus\Image\Transformer\Transformer;
 use Dynamicus\Transformer\ImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
+use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -52,11 +53,19 @@ class ListAction implements ActionInterface
     {
         /* @var DataObject $do */
         $do = $request->getAttribute(DataObject::class);
-        /* Добавление расширения, так как мы не читаем файловую систему и не знаем реальное расширение */
-        $do->setExtension(TYPE_JPG);
-        $this->createImagesPath($do);
+        if ($do instanceof \SplObjectStorage) {
+            foreach ($do as $object) {
+                $object->setExtension(TYPE_JPG);
+                $this->createImagesPath($object);
+            }
+            $item = new Collection($do, new ImageTransformer(), $this->getResourceName($object));
+        } else {
+            /* Добавление расширения, так как мы не читаем файловую систему и не знаем реальное расширение */
+            $do->setExtension(TYPE_JPG);
+            $this->createImagesPath($do);
 
-        $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));
+            $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));
+        }
 
         $request = $request
             ->withAttribute(self::RESPONSE, $item)
@@ -66,7 +75,6 @@ class ListAction implements ActionInterface
     }
 
     /**
-     * Будет работать только если имиджи локально
      * @param DataObject $do
      * @throws RuntimeException
      */
@@ -74,15 +82,38 @@ class ListAction implements ActionInterface
     {
         /* Добавление оригинального имиджа */
         $pathObject = new File();
-        $pathObject->setUrl($do->getRelativeDirectoryUrl() . $this->makeFileName($do, null));
+        $pathObject->setUrl(
+            $this->getHost($do->getEntityName()) .
+            $do->getRelativeDirectoryUrl() .
+            $this->makeFileName($do, null)
+        );
         $do->attachFile($pathObject);
 
         /* Добавление остальных имиджей */
         foreach ($this->createOptions($do) as $options) {
             $pathObject = new File();
-            $pathObject->setUrl($do->getRelativeDirectoryUrl() . $this->makeFileName($do, $options));
+            $pathObject->setUrl(
+                $this->getHost($do->getEntityName()) .
+                $do->getRelativeDirectoryUrl() .
+                $this->makeFileName($do, $options)
+            );
             $do->attachFile($pathObject);
         }
+    }
+
+    /**
+     * Получение хоста из конфига
+     * @param string $entityName
+     * @return string
+     */
+    protected function getHost(string $entityName): string
+    {
+        $configKey = 'hosts.'.$entityName;
+        if ($this->config->get($configKey, null) === null) {
+            $configKey = 'hosts.0';
+        }
+
+        return $this->config->get($configKey);
     }
 
     /**
