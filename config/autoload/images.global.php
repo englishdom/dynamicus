@@ -112,7 +112,13 @@ return [
                 [WIDTH => 50, HEIGHT => 50, QUALITY => 85], // дашборд. верхний правый угол
                 [WIDTH => 140, HEIGHT => 140, QUALITY => 100], // профиль пользователя, просмотр
             ]
-        ]
+        ],
+        'teacher' => [
+            KEY_DEFAULT => [
+                [WIDTH => 300, HEIGHT => 200, QUALITY => 85], // большая фото преподователей
+                [WIDTH => 100, HEIGHT => 100, QUALITY => 100], // аватар
+            ]
+        ],
     ]
 ];
 
