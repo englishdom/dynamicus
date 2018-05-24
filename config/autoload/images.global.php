@@ -119,6 +119,11 @@ return [
                 [WIDTH => 100, HEIGHT => 100, QUALITY => 100], // аватар
             ]
         ],
+        'headteacher' => [
+            KEY_DEFAULT => [
+                [WIDTH => 100, HEIGHT => 100, QUALITY => 100], // аватар
+            ]
+        ]
     ]
 ];
 
