@@ -15,6 +15,11 @@ class ParsingConfigArray implements TransformerPluginInterface
         $storage = new \SplObjectStorage();
 
         foreach ($options as $variant => $optionsRow) {
+            /* Если оригинал то нет размеров */
+            if ($variant == KEY_ORIGINAL) {
+                return $storage;
+            }
+
             foreach ($optionsRow as $dimensions) {
                 if (!is_array($dimensions)) {
                     continue;

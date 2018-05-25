@@ -7,6 +7,7 @@ define('TYPE_JPG', 'jpg');
 /* ключевые слова */
 define('KEY_DEFAULT', 'default');
 define('KEY_CONTENT', 'content');
+define('KEY_ORIGINAL', 'original');
 
 return [
     'images' => [
@@ -108,8 +109,8 @@ return [
         ],
         'user' => [
             KEY_DEFAULT => [
-                [WIDTH => 40, HEIGHT => 40, QUALITY => 85], // комментарии
-                [WIDTH => 50, HEIGHT => 50, QUALITY => 85], // дашборд. верхний правый угол
+                [WIDTH => 40, HEIGHT => 40, QUALITY => 100], // комментарии
+                [WIDTH => 50, HEIGHT => 50, QUALITY => 100], // дашборд. верхний правый угол
                 [WIDTH => 140, HEIGHT => 140, QUALITY => 100], // профиль пользователя, просмотр
             ]
         ],
@@ -129,6 +130,9 @@ return [
                 [WIDTH => 940, HEIGHT => 565, QUALITY => 80], // background
                 [WIDTH => 70, HEIGHT => 70, QUALITY => 100], // avatar
             ]
+        ],
+        'certificate' => [
+            KEY_ORIGINAL => true // save only original
         ],
     ]
 ];
