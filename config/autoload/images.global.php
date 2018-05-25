@@ -123,7 +123,13 @@ return [
             KEY_DEFAULT => [
                 [WIDTH => 100, HEIGHT => 100, QUALITY => 100], // аватар
             ]
-        ]
+        ],
+        'task-talk' => [
+            KEY_DEFAULT => [
+                [WIDTH => 940, HEIGHT => 565, QUALITY => 80], // background
+                [WIDTH => 70, HEIGHT => 75, QUALITY => 100], // avatar
+            ]
+        ],
     ]
 ];
 
