@@ -127,7 +127,7 @@ return [
         'task-talk' => [
             KEY_DEFAULT => [
                 [WIDTH => 940, HEIGHT => 565, QUALITY => 80], // background
-                [WIDTH => 70, HEIGHT => 75, QUALITY => 100], // avatar
+                [WIDTH => 70, HEIGHT => 70, QUALITY => 100], // avatar
             ]
         ],
     ]
