@@ -34,7 +34,7 @@ class WriteImagesMiddleware implements MiddlewareInterface
             $this->moveImage(
                 $filesystem,
                 $imageFile->getPath(),
-                $this->createNewPath($do->getShardingPath(), $imageFile->getPath())
+                $this->createNewPath($do->getShardingPath(), $imageFile->getUrl())
             );
         }
 

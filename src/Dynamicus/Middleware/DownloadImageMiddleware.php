@@ -124,7 +124,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
             if($bytesRead >= self::MAX_FILE_SIZE) {
                 fclose($resource);
                 unlink($toFile);
-                throw new RuntimeException('The image\'s file size more 10Mb');
+                throw new RuntimeException('The image\'s file size more 5Mb');
             }
             fwrite($resource, $data);
         }

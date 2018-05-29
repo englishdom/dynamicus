@@ -89,6 +89,10 @@ class ImageCreator implements ImageCreatorInterface
         if (!$configSizes) {
             throw new NotFoundException('The image\'s config does not exist for entity: '.$do->getEntityName());
         }
+        /* Осли имидж должен быть только оригинал */
+        if (isset($configSizes[KEY_ORIGINAL])) {
+            return new \SplObjectStorage();
+        }
 
         if (isset($request['data']['resize']) && !empty($request['data']['resize'])) {
             $plugin = new ParsingPostArray($configSizes);

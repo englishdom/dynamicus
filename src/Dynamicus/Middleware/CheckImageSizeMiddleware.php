@@ -65,7 +65,13 @@ class CheckImageSizeMiddleware implements MiddlewareInterface
         $fromConfig = $this->config->get('images.'.$entityName);
 
         $result = false;
-        foreach ($fromConfig as $variant) {
+        foreach ($fromConfig as $key => $variant) {
+            /* If image need save as original */
+            if ($key == KEY_ORIGINAL) {
+                $result = true;
+                continue;
+            }
+
             foreach ($variant as $options) {
                 $sizeFromConfig = $options['width'] . 'x' . $options['height'];
                 if ((!$options['width'] || !$options['height'] && strstr($size, $sizeFromConfig))

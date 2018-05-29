@@ -69,6 +69,38 @@ $app->route(
     ],
 ]);
 
+/* POST image /translation/35 or with namespace /meta_info:og/34 */
+$app->route(
+    '/post/{entity}/{entity_id}[/]',
+    [
+        /* Подготовка DO */
+        \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Чтение json массива из body */
+        \Common\Middleware\JsonBodyParamsMiddleware::class,
+        /* Сверка разрешенных размеров имиджа с конфигом */
+        \Dynamicus\Middleware\CheckImageSizeMiddleware::class,
+        /* Подготовка Flysystem */
+        \Common\Middleware\PrepareFilesystemMiddleware::class,
+        /* Шардирование */
+        \Common\Middleware\ShardingMiddleware::class,
+        /* Загрузка имиджа и проверка типа */
+        Dynamicus\Middleware\PostImageMiddleware::class,
+        /* Обработка имиджа */
+        Dynamicus\Middleware\ProcessImageMiddleware::class,
+        /* Запись имиджа в установленную файловую систему */
+        Dynamicus\Middleware\WriteImagesMiddleware::class,
+        /* Ответ */
+        Dynamicus\Action\PostAction::class,
+    ],
+    ['POST'],
+    'post'
+)->setOptions([
+    'tokens' => [
+        'entity' => '\w+',
+        'entity_id' => '\d+'
+    ],
+]);
+
 /* GET /search/{urlencode('search text')} */
 $app->route(
     '/search/{search_text}[/]',

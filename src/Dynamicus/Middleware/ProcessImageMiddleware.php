@@ -33,7 +33,7 @@ class ProcessImageMiddleware implements MiddlewareInterface
     {
         $this->imageManager->process(
             $request->getAttribute(DataObject::class),
-            $request->getParsedBody()
+            !empty($request->getQueryParams()) ? $request->getQueryParams() : $request->getParsedBody()
         );
 
         return $delegate->process($request);
