@@ -30,12 +30,14 @@ class WriteImagesMiddleware implements MiddlewareInterface
         }
 
         /* @var File $imageFile */
-        foreach ($images as $imageFile) {
-            $this->moveImage(
-                $filesystem,
-                $imageFile->getPath(),
-                $this->createNewPath($do->getShardingPath(), $imageFile->getUrl())
-            );
+        if ($images->count() > 0) {
+            foreach ($images as $imageFile) {
+                $this->moveImage(
+                    $filesystem,
+                    $imageFile->getPath(),
+                    $this->createNewPath($do->getShardingPath(), $imageFile->getUrl())
+                );
+            }
         }
 
         return $delegate->process($request);
