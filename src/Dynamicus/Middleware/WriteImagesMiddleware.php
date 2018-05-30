@@ -31,10 +31,6 @@ class WriteImagesMiddleware implements MiddlewareInterface
 
         /* @var File $imageFile */
         foreach ($images as $imageFile) {
-            /* не переносить файл если нет пути */
-            if (!$imageFile->getPath()) {
-                continue;
-            }
             $this->moveImage(
                 $filesystem,
                 $imageFile->getPath(),
