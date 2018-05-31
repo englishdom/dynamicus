@@ -39,6 +39,7 @@ return [
         'course-int-lesson' => [
             KEY_DEFAULT => [
                 [WIDTH => 960, HEIGHT => 172, QUALITY => 85], // Course lesson header new image
+                [WIDTH => 504, HEIGHT => 218, QUALITY => 85],
             ],
         ],
         'exercise' => [
