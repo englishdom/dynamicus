@@ -138,6 +138,15 @@ return [
             KEY_DEFAULT => [
                 [WIDTH => 224, HEIGHT => 168, QUALITY => 85], // слова
             ]
+        ],
+        'webinar' => [
+            KEY_DEFAULT => [
+                [WIDTH => 940, HEIGHT => 405, QUALITY => 85], /* Фото вебинара s1 940x405 (бекгрануд) */
+                [WIDTH => 300, HEIGHT =>  260, QUALITY => 100], /* Фото вебинара s2 300x260 (будущий/активный вебинар) */
+                [WIDTH => 300, HEIGHT => 204, QUALITY => 100], /* Фото вебинара s3 300x204 (архив) */
+                [WIDTH => 54, HEIGHT => 54, QUALITY => 100], /* Фотография "спикера" s4 54х54 */
+                [WIDTH => 34, HEIGHT => 34, QUALITY => 100]
+            ]
         ]
     ]
 ];
