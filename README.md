@@ -123,6 +123,43 @@ Response: 201
 }
 ```
 
+## Post
+An image upload use `multipart/form-data`
+
+`POST /post/{entity}/{entity_id}` example `/post/blog-post/1`
+
+Request
+```
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="image.jpg"
+
+...image's content...
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"300x190","crop":"0x0x300x190"}]}}
+--boundary--
+```
+
+Response: 201
+
+```json
+{
+  "data": {
+    "id": 1,
+    "links": {
+      "original": "\/dynamicus\/blog-post\/000\/000\/001\/1.jpg",
+      "default": {
+        "300x190": "\/dynamicus\/blog-post\/000\/000\/001\/1_default_300x190.jpg"
+      }
+    }
+  }
+}
+```
+
 ## Search
 `GET /search/{urlencode(search_text)}`
 
