@@ -222,10 +222,22 @@ $app->route(
 
 $app->route(
     '/audio/{entity}/{entity_id}[/]',
-    [],
+    [
+        /* Подготовка DO */
+        \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Шардирование по хешу */
+        \Audicus\Middleware\ShardingMiddleware::class,
+        /* Вывод пути к файлам */
+        \Audicus\Action\ListAction::class,
+    ],
     ['GET'],
     'audio-list'
-);
+)->setOptions([
+    'tokens' => [
+        'entity' => '\w+',
+        'entity_id' => '\d+'
+    ],
+]);
 
 $app->route(
     '/audio/{entity}/{entity_id}[/]',

@@ -28,8 +28,8 @@ class AudioTransformer extends TransformerAbstract
         }
 
         if ($entity->getFiles()) {
-            foreach ($entity->getFiles() as $image) {
-                $data['links'][] = $image->getUrl();
+            foreach ($entity->getFiles() as $file) {
+                $data['links'][] = $file->getUrl();
             }
         }
         return $data;

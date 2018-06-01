@@ -4,6 +4,7 @@ define('WIDTH', 'width');
 define('HEIGHT', 'height');
 define('QUALITY', 'quality');
 define('TYPE_JPG', 'jpg');
+define('TYPE_MP3', 'mp3');
 /* ключевые слова */
 define('KEY_DEFAULT', 'default');
 define('KEY_CONTENT', 'content');

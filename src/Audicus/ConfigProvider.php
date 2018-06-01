@@ -28,6 +28,7 @@ class ConfigProvider
                 Middleware\ShardingMiddleware::class => Factory\ShardingMiddlewareFactory::class,
                 Middleware\AddEntityToStorageMiddleware::class => Factory\StoreEntityInRedisMiddlewareFactory::class,
                 Middleware\GenerateAudioMiddleware::class => Factory\GenerateAudioMiddlewareFactory::class,
+                Action\ListAction::class => Factory\ListActionFactory::class,
             ]
         ];
     }
