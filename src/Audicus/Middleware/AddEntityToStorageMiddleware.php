@@ -37,7 +37,7 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
 
         /* Если хеша нет в редисе, добавить */
         if ($request->getAttribute(self::HASH_IS_EXIST) === false) {
-            $data = $request->getBody()->getContents();
+            $data = $request->getAttribute('rawBody');
             $this->writeHash($hash, $data);
         }
 

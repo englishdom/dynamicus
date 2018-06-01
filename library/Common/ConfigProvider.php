@@ -4,6 +4,7 @@ namespace Common;
 
 use Common\Container\SelectelFilesystemAdapter;
 use League\Flysystem\AdapterInterface;
+use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 class ConfigProvider
 {
@@ -27,7 +28,8 @@ class ConfigProvider
                 AdapterInterface::class => Factory\FilesystemLocalFSAdapterFactory::class,
                 // для работы с selectel
                 /* временный интерфейс */
-                SelectelFilesystemAdapter::class => Factory\FilesystemSelectelAdapterFactory::class
+                SelectelFilesystemAdapter::class => Factory\FilesystemSelectelAdapterFactory::class,
+                BodyParamsMiddleware::class => Factory\BodyParseMiddlewareFactory::class,
             ],
         ];
     }
