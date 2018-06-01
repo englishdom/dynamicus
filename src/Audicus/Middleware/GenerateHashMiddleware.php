@@ -22,7 +22,7 @@ class GenerateHashMiddleware implements MiddlewareInterface, ConstantMiddlewareI
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        $content = $request->getAttribute('rawBody');
+        $content = $request->getAttribute(self::RAW_BODY);
         $hash = md5($content);
         $request = $request->withAttribute(self::HASH, $hash);
 

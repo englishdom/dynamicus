@@ -167,8 +167,6 @@ $app->route(
         \Audicus\Middleware\GenerateHashMiddleware::class,
         /* Шардирование по хешу */
         \Audicus\Middleware\ShardingMiddleware::class,
-        /* Проверка хеша в редисе */
-        \Audicus\Middleware\CheckHashMiddleware::class,
         /* Подготовка Flysystem */
         \Common\Middleware\PrepareFilesystemMiddleware::class,
         /* Получение файла из загрузок multipart/form-data */
@@ -191,10 +189,36 @@ $app->route(
 
 $app->route(
     '/audio/regenerate/{entity}/{entity_id}[/]',
-    [],
+    [
+        /* Подготовка DO */
+        \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Чтение json массива из body */
+        \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
+        /* Валидация json данных и создание DTO */
+        \Audicus\Middleware\ValidateAudioParamsMiddleware::class,
+        /* Создание md5 хеша из данных */
+        \Audicus\Middleware\GenerateHashMiddleware::class,
+        /* Шардирование по хешу */
+        \Audicus\Middleware\ShardingMiddleware::class,
+        /* Подготовка Flysystem */
+        \Common\Middleware\PrepareFilesystemMiddleware::class,
+        /* Генерация файла, запрос Polly */
+        \Audicus\Middleware\GenerateAudioMiddleware::class,
+        /* Загрузка файла */
+        \Audicus\Middleware\UploadFileMiddleware::class,
+        /* Добавление entity:id в redis */
+        \Audicus\Middleware\AddEntityToStorageMiddleware::class,
+        /* Вывод пути добавленного файла */
+        \Audicus\Action\PostAction::class,
+    ],
     ['PATCH'],
     'audio-regenerate'
-);
+)->setOptions([
+    'tokens' => [
+        'entity' => '\w+',
+        'entity_id' => '\d+'
+    ],
+]);
 
 $app->route(
     '/audio/{entity}/{entity_id}[/]',

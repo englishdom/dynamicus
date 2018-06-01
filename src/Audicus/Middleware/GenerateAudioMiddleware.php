@@ -33,7 +33,7 @@ class GenerateAudioMiddleware implements MiddlewareInterface, ConstantMiddleware
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $hashIsExist = $request->getAttribute(self::HASH_IS_EXIST);
-        if ($hashIsExist === false) {
+        if ($hashIsExist !== true) {
             $audioDataObject = $request->getAttribute(AudioDataObject::class);
             $request = $request->withAttribute(
                 self::AUDIO_CONTENT,

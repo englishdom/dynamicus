@@ -12,6 +12,7 @@ interface ConstantMiddlewareInterface
     const HASH_IS_EXIST = 'hash_is_exist';
     const AUDIO_CONTENT = 'audio_content';
     const AUDIO_MESSAGE_LENGTH = 200;
+    const RAW_BODY = 'rawBody';
 
     const DYNAMICUS_KEY = 'dynamicus';
 }

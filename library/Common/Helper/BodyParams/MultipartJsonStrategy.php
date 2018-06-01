@@ -2,6 +2,7 @@
 
 namespace Common\Helper\BodyParams;
 
+use Common\Middleware\ConstantMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Helper\BodyParams\StrategyInterface;
 
@@ -24,7 +25,7 @@ class MultipartJsonStrategy implements StrategyInterface
             $parsedBody = json_decode($body['json'], true);
             $request = $request
                 ->withParsedBody($parsedBody)
-                ->withAttribute('rawBody', $body['json']);
+                ->withAttribute(ConstantMiddlewareInterface::RAW_BODY, $body['json']);
         }
 
         return $request;
