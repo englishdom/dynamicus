@@ -62,13 +62,9 @@ class ListAction implements ActionInterface
     {
         $do->setExtension(TYPE_MP3);
         $key = $this->generateKey($do->getEntityName(), $do->getEntityId());
-        for ($i=0; $i<$this->redis->lSize($key); $i++) {
-            $string = $this->redis->lGet($key, $i);
-            if (strlen($string) < 47) {
-                continue;
-            }
-
-            $hash = $this->cleanHash($string);
+        $values = $this->redis->lRange($key, 0, -1);
+        foreach ($values as $value) {
+            $hash = $this->cleanHash($value);
             $file = new File();
             $file->setUrl($do->getRelativeDirectoryUrl() . $hash . '.' . $do->getExtension());
             $do->attachFile($file);
@@ -77,7 +73,7 @@ class ListAction implements ActionInterface
 
     protected function cleanHash($string): string
     {
-        return substr($string, 15);
+        return substr($string, -32);
     }
 
     protected function getResourceName(DataObject $do): string

@@ -126,7 +126,6 @@ $app->route(
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Валидация json данных и создание DTO */
-        /* @TODO нужна проверка величины текста */
         \Audicus\Middleware\ValidateAudioParamsMiddleware::class,
         /* Создание md5 хеша из данных */
         \Audicus\Middleware\GenerateHashMiddleware::class,
@@ -239,12 +238,24 @@ $app->route(
     ],
 ]);
 
-$app->route(
-    '/audio/{entity}/{entity_id}[/]',
-    [],
-    ['DELETE'],
-    'audio-delete'
-);
+//$app->route(
+//    '/audio/{entity}/{entity_id}[/]',
+//    [
+//        /* Подготовка DO */
+//        \Common\Middleware\PrepareDataObjectMiddleware::class,
+//        /* Шардирование по хешу */
+//        \Audicus\Middleware\ShardingMiddleware::class,
+//        /* Удаление файла если он не используется в других entity */
+//        \Audicus\Action\DeleteAction::class,
+//    ],
+//    ['DELETE'],
+//    'audio-delete'
+//)->setOptions([
+//    'tokens' => [
+//        'entity' => '\w+',
+//        'entity_id' => '\d+'
+//    ],
+//]);
 
 /* GET /testlog/{type} */
 $app->route(

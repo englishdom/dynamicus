@@ -1,6 +1,7 @@
 <?php
 
 namespace Audicus\Middleware;
+
 use Common\Entity\DataObject;
 use Common\Middleware\ConstantMiddlewareInterface;
 use Common\Middleware\GenerateKeyTrait;
@@ -31,6 +32,11 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
         $this->redis = $redis;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface      $delegate
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $hash = $request->getAttribute(self::HASH);
@@ -43,7 +49,12 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
 
         $do = $request->getAttribute(DataObject::class);
         /* Добавить хеш, если хеша нет в ентити */
-        $this->addHash($do->getEntityName(), $do->getEntityId(), $hash);
+        $result = $this->addHash($do, $hash);
+        
+        if ($result === true) {
+            /* Удалние старых файлов из entity */
+            $this->removeOldFiles($do, $hash);
+        }
 
         return $delegate->process($request);
     }
@@ -61,14 +72,13 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
     }
 
     /**
-     * @param $entityName
-     * @param $entityId
-     * @param $hash
+     * @param DataObject $do
+     * @param            $hash
      * @return bool
      */
-    protected function addHash($entityName, $entityId, $hash):bool
+    protected function addHash(DataObject $do, $hash):bool
     {
-        $key = $this->generateKey($entityName, $entityId);
+        $key = $this->generateKey($do->getEntityName(), $do->getEntityId());
         $values = $this->redis->lRange($key, 0, -1);
         $hashKey = $this->generateHashKey($hash);
         $hashIsExist = false;
@@ -83,5 +93,23 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
             return (bool)$this->redis->lPush($key, $hashKey);
         }
         return false;
+    }
+
+    /**
+     * @param                     $excludeHash
+     * @param DataObject          $do
+     * @TODO нужно добавить проверку по неймспейсу
+     */
+    protected function removeOldFiles(DataObject $do, $excludeHash)
+    {
+        $key = $this->generateKey($do->getEntityName(), $do->getEntityId());
+        $hashes = $this->redis->lRange($key, 0, -1);
+        foreach ($hashes as $hash) {
+            $parts = explode(':', $hash);
+            if (count($parts) == 3 && $parts[2] != $excludeHash) {
+                /* Удаление хеша только из entity. Потому что файл может быть связан с другой entity */
+                $this->redis->lRemove($key, $hash, 1);
+            }
+        }
     }
 }
