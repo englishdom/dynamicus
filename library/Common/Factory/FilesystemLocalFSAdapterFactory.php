@@ -16,6 +16,6 @@ class FilesystemLocalFSAdapterFactory
     {
         $config = $container->get(ConfigInterface::class);
         $rootPath = $config->get('images-path.root-path');
-        return new Local($rootPath);
+        return new Local($rootPath, 0);
     }
 }
