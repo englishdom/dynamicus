@@ -30,12 +30,12 @@ class PostAction implements ActionInterface
 
         $item = new Item($do, new AudioTransformer(), $this->getResourceName($do));
 
-        $hashIsExist = $request->getAttribute(ConstantMiddlewareInterface::HASH_IS_EXIST);
+        $fileExists = $request->getAttribute(ConstantMiddlewareInterface::FILE_EXISTS);
         $request = $request
             ->withAttribute(self::RESPONSE, $item)
             ->withAttribute(
                 self::HTTP_CODE,
-                $hashIsExist === true ? Response::STATUS_CODE_200 : Response::STATUS_CODE_201
+                $fileExists === true ? Response::STATUS_CODE_200 : Response::STATUS_CODE_201
             );
 
         return $delegate->process($request);

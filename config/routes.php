@@ -123,6 +123,8 @@ $app->route(
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Добавление расширения .mp3 */
+        \Audicus\Middleware\AddExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Валидация json данных и создание DTO */
@@ -131,10 +133,10 @@ $app->route(
         \Audicus\Middleware\GenerateHashMiddleware::class,
         /* Шардирование по хешу */
         \Audicus\Middleware\ShardingMiddleware::class,
-        /* Проверка хеша в редисе */
-        \Audicus\Middleware\CheckHashMiddleware::class,
         /* Подготовка Flysystem */
         \Common\Middleware\PrepareFilesystemMiddleware::class,
+        /* Проверка существования файла */
+        \Audicus\Middleware\CheckFileMiddleware::class,
         /* Генерация файла, запрос Polly */
         \Audicus\Middleware\GenerateAudioMiddleware::class,
         /* Загрузка файла */
@@ -158,6 +160,8 @@ $app->route(
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Добавление расширения .mp3 */
+        \Audicus\Middleware\AddExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Валидация json данных и создание DTO */
@@ -191,6 +195,8 @@ $app->route(
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Добавление расширения .mp3 */
+        \Audicus\Middleware\AddExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Валидация json данных и создание DTO */
@@ -224,6 +230,8 @@ $app->route(
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Добавление расширения .mp3 */
+        \Audicus\Middleware\AddExtensionMiddleware::class,
         /* Шардирование по хешу */
         \Audicus\Middleware\ShardingMiddleware::class,
         /* Вывод пути к файлам */

@@ -42,7 +42,7 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
         $hash = $request->getAttribute(self::HASH);
 
         /* Если хеша нет в редисе, добавить */
-        if ($request->getAttribute(self::HASH_IS_EXIST) !== true) {
+        if (!$this->isHash($hash)) {
             $data = $request->getAttribute(self::RAW_BODY);
             $this->writeHash($hash, $data);
         }
@@ -57,6 +57,16 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
         }
 
         return $delegate->process($request);
+    }
+
+    /**
+     * Check STRING key in redis
+     * @param $hash
+     * @return bool
+     */
+    protected function isHash($hash): bool
+    {
+        return $this->redis->exists($this->generateHashKey($hash));
     }
 
     /**

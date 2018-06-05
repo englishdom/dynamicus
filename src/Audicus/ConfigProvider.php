@@ -24,7 +24,6 @@ class ConfigProvider
     {
         return [
             'factories'  => [
-                Middleware\CheckHashMiddleware::class => Factory\CheckHashInRedisMiddlewareFactory::class,
                 Middleware\ShardingMiddleware::class => Factory\ShardingMiddlewareFactory::class,
                 Middleware\AddEntityToStorageMiddleware::class => Factory\StoreEntityInRedisMiddlewareFactory::class,
                 Middleware\GenerateAudioMiddleware::class => Factory\GenerateAudioMiddlewareFactory::class,

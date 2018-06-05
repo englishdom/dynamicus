@@ -30,10 +30,16 @@ class GenerateAudioMiddleware implements MiddlewareInterface, ConstantMiddleware
         $this->config = $config;
     }
 
+    /**
+     * Если не существует аудио файла запрос генерации аудио
+     *
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface      $delegate
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        $hashIsExist = $request->getAttribute(self::HASH_IS_EXIST);
-        if ($hashIsExist !== true) {
+        if ($request->getAttribute(self::FILE_EXISTS) === false) {
             $audioDataObject = $request->getAttribute(AudioDataObject::class);
             $request = $request->withAttribute(
                 self::AUDIO_CONTENT,

@@ -14,6 +14,7 @@ interface ConstantMiddlewareInterface
     const AUDIO_MESSAGE_LENGTH = 255;
     const RAW_BODY = 'rawBody';
     const TO_REMOVE = 'to_remove';
+    const FILE_EXISTS = 'file_exists';
 
     const DYNAMICUS_KEY = 'dynamicus';
 }

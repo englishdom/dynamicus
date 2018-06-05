@@ -46,7 +46,7 @@ class UploadFileMiddleware implements MiddlewareInterface, ConstantMiddlewareInt
     protected function attachFile(DataObject $do, ServerRequestInterface $request): File
     {
         $hash = $request->getAttribute(self::HASH);
-        $fileName = $hash . '.mp3';
+        $fileName = $hash . '.' . $do->getExtension();
         $url = $do->getRelativeDirectoryUrl() . $fileName;
         $path = $do->getShardingPath() . DIRECTORY_SEPARATOR . $fileName;
 

@@ -16,6 +16,12 @@ use Zend\Diactoros\UploadedFile;
  */
 class PrepareUploadedFileMiddleware implements MiddlewareInterface, ConstantMiddlewareInterface
 {
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface      $delegate
+     * @return ResponseInterface
+     * @throws InvalidParameterException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $files = $request->getUploadedFiles();
