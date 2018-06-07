@@ -4,6 +4,7 @@ namespace Audicus\Action;
 
 use Audicus\Transformer\AudioTransformer;
 use Common\Action\ActionInterface;
+use Common\Container\Config;
 use Common\Entity\DataObject;
 use Common\Entity\File;
 use Common\Middleware\GenerateKeyTrait;
@@ -22,14 +23,20 @@ class ListAction implements ActionInterface
     use GenerateKeyTrait;
 
     protected $redis;
+    /**
+     * @var Config
+     */
+    private $config;
 
     /**
      * CheckHashInRedisMiddleware constructor.
      * @param \Redis $redis
+     * @param Config $config
      */
-    public function __construct(\Redis $redis)
+    public function __construct(\Redis $redis, Config $config)
     {
         $this->redis = $redis;
+        $this->config = $config;
     }
 
     /**
@@ -66,9 +73,27 @@ class ListAction implements ActionInterface
         foreach ($values as $value) {
             $hash = $this->cleanHash($value);
             $file = new File();
-            $file->setUrl($do->getRelativeDirectoryUrl() . $hash . '.' . $do->getExtension());
+            $file->setUrl(
+                $this->getHost($do->getEntityName()) .
+                $do->getRelativeDirectoryUrl() . $hash . '.' . $do->getExtension()
+            );
             $do->attachFile($file);
         }
+    }
+
+    /**
+     * Получение хоста из конфига
+     * @param string $entityName
+     * @return string
+     */
+    protected function getHost(string $entityName): string
+    {
+        $configKey = 'hosts.'.$entityName;
+        if ($this->config->get($configKey, null) === null) {
+            $configKey = 'hosts.0';
+        }
+
+        return $this->config->get($configKey);
     }
 
     protected function cleanHash($string): string

@@ -28,6 +28,7 @@ class ConfigProvider
                 Middleware\AddEntityToStorageMiddleware::class => Factory\StoreEntityInRedisMiddlewareFactory::class,
                 Middleware\GenerateAudioMiddleware::class => Factory\GenerateAudioMiddlewareFactory::class,
                 Action\ListAction::class => Factory\ListActionFactory::class,
+                Action\PostAction::class => Factory\PostActionFactory::class,
             ]
         ];
     }

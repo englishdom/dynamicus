@@ -2,6 +2,7 @@
 
 namespace Audicus\Action;
 
+use Common\Container\Config;
 use Common\Middleware\ConstantMiddlewareInterface;
 use Audicus\Transformer\AudioTransformer;
 use Common\Action\ActionInterface;
@@ -18,6 +19,20 @@ use League\Fractal\Resource\Item;
  */
 class PostAction implements ActionInterface
 {
+    /**
+     * @var Config
+     */
+    private $config;
+
+    /**
+     * ListAction constructor.
+     * @param Config $config
+     */
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
+    }
+
     public function getResourceName(DataObject $do): string
     {
         return '/audio/'.$do->getEntityName().'/'.$do->getEntityId();
@@ -27,7 +42,7 @@ class PostAction implements ActionInterface
     {
         /* @var DataObject $do */
         $do = $request->getAttribute(DataObject::class);
-
+        $this->createAudioPath($do);
         $item = new Item($do, new AudioTransformer(), $this->getResourceName($do));
 
         $fileExists = $request->getAttribute(ConstantMiddlewareInterface::FILE_EXISTS);
@@ -39,5 +54,33 @@ class PostAction implements ActionInterface
             );
 
         return $delegate->process($request);
+    }
+
+    /**
+     * @param DataObject $do
+     */
+    protected function createAudioPath(DataObject $do)
+    {
+        foreach ($do->getFiles() as $file) {
+            $file->setUrl(
+                $this->getHost($do->getEntityName()) .
+                $file->getUrl()
+            );
+        }
+    }
+
+    /**
+     * Получение хоста из конфига
+     * @param string $entityName
+     * @return string
+     */
+    protected function getHost(string $entityName): string
+    {
+        $configKey = 'hosts.'.$entityName;
+        if ($this->config->get($configKey, null) === null) {
+            $configKey = 'hosts.0';
+        }
+
+        return $this->config->get($configKey);
     }
 }
