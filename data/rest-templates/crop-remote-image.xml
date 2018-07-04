@@ -1,0 +1,41 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list>
+      <Biscuit>
+        <option name="date" value="1521023856000" />
+        <option name="domain" value="localhost" />
+        <option name="name" value="XDEBUG_SESSION" />
+        <option name="path" value="/" />
+        <option name="value" value="anton" />
+      </Biscuit>
+    </list>
+  </option>
+  <option name="httpMethod" value="POST" />
+  <option name="urlBase" value="http://localhost:8888" />
+  <option name="urlPath" value="/meta_info:vk/3" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Accept" />
+        <option name="value" value="*/*" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Cache-Control" />
+        <option name="value" value="no-cache" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Content-Type" />
+        <option name="value" value="application/vnd.api+json" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list />
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="true" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="{&quot;data&quot;:{&quot;resize&quot;:[{&quot;size&quot;:&quot;537x240&quot;,&quot;crop&quot;:&quot;0x0x537x240&quot;}],&quot;links&quot;:{&quot;url&quot;:&quot;https://c1.staticflickr.com/5/4793/39890821375_d1fcdbf1a3_h.jpg&quot;}}}" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>
