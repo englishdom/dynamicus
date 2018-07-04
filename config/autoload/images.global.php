@@ -137,7 +137,10 @@ return [
             KEY_ORIGINAL => true // save only original
         ],
         'certificate-share' => [
-            KEY_ORIGINAL => true // save only original
+            KEY_DEFAULT => [
+                [WIDTH => 1200, HEIGHT => 630, QUALITY => 100], // fb
+                [WIDTH => 537, HEIGHT => 240, QUALITY => 100], // vk
+            ]
         ],
         'online-test' => [
             KEY_DEFAULT => [
