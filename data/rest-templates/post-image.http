@@ -1,0 +1,51 @@
+# otions in query: ?data[resize][0][size]=300x215&data[resize][0][crop]=0x0x300x215&data[links][url]=https://www.what-dog.net/Images/faces2/scroll001.jpg
+# dumanic height
+POST http://localhost:9999/blog-post/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+{"data":{"resize":[{"size":"300x215","crop":"0x0x300x215"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
+
+###
+
+POST http://localhost:9999/blog-post/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+{"data":{"resize":[{"size":"300x190","crop":"0x0x300x190"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
+
+###
+
+# POST FORM-DATA image with parameters
+POST http://localhost:9999/post/blog-post/1
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="image.jpg"
+
+< ../../data/image.jpg
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"300x190","crop":"0x0x300x190"}]}}
+--boundary--
+
+###
+
+# POST FORM-DATA image
+POST http://localhost:9999/post/certificate/1
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="image.jpg"
+
+< ../../data/image.jpg
+--boundary--
+
+###

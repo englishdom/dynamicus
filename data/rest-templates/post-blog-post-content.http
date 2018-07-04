@@ -1,0 +1,8 @@
+POST http://localhost:9999/blog-post:content/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+{"data":{"resize":[{"size":"700x445","crop":"0x0x700x445"}],"links":{"url":"https://robbreportedit.files.wordpress.com/2016/04/01-ford-gt-front-three-quarter1.jpg"}}}
+
+###
