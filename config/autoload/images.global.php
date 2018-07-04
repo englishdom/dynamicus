@@ -136,6 +136,9 @@ return [
         'certificate' => [
             KEY_ORIGINAL => true // save only original
         ],
+        'certificate-share' => [
+            KEY_ORIGINAL => true // save only original
+        ],
         'online-test' => [
             KEY_DEFAULT => [
                 [WIDTH => 224, HEIGHT => 168, QUALITY => 85], // слова
