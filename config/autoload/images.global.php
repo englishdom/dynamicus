@@ -155,6 +155,9 @@ return [
                 [WIDTH => 54, HEIGHT => 54, QUALITY => 100], /* Фотография "спикера" s4 54х54 */
                 [WIDTH => 34, HEIGHT => 34, QUALITY => 100]
             ]
+        ],
+        'feedback' => [
+            KEY_ORIGINAL => true // save only original
         ]
     ]
 ];
