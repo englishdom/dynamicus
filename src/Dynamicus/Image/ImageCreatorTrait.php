@@ -18,6 +18,12 @@ trait ImageCreatorTrait
                 $do->getEntityId(),
                 $do->getExtension()
             );
+        } elseif ($options->getVariant() == TYPE_SVG) {
+            $fileName = sprintf(
+                '%s.%s',
+                $do->getEntityId(),
+                TYPE_SVG
+            );
         } else {
             $fileName = sprintf(
                 '%s_%s_%s.%s',

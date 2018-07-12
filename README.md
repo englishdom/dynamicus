@@ -123,7 +123,7 @@ Response: 201
 }
 ```
 
-## Post
+## Upload
 An image upload use `multipart/form-data`
 
 `POST /post/{entity}/{entity_id}` example `/post/blog-post/1`
@@ -155,6 +155,37 @@ Response: 201
       "default": {
         "300x190": "\/dynamicus\/blog-post\/000\/000\/001\/1_default_300x190.jpg"
       }
+    }
+  }
+}
+```
+
+## Upload SVG
+
+Need add to config `TYPE_SVG => true`
+
+`POST /upload/user:svg/1`
+
+Request
+```
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="image.svg"
+
+...image's content...
+--boundary--
+```
+
+Response: 201
+
+```json
+{
+  "data": {
+    "id": 1,
+    "links": {
+      "svg": "\/dynamicus\/user\/000\/000\/001\/1.svg"
     }
   }
 }

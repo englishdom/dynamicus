@@ -30,10 +30,8 @@ class PostImageMiddleware implements MiddlewareInterface
 
     protected function getImageFile(DataObject $do): File
     {
-        $do->setExtension(TYPE_JPG);
-
         $path = $_FILES['image']['tmp_name'];
-        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . TYPE_JPG;
+        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . $do->getExtension();
 
         $image = new File();
         $image->setPath($path);

@@ -69,13 +69,12 @@ class DownloadImageMiddleware implements MiddlewareInterface
         if (!in_array($extension, ['jpeg', 'jpg'])) {
             throw new UnsupportedMediaException('The image unsupported with type: '.$extension);
         }
-        $do->setExtension(TYPE_JPG);
 
         /* Directory creating */
         $this->createFoldersRecursive($do->getTmpDirectoryPath());
 
-        $path = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . TYPE_JPG;
-        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . TYPE_JPG;
+        $path = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . $do->getExtension();
+        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . $do->getExtension();
 
         $image = new File();
         $image->setPath($path);
