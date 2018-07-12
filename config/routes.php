@@ -226,7 +226,7 @@ $app->route(
 ]);
 
 $app->route(
-    '/audio/{entity}/{entity_id}[/]',
+    '/audio/{entity}/{entity_id}[/{with-info}]',
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
@@ -242,7 +242,7 @@ $app->route(
 )->setOptions([
     'tokens' => [
         'entity' => '\w+',
-        'entity_id' => '\d+'
+        'entity_id' => '\d+',
     ],
 ]);
 
