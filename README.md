@@ -228,6 +228,30 @@ Need redis for working with audio.
 
 `GET /audio/{entity}/{entity_id}`
 
+### List with file info
+
+`GET /audio/{entity}/{entity_id}/with-info` example `GET /audio/blog-post/1/with-info`
+
+Response [200]
+```json
+{
+  "data": {
+    "id": 1,
+    "links": [
+      "https:\/\/...\/dynamicus\/blog-post\/000\/000\/001\/943364a76a06c7057ea847e993ac6a34.mp3"
+    ],
+    "info": [
+      {
+        "type": "file",
+        "path": "blog-post\/000\/000\/001\/943364a76a06c7057ea847e993ac6a34.mp3",
+        "timestamp": 1531388148,
+        "size": 2385
+      }
+    ]
+  }
+}
+```
+
 ## Create
 
 `POST /audio/{entity}/{entity_id}` example `/audio/word/1`
