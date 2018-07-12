@@ -55,13 +55,13 @@ class ListAction implements ActionInterface
         $do = $request->getAttribute(DataObject::class);
         if ($do instanceof \SplObjectStorage) {
             foreach ($do as $object) {
-                $object->setExtension(TYPE_JPG);
+                $object->setExtension($do->getExtension());
                 $this->createImagesPath($object);
             }
             $item = new Collection($do, new ImageTransformer(), $this->getResourceName($object));
         } else {
             /* Добавление расширения, так как мы не читаем файловую систему и не знаем реальное расширение */
-            $do->setExtension(TYPE_JPG);
+            $do->setExtension($do->getExtension());
             $this->createImagesPath($do);
 
             $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));

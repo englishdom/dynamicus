@@ -4,6 +4,7 @@ define('WIDTH', 'width');
 define('HEIGHT', 'height');
 define('QUALITY', 'quality');
 define('TYPE_JPG', 'jpg');
+define('TYPE_SVG', 'svg');
 define('TYPE_MP3', 'mp3');
 /* ключевые слова */
 define('KEY_DEFAULT', 'default');
@@ -36,6 +37,9 @@ return [
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
                 [WIDTH => 300, HEIGHT => 194, QUALITY => 85], // Картинка на /video-practicum
             ],
+        ],
+        'course-int' => [
+            TYPE_SVG => true
         ],
         'course-int-lesson' => [
             KEY_DEFAULT => [
