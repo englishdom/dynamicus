@@ -8,7 +8,6 @@ $dotenv = new Dotenv\Dotenv('./');
 $dotenv->load();
 
 $aggregator = new ConfigAggregator([
-    \Zend\Validator\ConfigProvider::class,
     \Zend\Log\ConfigProvider::class,
     // Base config provider
     Common\ConfigProvider::class,

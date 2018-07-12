@@ -86,20 +86,11 @@ class ListAction implements ActionInterface
             $hash = $this->cleanHash($value);
             $file = new File();
             if ($withMetaInfo) {
-                $this->setFileInfo($file, $this->createUrlInFileSystem($do, $hash));
+                $file->setMetaData($this->getFileInfo($this->createUrlInFileSystem($do, $hash)));
             }
             $file->setUrl($this->createUrl($do, $hash));
             $do->attachFile($file);
         }
-    }
-
-    /**
-     * @param File $file
-     * @param string $url
-     */
-    protected function setFileInfo(File $file, string $url)
-    {
-        $file->setMetaData($this->getFileInfo($url));
     }
 
     /**
