@@ -53,7 +53,7 @@ Response [200]:
 ## Delete
 `DELETE /{entity}/{entity_id}`
 
-Response: 204
+Response [204]
 
 ## Create
 `POST /{entity}/{entity_id}`
@@ -86,16 +86,16 @@ Request:
  
  If an element `resize` does not exist. The image will crop for all sizes from config.
 
-Response: 201
+Response [201]
 
 ```json
 {
   "data": {
     "id": 1,
     "links": {
-      "original": "\/dynamicus\/blog-post\/000\/000\/001\/1.jpg",
+      "original": "https://...\/dynamicus\/blog-post\/000\/000\/001\/1.jpg",
       "default": {
-        "300x285": "\/dynamicus\/blog-post\/000\/000\/001\/1_default_300x285.jpg"
+        "300x285": "https://...\/dynamicus\/blog-post\/000\/000\/001\/1_default_300x285.jpg"
       }
     }
   }
@@ -109,14 +109,14 @@ It does not create original image and does not return this image in list.
  
 Request: like [Create](#create)
 
-Response: 201
+Response [201]
 ```json
 {
   "data": {
     "id": 1,
     "links": {
       "content": {
-        "700x445": "\/dynamicus\/blog-post\/000\/000\/001\/1522913218_content_700x445.jpg"
+        "700x445": "https://...\/dynamicus\/blog-post\/000\/000\/001\/1522913218_content_700x445.jpg"
       }
     }
   }
@@ -144,16 +144,16 @@ Content-Disposition: form-data; name="json"
 --boundary--
 ```
 
-Response: 201
+Response [201]
 
 ```json
 {
   "data": {
     "id": 1,
     "links": {
-      "original": "\/dynamicus\/blog-post\/000\/000\/001\/1.jpg",
+      "original": "https://...\/dynamicus\/blog-post\/000\/000\/001\/1.jpg",
       "default": {
-        "300x190": "\/dynamicus\/blog-post\/000\/000\/001\/1_default_300x190.jpg"
+        "300x190": "https://...\/dynamicus\/blog-post\/000\/000\/001\/1_default_300x190.jpg"
       }
     }
   }
@@ -178,14 +178,14 @@ Content-Disposition: form-data; name="image"; filename="image.svg"
 --boundary--
 ```
 
-Response: 201
+Response [201]
 
 ```json
 {
   "data": {
     "id": 1,
     "links": {
-      "svg": "\/dynamicus\/user\/000\/000\/001\/1.svg"
+      "svg": "https://.../dynamicus/user/000/000/001/1.svg"
     }
   }
 }
@@ -219,6 +219,102 @@ Response [200]:
 ```
 A string will write to log `Dynamicus: Request to Image API for {search query}`
 
+# Audio
+
+Audio files can be only `.mp3`
+Need redis for working with audio.
+
+## List
+
+`GET /audio/{entity}/{entity_id}`
+
+## Create
+
+`POST /audio/{entity}/{entity_id}` example `/audio/word/1`
+
+Request:
+
+```json
+{
+  "data": {
+    "message": "<speak>my phone is</speak>"
+  }
+}
+```
+
+Response [201]
+```json
+{
+  "data": {
+    "id": 1,
+    "links": [
+      "https://.../dynamicus/word/000/000/001/1cd083fa859fccefca7b3b7a2517c909.mp3"
+    ]
+  }
+}
+```
+
+## Upload audio file
+
+`POST /audio/upload/{entity}/{entity_id}` example `/audio/upload/blog-post/1`
+
+Request:
+
+```
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+
+--boundary
+Content-Disposition: form-data; name="audio"; filename="audio.mp3"
+
+< ../../data/audio.mp3
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"message":"<speak>arm</speak>"}}
+--boundary--
+```
+
+Response [201]
+
+```json
+{
+  "data": {
+    "id": 1,
+    "links": [
+      "https://.../dynamicus/blog-post/000/000/001/943364a76a06c7057ea847e993ac6a34.mp3"
+    ]
+  }
+}
+```
+
+## Regenerate audio
+
+Old audios will remove from entity and a new audio generate
+
+`PATCH /audio/regenerate/blog-post/1`
+
+Request:
+
+```json
+{
+  "data": {
+    "message": "<speak>my phone is</speak>"
+  }
+}
+```
+
+Response [201]
+```json
+{
+  "data": {
+    "id": 1,
+    "links": [
+      "https://.../dynamicus/word/000/000/001/1cd083fa859fccefca7b3b7a2517c909.mp3"
+    ]
+  }
+}
+```
 
 ## TestLog
 `GET /test-log/{type}`
@@ -234,7 +330,7 @@ A string will write to log `Dynamicus: Request to Image API for {search query}`
 
 ``http 127.0.0.1:8889/test-log/exception``
 
-Response [400]:
+Response [400]
 ```json
 {
     "errors": {
