@@ -10,7 +10,7 @@ use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
  * Class BodyParseMiddlewareFactory
  * @package Common\Factory
  */
-class BodyParseMiddlewareFactory
+class BodyParamsMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
