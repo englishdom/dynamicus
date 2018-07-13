@@ -55,7 +55,7 @@ class ListAction implements ActionInterface
         $do = $request->getAttribute(DataObject::class);
         if ($do instanceof \SplObjectStorage) {
             foreach ($do as $object) {
-                $object->setExtension($do->getExtension());
+                $object->setExtension($object->getExtension());
                 $this->createImagesPath($object);
             }
             $item = new Collection($do, new ImageTransformer(), $this->getResourceName($object));
