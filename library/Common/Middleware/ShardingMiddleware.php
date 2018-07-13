@@ -89,9 +89,6 @@ class ShardingMiddleware implements MiddlewareInterface
      */
     private function getRelativeUrlPrefix(DataObject $do): string
     {
-        return str_replace('//', '/', $this->config->get('images-path.relative-url', '')
-            . DIRECTORY_SEPARATOR . $do->getShardingPath()
-            . DIRECTORY_SEPARATOR
-        );
+        return str_replace('//', '/', DIRECTORY_SEPARATOR . $do->getShardingPath() . DIRECTORY_SEPARATOR);
     }
 }

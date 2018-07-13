@@ -29,8 +29,6 @@ return [
         'root-name' => 'dynamicus',
         /* для временного аплоада и манипуляций с имиджами */
         'absolute-tmp-path' => '/tmp/images/', /* /tmp/images/translation/000/000/001/1.jpg */
-        /* используется в ответе, подставляется в путь к имиджам */
-        'relative-url' => '/dynamicus/',
     ],
     'containers' => [
         'redis' => [
