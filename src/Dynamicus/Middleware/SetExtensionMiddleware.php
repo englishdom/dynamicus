@@ -19,6 +19,20 @@ class SetExtensionMiddleware implements MiddlewareInterface, ConstantMiddlewareI
     {
         $do = $request->getAttribute(DataObject::class);
 
+        if ($do instanceof \SplObjectStorage) {
+            foreach ($do as $single) {
+                $this->setExtension($single);
+            }
+        } else {
+            $this->setExtension($do);
+        }
+
+
+        return $delegate->process($request);
+    }
+
+    protected function setExtension(DataObject $do)
+    {
         switch($do->getNamespace()) {
             case 'svg':
                 $do->setExtension(TYPE_SVG);
@@ -27,7 +41,5 @@ class SetExtensionMiddleware implements MiddlewareInterface, ConstantMiddlewareI
                 $do->setExtension(TYPE_JPG);
                 break;
         }
-
-        return $delegate->process($request);
     }
 }
