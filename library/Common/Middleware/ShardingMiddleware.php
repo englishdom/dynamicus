@@ -62,6 +62,9 @@ class ShardingMiddleware implements MiddlewareInterface
             array_unshift($split, $prefix);
         }
 
+        /* добавление главной категории `dynamicus` */
+        array_unshift($split, $this->config->get('images-path.root-name'));
+
         /* Построение пути */
         return implode(DIRECTORY_SEPARATOR, $split);
     }
