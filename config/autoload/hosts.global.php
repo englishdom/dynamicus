@@ -6,8 +6,9 @@ return [
         'faq' => env('HOST_SELECTEL'),
     ],
     'adapters' => [
-        '0' => \Common\Factory\FilesystemLocalFSAdapterFactory::class,
+        '0' => \League\Flysystem\AdapterInterface::class,
         /* Для entity FAQ будет использвоаться адаптер selectel */
-        'faq' => \Common\Factory\FilesystemSelectelAdapterFactory::class,
-    ]
+        'faq' => \Common\Container\SelectelAdapterInterface::class,
+    ],
+
 ];

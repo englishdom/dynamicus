@@ -2,7 +2,7 @@
 
 namespace Common;
 
-use Common\Container\SelectelFilesystemAdapter;
+use Common\Container\SelectelAdapterInterface;
 use League\Flysystem\AdapterInterface;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
@@ -25,11 +25,10 @@ class ConfigProvider
                 Middleware\ShardingMiddleware::class => Factory\ShardingMiddlewareFactory::class,
                 Middleware\PrepareFilesystemMiddleware::class => Factory\PrepareFilesystemMiddlewareFactory::class,
                 // для работы с локальной ФС
-                AdapterInterface::class => Factory\FilesystemLocalFSAdapterFactory::class,
+                AdapterInterface::class => Factory\LocalFSAdapterFactory::class,
                 // для работы с selectel
-                /* временный интерфейс */
-                SelectelFilesystemAdapter::class => Factory\FilesystemSelectelAdapterFactory::class,
-                BodyParamsMiddleware::class => Factory\BodyParseMiddlewareFactory::class,
+                SelectelAdapterInterface::class => Factory\SelectelAdapterFactory::class,
+                BodyParamsMiddleware::class => Factory\BodyParamsMiddlewareFactory::class,
             ],
         ];
     }

@@ -2,8 +2,8 @@
 
 namespace Common\Factory;
 
+use Common\Container\ConfigInterface;
 use Common\Middleware\PrepareFilesystemMiddleware;
-use League\Flysystem\AdapterInterface;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -14,7 +14,8 @@ class PrepareFilesystemMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $fileSystemAdapter = $container->get(AdapterInterface::class);
-        return new PrepareFilesystemMiddleware($fileSystemAdapter);
+        /* Передается контейнер только потому, что нужно выбирать различные адаптеры */
+        $config = $container->get(ConfigInterface::class);
+        return new PrepareFilesystemMiddleware($container, $config);
    }
 }
