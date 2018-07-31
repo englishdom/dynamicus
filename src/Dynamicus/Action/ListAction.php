@@ -108,9 +108,9 @@ class ListAction implements ActionInterface
      */
     protected function getHost(string $entityName): string
     {
-        $configKey = 'hosts.'.$entityName;
+        $configKey = 'hosts.cdn.'.$entityName;
         if ($this->config->get($configKey, null) === null) {
-            $configKey = 'hosts.0';
+            $configKey = 'hosts.cdn.0';
         }
 
         return $this->config->get($configKey);

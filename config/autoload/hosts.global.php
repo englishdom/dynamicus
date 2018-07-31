@@ -2,9 +2,16 @@
 
 return [
     'hosts' => [
-        '0' => env('HOST_LOCAL'),
-        'faq' => env('HOST_SELECTEL'),
-        'course-int-lesson' => env('HOST_SELECTEL'),
+        'default' => [
+            '0' => env('HOST_LOCAL'),
+            'faq' => env('HOST_SELECTEL'),
+            'course-int-lesson' => env('HOST_SELECTEL'),
+        ],
+        'cdn' => [
+            '0' => env('HOST_LOCAL'),
+            'faq' => env('HOST_SELECTEL_CDN'),
+            'course-int-lesson' => env('HOST_SELECTEL_CDN'),
+        ],
     ],
     'adapters' => [
         '0' => \League\Flysystem\AdapterInterface::class,
@@ -12,5 +19,4 @@ return [
         'faq' => \Common\Container\SelectelAdapterInterface::class,
         'course-int-lesson' => \Common\Container\SelectelAdapterInterface::class,
     ],
-
 ];
