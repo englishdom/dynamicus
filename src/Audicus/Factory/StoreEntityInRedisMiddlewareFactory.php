@@ -3,6 +3,8 @@
 namespace Audicus\Factory;
 
 use Audicus\Middleware\AddEntityToStorageMiddleware;
+use Common\Storage\RedisStorage;
+use Common\Storage\RQLiteStorage;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -13,7 +15,8 @@ class StoreEntityInRedisMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $redis = $container->get(\Redis::class);
-        return new AddEntityToStorageMiddleware($redis);
+        $redisStorage = $container->get(RedisStorage::class);
+        $RQLiteStorage = $container->get(RQLiteStorage::class);
+        return new AddEntityToStorageMiddleware($redisStorage, $RQLiteStorage);
     }
 }

@@ -7,7 +7,7 @@ use Common\Action\ActionInterface;
 use Common\Container\Config;
 use Common\Entity\DataObject;
 use Common\Entity\File;
-use Common\Middleware\GenerateKeyTrait;
+use Common\Storage\StorageInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Filesystem;
@@ -22,9 +22,6 @@ use Zend\Http\Response;
  */
 class ListAction implements ActionInterface
 {
-    use GenerateKeyTrait;
-
-    protected $redis;
     /**
      * @var Config
      */
@@ -36,16 +33,21 @@ class ListAction implements ActionInterface
     protected $fileSystemAdapter;
 
     /**
+     * @var StorageInterface
+     */
+    private $storage;
+
+    /**
      * ListAction constructor.
-     * @param \Redis $redis
-     * @param Config $config
+     * @param StorageInterface $storage
+     * @param Config           $config
      * @param AdapterInterface $fileSystemAdapter
      */
-    public function __construct(\Redis $redis, Config $config, AdapterInterface $fileSystemAdapter)
+    public function __construct(StorageInterface $storage, Config $config, AdapterInterface $fileSystemAdapter)
     {
-        $this->redis = $redis;
         $this->config = $config;
         $this->fileSystemAdapter = $fileSystemAdapter;
+        $this->storage = $storage;
     }
 
     /**
@@ -79,11 +81,9 @@ class ListAction implements ActionInterface
     protected function addFiles(DataObject $do, bool $withMetaInfo = false)
     {
         $do->setExtension(TYPE_MP3);
-        $key = $this->generateKey($do->getEntityName(), $do->getEntityId());
-        $values = $this->redis->lRange($key, 0, -1);
+        $hashes = $this->storage->readHashes($do);
 
-        foreach ($values as $value) {
-            $hash = $this->cleanHash($value);
+        foreach ($hashes as $hash) {
             $file = new File();
             if ($withMetaInfo) {
                 $file->setMetaData($this->getFileInfo($this->createUrlInFileSystem($do, $hash)));
@@ -142,15 +142,6 @@ class ListAction implements ActionInterface
         }
 
         return $this->config->get($configKey);
-    }
-
-    /**
-     * @param $string
-     * @return string
-     */
-    protected function cleanHash($string): string
-    {
-        return substr($string, -32);
     }
 
     /**
