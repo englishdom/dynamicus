@@ -370,3 +370,7 @@ Response [400]
     }
 }
 ```
+
+# Storage Adapters
+* Redis
+* RQLite

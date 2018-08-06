@@ -42,6 +42,7 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
      * @param ServerRequestInterface $request
      * @param DelegateInterface      $delegate
      * @return ResponseInterface
+     * @throws \Common\Storage\RQLiteStorageException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
@@ -50,12 +51,12 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
         /* Save hash to storage */
         $data = $request->getAttribute(self::RAW_BODY);
         $this->redisStorage->writeHash($hash, $data);
-//        $this->RQLiteStorage->writeHash($hash, $data);
+        $this->RQLiteStorage->writeHash($hash, $data);
 
         $do = $request->getAttribute(DataObject::class);
         /* Link entity with hash */
         $this->redisStorage->linkHash($do, $hash);
-//        $this->RQLiteStorage->linkHash($do->getEntityName(), $do->getEntityId(), $hash);
+        $this->RQLiteStorage->linkHash($do, $hash);
 
         return $delegate->process($request);
     }
