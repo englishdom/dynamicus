@@ -3,6 +3,9 @@
 namespace Common;
 
 use Common\Container\SelectelAdapterInterface;
+use Common\Storage\RedisStorage;
+use Common\Storage\RQLiteStorage;
+use Common\Storage\StorageInterface;
 use League\Flysystem\AdapterInterface;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
@@ -20,7 +23,6 @@ class ConfigProvider
         return [
             'factories'  => [
                 Container\ConfigInterface::class => Factory\ConfigFactory::class,
-                \Redis::class => Factory\RedisFactory::class,
                 Middleware\PrepareResponseMiddleware::class => Factory\PrepareResponseMiddlewareFactory::class,
                 Middleware\ShardingMiddleware::class => Factory\ShardingMiddlewareFactory::class,
                 Middleware\PrepareFilesystemMiddleware::class => Factory\PrepareFilesystemMiddlewareFactory::class,
@@ -29,6 +31,12 @@ class ConfigProvider
                 // для работы с selectel
                 SelectelAdapterInterface::class => Factory\SelectelAdapterFactory::class,
                 BodyParamsMiddleware::class => Factory\BodyParamsMiddlewareFactory::class,
+                // write storages
+                \Redis::class => Factory\RedisFactory::class,
+                RedisStorage::class => Factory\RedisStorageFactory::class,
+                RQLiteStorage::class => Factory\RQLiteStorageFactory::class,
+                // a read storage
+                StorageInterface::class => Factory\RedisStorageFactory::class,
             ],
         ];
     }

@@ -2,12 +2,11 @@
 
 namespace Common\Storage;
 
-use Common\Middleware\GenerateKeyTrait;
+use Common\Entity\DataObject;
+use Common\Middleware\ConstantMiddlewareInterface;
 
 class RedisStorage implements StorageInterface
 {
-    use GenerateKeyTrait;
-
     /**
      * @var \Redis
      */
@@ -19,13 +18,20 @@ class RedisStorage implements StorageInterface
     }
 
     /**
-     * Check key in the storage
-     * @param $hashKey
-     * @return bool
+     * Read all hashes from entity
+     * @param DataObject $do
+     * @return array
      */
-    public function exist($hashKey): bool
+    public function readHashes(DataObject $do): array
     {
-        return $this->redis->exists($hashKey);
+        $hashes = [];
+        $key = $this->generateKey($do->getEntityName(), $do->getEntityId());
+        $values = $this->redis->lRange($key, 0, -1);
+
+        foreach ($values as $value) {
+            $hashes[] = substr($value, -32);
+        }
+        return $hashes;
     }
 
     /**
@@ -37,7 +43,7 @@ class RedisStorage implements StorageInterface
     public function writeHash($hash, $value): bool
     {
         $hashKey = $this->generateHashKey($hash);
-        if (!$this->exist($hashKey)) {
+        if (!$this->redis->exists($hashKey)) {
             return $this->redis->set($hashKey, $value);
         }
         return false;
@@ -46,16 +52,14 @@ class RedisStorage implements StorageInterface
     /**
      * Link hash for entity.
      * Remove old hashes in entity.
-     *
-     * @param $entityName
-     * @param $entityId
-     * @param $hash
+     * @param DataObject $do
+     * @param            $hash
      * @return bool
      */
-    public function linkHash($entityName, $entityId, $hash)
+    public function linkHash(DataObject $do, $hash): bool
     {
         /* Generate key for entity: dynamicus:{entity}:{id} */
-        $key = $this->generateKey($entityName, $entityId);
+        $key = $this->generateKey($do->getEntityName(), $do->getEntityId());
         /* Get all values from key */
         $values = $this->redis->lRange($key, 0, -1);
         /* Generate key for hash: dynamicus:hash:{key} */
@@ -84,5 +88,19 @@ class RedisStorage implements StorageInterface
             return $result;
         }
         return false;
+    }
+
+    protected function generateHashKey($hash)
+    {
+        return $this->generateKey('hash', $hash);
+    }
+
+    protected function generateKey($entityName, $entityId, $namespace = null): string
+    {
+        if (!$namespace) {
+            return sprintf('%s:%s:%s', ConstantMiddlewareInterface::DYNAMICUS_KEY, $entityName, $entityId);
+        }
+
+        return sprintf('%s:%s:%s:%s', ConstantMiddlewareInterface::DYNAMICUS_KEY, $entityName, $entityId, $namespace);
     }
 }

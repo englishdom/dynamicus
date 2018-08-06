@@ -4,7 +4,8 @@ namespace Audicus\Middleware;
 
 use Common\Entity\DataObject;
 use Common\Middleware\ConstantMiddlewareInterface;
-use Common\Middleware\GenerateKeyTrait;
+use Common\Storage\RedisStorage;
+use Common\Storage\RQLiteStorage;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -16,20 +17,25 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddlewareInterface
 {
-    use GenerateKeyTrait;
+    /**
+     * @var RedisStorage
+     */
+    private $redisStorage;
 
     /**
-     * @var \Redis
+     * @var RQLiteStorage
      */
-    private $redis;
+    private $RQLiteStorage;
 
     /**
      * StoreEntityInRedisMiddleware constructor.
-     * @param \Redis $redis
+     * @param RedisStorage  $redisStorage
+     * @param RQLiteStorage $RQLiteStorage
      */
-    public function __construct(\Redis $redis)
+    public function __construct(RedisStorage $redisStorage, RQLiteStorage $RQLiteStorage)
     {
-        $this->redis = $redis;
+        $this->redisStorage = $redisStorage;
+        $this->RQLiteStorage = $RQLiteStorage;
     }
 
     /**
@@ -41,85 +47,16 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
     {
         $hash = $request->getAttribute(self::HASH);
 
-        /* Если хеша нет в редисе, добавить */
-        if (!$this->isHash($hash)) {
-            $data = $request->getAttribute(self::RAW_BODY);
-            $this->writeHash($hash, $data);
-        }
+        /* Save hash to storage */
+        $data = $request->getAttribute(self::RAW_BODY);
+        $this->redisStorage->writeHash($hash, $data);
+//        $this->RQLiteStorage->writeHash($hash, $data);
 
         $do = $request->getAttribute(DataObject::class);
-        /* Добавить хеш, если хеша нет в ентити */
-        $result = $this->addHash($do, $hash);
-        
-        if ($result === true) {
-            /* Удалние старых файлов из entity */
-            $this->removeOldFiles($do, $hash);
-        }
+        /* Link entity with hash */
+        $this->redisStorage->linkHash($do, $hash);
+//        $this->RQLiteStorage->linkHash($do->getEntityName(), $do->getEntityId(), $hash);
 
         return $delegate->process($request);
-    }
-
-    /**
-     * Check STRING key in redis
-     * @param $hash
-     * @return bool
-     */
-    protected function isHash($hash): bool
-    {
-        return $this->redis->exists($this->generateHashKey($hash));
-    }
-
-    /**
-     * Set STRING key - value in redis
-     * @param $hash
-     * @param $value
-     * @return bool
-     */
-    protected function writeHash($hash, $value): bool
-    {
-        $key = $this->generateHashKey($hash);
-        return $this->redis->set($key, $value);
-    }
-
-    /**
-     * @param DataObject $do
-     * @param            $hash
-     * @return bool
-     */
-    protected function addHash(DataObject $do, $hash):bool
-    {
-        $key = $this->generateKey($do->getEntityName(), $do->getEntityId());
-        $values = $this->redis->lRange($key, 0, -1);
-        $hashKey = $this->generateHashKey($hash);
-        $hashIsExist = false;
-        foreach ($values as $value) {
-            if ($value == $hashKey) {
-                $hashIsExist = true;
-                break;
-            }
-        }
-
-        if ($hashIsExist === false) {
-            return (bool)$this->redis->lPush($key, $hashKey);
-        }
-        return false;
-    }
-
-    /**
-     * @param                     $excludeHash
-     * @param DataObject          $do
-     * @TODO нужно добавить проверку по неймспейсу
-     */
-    protected function removeOldFiles(DataObject $do, $excludeHash)
-    {
-        $key = $this->generateKey($do->getEntityName(), $do->getEntityId());
-        $hashes = $this->redis->lRange($key, 0, -1);
-        foreach ($hashes as $hash) {
-            $parts = explode(':', $hash);
-            if (count($parts) == 3 && $parts[2] != $excludeHash) {
-                /* Удаление хеша только из entity. Потому что файл может быть связан с другой entity */
-                $this->redis->lRemove($key, $hash, 1);
-            }
-        }
     }
 }
