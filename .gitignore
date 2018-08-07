@@ -8,4 +8,4 @@ phpunit.xml
 vendor/
 data/*
 !data/rest-templates/
-!date/tables.sql
+!data/tables.sql

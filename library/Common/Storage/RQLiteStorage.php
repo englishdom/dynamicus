@@ -13,7 +13,16 @@ class RQLiteStorage implements StorageInterface
         'Content-Type: application/json'
     ];
 
-    private $rqliteHost = 'rqlite:4001';
+    private $host;
+
+    /**
+     * RQLiteStorage constructor.
+     * @param $host
+     */
+    public function __construct($host)
+    {
+        $this->host = $host;
+    }
 
     /**
      * @param DataObject $do
@@ -70,13 +79,28 @@ class RQLiteStorage implements StorageInterface
             /* Save hash id */
             $hashId = $json['results'][0]['values'][0][0];
 
-            /* Remove all hashes for entity */
-            $delete = '["DELETE FROM entities WHERE entity_name=\"'.$do->getEntityName().'\" AND entity_id='.$do->getEntityId().'"]';
-            $this->generateCurl(self::TYPE_POST, $delete);
+            try {
+                /* Start transaction */
+                $query = '["BEGIN"]';
+                $this->generateCurl(self::TYPE_POST, $query);
 
-            /* Insert new hash for entity */
-            $insert = '["INSERT INTO entities(hash_id, entity_name, entity_id) VALUES('.$hashId.',\"'.$do->getEntityName().'\",\"'.$do->getEntityId().'\")"]';
-            $json = $this->generateCurl(self::TYPE_POST, $insert);
+                /* Remove all hashes for entity */
+                $delete = '["DELETE FROM entities WHERE entity_name=\"' . $do->getEntityName() . '\" AND entity_id=' . $do->getEntityId() . '"]';
+                $this->generateCurl(self::TYPE_POST, $delete);
+
+                /* Insert new hash for entity */
+                $insert = '["INSERT INTO entities(hash_id, entity_name, entity_id) VALUES(' . $hashId . ',\"' . $do->getEntityName() . '\",\"' . $do->getEntityId() . '\")"]';
+                $json = $this->generateCurl(self::TYPE_POST, $insert);
+
+                /* Commit transaction */
+                $query = '["COMMIT"]';
+                $this->generateCurl(self::TYPE_POST, $query);
+            } catch (RQLiteStorageException $err) {
+                /* Rollback transaction */
+                $query = '["ROLLBACK"]';
+                $this->generateCurl(self::TYPE_POST, $query);
+                throw new RQLiteStorageException($err->getMessage());
+            }
         } else {
             throw new RQLiteStorageException('The hash does not exist in a storage!');
         }
@@ -93,11 +117,11 @@ class RQLiteStorage implements StorageInterface
     protected function generateCurl(string $type, string $query): array
     {
         $curl = curl_init();
-        $url = 'http://' . $this->rqliteHost . '/db/query?pretty&q='.urlencode($query);
+        $url = 'http://' . $this->host . '/db/query?pretty&q='.urlencode($query);
         if ($type == self::TYPE_POST) {
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
-            $url ='http://' . $this->rqliteHost . '/db/execute?pretty';
+            $url ='http://' . $this->host . '/db/execute?pretty';
         }
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HEADER, 0);

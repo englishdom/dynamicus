@@ -2,6 +2,7 @@
 
 namespace Common\Factory;
 
+use Common\Container\ConfigInterface;
 use Common\Storage\RQLiteStorage;
 use Psr\Container\ContainerInterface;
 
@@ -13,6 +14,8 @@ class RQLiteStorageFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        return new RQLiteStorage();
+        $config = $container->get(ConfigInterface::class);
+        $host = $config->get('storage.rqlite.host');
+        return new RQLiteStorage($host);
     }
 }
