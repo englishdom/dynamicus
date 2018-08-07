@@ -162,7 +162,10 @@ return [
         ],
         'feedback' => [
             KEY_ORIGINAL => true // save only original
-        ]
+        ],
+        'promocode' => [
+            KEY_ORIGINAL => true // save only original
+        ],
     ]
 ];
 
