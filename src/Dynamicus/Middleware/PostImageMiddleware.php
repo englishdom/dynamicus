@@ -32,7 +32,9 @@ class PostImageMiddleware implements MiddlewareInterface
     {
         $movedPath = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . $do->getExtension();
         /* Create tmp folder */
-        mkdir($do->getTmpDirectoryPath(), 0755, true);
+        if (!file_exists($do->getTmpDirectoryPath())) {
+            mkdir($do->getTmpDirectoryPath(), 0755, true);
+        }
         /* Move uploaded image */
         move_uploaded_file($_FILES['image']['tmp_name'], $movedPath);
         $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . $do->getExtension();
