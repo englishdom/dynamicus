@@ -38,6 +38,9 @@ return [
         ],
         'rqlite' => [
             'host' => env('RQLITE_HOST'),
+            'port' => env('RQLITE_PORT'),
+            'username' => env('RQLITE_USERNAME'),
+            'password' => env('RQLITE_PASSWORD'),
         ]
     ]
 ];

@@ -14,14 +14,20 @@ class RQLiteStorage implements StorageInterface
     ];
 
     private $host;
+    private $port;
+    private $username;
+    private $password;
 
     /**
      * RQLiteStorage constructor.
      * @param $host
      */
-    public function __construct($host)
+    public function __construct($host, $port, $username, $password)
     {
         $this->host = $host;
+        $this->port = $port;
+        $this->username = $username;
+        $this->password = $password;
     }
 
     /**
@@ -117,16 +123,17 @@ class RQLiteStorage implements StorageInterface
     protected function generateCurl(string $type, string $query): array
     {
         $curl = curl_init();
-        $url = 'http://' . $this->host . '/db/query?pretty&q='.urlencode($query);
+        $url = 'http://' . $this->host . ':' . $this->port . '/db/query?pretty&q='.urlencode($query);
         if ($type == self::TYPE_POST) {
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
-            $url ='http://' . $this->host . '/db/execute?pretty';
+            $url ='http://' . $this->host . ':' . $this->port . '/db/execute?pretty';
         }
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_USERPWD, "$this->username:$this->password");
 
         $response = curl_exec($curl);
         $error = curl_error($curl);
