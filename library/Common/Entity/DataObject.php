@@ -46,6 +46,13 @@ class DataObject implements EntityInterface
     private $extension;
 
     /**
+     * File name for original image
+     * !!! ONLY for ORIGINAL IMAGE
+     * @var string
+     */
+    private $fileName;
+
+    /**
      * @var \SplObjectStorage
      */
     private $files;
@@ -170,6 +177,22 @@ class DataObject implements EntityInterface
     public function setExtension(string $extension)
     {
         $this->extension = $extension;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * @param string $fileName
+     */
+    public function setFileName(string $fileName): void
+    {
+        $this->fileName = $fileName;
     }
 
     /**

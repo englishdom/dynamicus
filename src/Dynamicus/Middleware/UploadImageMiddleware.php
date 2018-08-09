@@ -13,8 +13,14 @@ use Psr\Http\Message\ServerRequestInterface;
  * Class PostImageMiddleware
  * @package Dynamicus\Middleware
  */
-class PostImageMiddleware implements MiddlewareInterface
+class UploadImageMiddleware implements MiddlewareInterface
 {
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface      $delegate
+     * @return ResponseInterface
+     * @throws \Common\Exception\RuntimeException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         /* @var DataObject $do */
@@ -30,14 +36,18 @@ class PostImageMiddleware implements MiddlewareInterface
 
     protected function getImageFile(DataObject $do): File
     {
-        $movedPath = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . $do->getExtension();
+        if (!$do->getFileName()) {
+            $do->setFileName($do->getEntityId());
+        }
+
+        $movedPath = $do->getTmpDirectoryPath() . $do->getFileName() . '.' . $do->getExtension();
         /* Create tmp folder */
         if (!file_exists($do->getTmpDirectoryPath())) {
             mkdir($do->getTmpDirectoryPath(), 0755, true);
         }
         /* Move uploaded image */
         move_uploaded_file($_FILES['image']['tmp_name'], $movedPath);
-        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . $do->getExtension();
+        $url = $do->getRelativeDirectoryUrl() . $do->getFileName() . '.' . $do->getExtension();
 
         $image = new File();
         $image->setPath($movedPath);

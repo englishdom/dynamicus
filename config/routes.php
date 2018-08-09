@@ -51,6 +51,8 @@ $app->route(
         Dynamicus\Middleware\SetExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
+        /* Установка имени файла */
+        \Common\Middleware\SetFilenameMiddleware::class,
         /* Сверка разрешенных размеров имиджа с конфигом */
         \Dynamicus\Middleware\CheckImageSizeMiddleware::class,
         /* Подготовка Flysystem */
@@ -85,6 +87,8 @@ $app->route(
         Dynamicus\Middleware\SetExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
+        /* Установка имени файла */
+        \Common\Middleware\SetFilenameMiddleware::class,
         /* Сверка разрешенных размеров имиджа с конфигом */
         \Dynamicus\Middleware\CheckImageSizeMiddleware::class,
         /* Подготовка Flysystem */
@@ -92,7 +96,7 @@ $app->route(
         /* Шардирование */
         \Common\Middleware\ShardingMiddleware::class,
         /* Загрузка имиджа и проверка типа */
-        Dynamicus\Middleware\PostImageMiddleware::class,
+        Dynamicus\Middleware\UploadImageMiddleware::class,
         /* Обработка имиджа */
         Dynamicus\Middleware\ProcessImageMiddleware::class,
         /* Запись имиджа в установленную файловую систему */
