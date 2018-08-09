@@ -2,12 +2,21 @@
 
 return [
     'hosts' => [
-        '0' => env('HOST_LOCAL'),
-        'faq' => env('HOST_SELECTEL'),
+        'default' => [
+            '0' => env('HOST_LOCAL'),
+            'faq' => env('HOST_SELECTEL'),
+            'course-int-lesson' => env('HOST_SELECTEL'),
+        ],
+        'cdn' => [
+            '0' => env('HOST_LOCAL'),
+            'faq' => env('HOST_SELECTEL_CDN'),
+            'course-int-lesson' => env('HOST_SELECTEL_CDN'),
+        ],
     ],
     'adapters' => [
-        '0' => \Common\Factory\FilesystemLocalFSAdapterFactory::class,
+        '0' => \League\Flysystem\AdapterInterface::class,
         /* Для entity FAQ будет использвоаться адаптер selectel */
-        'faq' => \Common\Factory\FilesystemSelectelAdapterFactory::class,
-    ]
+        'faq' => \Common\Container\SelectelAdapterInterface::class,
+        'course-int-lesson' => \Common\Container\SelectelAdapterInterface::class,
+    ],
 ];

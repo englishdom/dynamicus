@@ -20,6 +20,14 @@ class ParsingConfigArray implements TransformerPluginInterface
                 return $storage;
             }
 
+            /* Если в конфиге размер не массив */
+            if (!is_array($optionsRow)) {
+                $options = new Options();
+                $options->setVariant($variant);
+                $storage->attach($options);
+                continue;
+            }
+
             foreach ($optionsRow as $dimensions) {
                 if (!is_array($dimensions)) {
                     continue;

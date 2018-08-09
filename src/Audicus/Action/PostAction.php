@@ -76,9 +76,9 @@ class PostAction implements ActionInterface
      */
     protected function getHost(string $entityName): string
     {
-        $configKey = 'hosts.'.$entityName;
+        $configKey = 'hosts.default.'.$entityName;
         if ($this->config->get($configKey, null) === null) {
-            $configKey = 'hosts.0';
+            $configKey = 'hosts.default.0';
         }
 
         return $this->config->get($configKey);

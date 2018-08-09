@@ -6,6 +6,8 @@ $app->route(
     '/list/{entity}/{entity_id}[/]',
     [
         \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Установка расширения по namespace */
+        Dynamicus\Middleware\SetExtensionMiddleware::class,
         // \Common\Middleware\PrepareFilesystemMiddleware::class,
         \Common\Middleware\ShardingMiddleware::class,
         Dynamicus\Action\ListAction::class
@@ -24,6 +26,8 @@ $app->route(
     '/{entity}/{entity_id}[/]',
     [
         \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Установка расширения по namespace */
+        Dynamicus\Middleware\SetExtensionMiddleware::class,
         \Common\Middleware\PrepareFilesystemMiddleware::class,
         \Common\Middleware\ShardingMiddleware::class,
         Dynamicus\Action\DeleteAction::class
@@ -43,6 +47,8 @@ $app->route(
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Установка расширения по namespace */
+        Dynamicus\Middleware\SetExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Сверка разрешенных размеров имиджа с конфигом */
@@ -71,10 +77,12 @@ $app->route(
 
 /* POST image /translation/35 or with namespace /meta_info:og/34 */
 $app->route(
-    '/post/{entity}/{entity_id}[/]',
+    '/upload/{entity}/{entity_id}[/]',
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
+        /* Установка расширения по namespace */
+        Dynamicus\Middleware\SetExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Сверка разрешенных размеров имиджа с конфигом */
@@ -93,7 +101,7 @@ $app->route(
         Dynamicus\Action\PostAction::class,
     ],
     ['POST'],
-    'post'
+    'upload'
 )->setOptions([
     'tokens' => [
         'entity' => '\w+',
@@ -226,7 +234,7 @@ $app->route(
 ]);
 
 $app->route(
-    '/audio/{entity}/{entity_id}[/]',
+    '/audio/{entity}/{entity_id}[/{with-info}]',
     [
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
@@ -242,7 +250,7 @@ $app->route(
 )->setOptions([
     'tokens' => [
         'entity' => '\w+',
-        'entity_id' => '\d+'
+        'entity_id' => '\d+',
     ],
 ]);
 

@@ -13,6 +13,7 @@ interface ActionInterface extends MiddlewareInterface
     const RESPONSE = 'json-api';
     const META = 'json-api-meta';
     const HTTP_CODE = 'http-code';
+    const WITH_INFO = 'with-info';
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface;
 }

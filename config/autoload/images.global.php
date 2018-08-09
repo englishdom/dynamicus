@@ -4,6 +4,7 @@ define('WIDTH', 'width');
 define('HEIGHT', 'height');
 define('QUALITY', 'quality');
 define('TYPE_JPG', 'jpg');
+define('TYPE_SVG', 'svg');
 define('TYPE_MP3', 'mp3');
 /* ключевые слова */
 define('KEY_DEFAULT', 'default');
@@ -36,6 +37,9 @@ return [
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
                 [WIDTH => 300, HEIGHT => 194, QUALITY => 85], // Картинка на /video-practicum
             ],
+        ],
+        'course-int' => [
+            TYPE_SVG => true
         ],
         'course-int-lesson' => [
             KEY_DEFAULT => [
@@ -136,6 +140,12 @@ return [
         'certificate' => [
             KEY_ORIGINAL => true // save only original
         ],
+        'certificate-share-fb' => [
+            KEY_ORIGINAL => true // save only original
+        ],
+        'certificate-share-vk' => [
+            KEY_ORIGINAL => true // save only original
+        ],
         'online-test' => [
             KEY_DEFAULT => [
                 [WIDTH => 224, HEIGHT => 168, QUALITY => 85], // слова
@@ -149,7 +159,13 @@ return [
                 [WIDTH => 54, HEIGHT => 54, QUALITY => 100], /* Фотография "спикера" s4 54х54 */
                 [WIDTH => 34, HEIGHT => 34, QUALITY => 100]
             ]
-        ]
+        ],
+        'feedback' => [
+            KEY_ORIGINAL => true // save only original
+        ],
+        'promocode' => [
+            KEY_ORIGINAL => true // save only original
+        ],
     ]
 ];
 

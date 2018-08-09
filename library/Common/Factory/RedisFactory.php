@@ -14,9 +14,9 @@ class RedisFactory
     public function __invoke(ContainerInterface $container)
     {
         $config = $container->get(ConfigInterface::class);
-        $host = $config->get('containers.redis.host');
-        $port = $config->get('containers.redis.port');
-        $password = $config->get('containers.redis.password');
+        $host = $config->get('storage.redis.host');
+        $port = $config->get('storage.redis.port');
+        $password = $config->get('storage.redis.password');
         $redis = new \Redis();
         $redis->connect($host, $port);
         $redis->auth($password);

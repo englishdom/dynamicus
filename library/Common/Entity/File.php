@@ -10,6 +10,7 @@ class File
 {
     protected $path;
     protected $url;
+    protected $metaData;
 
     /**
      * @return mixed
@@ -41,5 +42,21 @@ class File
     public function setUrl($url)
     {
         $this->url = $url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMetaData()
+    {
+        return $this->metaData;
+    }
+
+    /**
+     * @param mixed $metaData
+     */
+    public function setMetaData(array $metaData)
+    {
+        $this->metaData = $metaData;
     }
 }

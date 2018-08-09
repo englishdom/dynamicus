@@ -55,13 +55,13 @@ class ListAction implements ActionInterface
         $do = $request->getAttribute(DataObject::class);
         if ($do instanceof \SplObjectStorage) {
             foreach ($do as $object) {
-                $object->setExtension(TYPE_JPG);
+                $object->setExtension($object->getExtension());
                 $this->createImagesPath($object);
             }
             $item = new Collection($do, new ImageTransformer(), $this->getResourceName($object));
         } else {
             /* Добавление расширения, так как мы не читаем файловую систему и не знаем реальное расширение */
-            $do->setExtension(TYPE_JPG);
+            $do->setExtension($do->getExtension());
             $this->createImagesPath($do);
 
             $item = new Item($do, new ImageTransformer(), $this->getResourceName($do));
@@ -108,9 +108,9 @@ class ListAction implements ActionInterface
      */
     protected function getHost(string $entityName): string
     {
-        $configKey = 'hosts.'.$entityName;
+        $configKey = 'hosts.cdn.'.$entityName;
         if ($this->config->get($configKey, null) === null) {
-            $configKey = 'hosts.0';
+            $configKey = 'hosts.cdn.0';
         }
 
         return $this->config->get($configKey);

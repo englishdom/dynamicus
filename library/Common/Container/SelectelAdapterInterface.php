@@ -3,10 +3,10 @@
 namespace Common\Container;
 
 /**
- * Class SelectelFilesystemAdapter
+ * Class SelectelAdapterInterface
  * @package Common\Container
  */
-interface SelectelFilesystemAdapter
+interface SelectelAdapterInterface
 {
 
 }

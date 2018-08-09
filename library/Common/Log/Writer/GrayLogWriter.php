@@ -27,7 +27,7 @@ class GrayLogWriter extends AbstractWriter
         $this->setFormatter(new Gelf($facility));
     }
 
-    public function setFormatter($formatter)
+    public function setFormatter($formatter, array $options = null)
     {
         if (!($formatter instanceof Gelf)) {
             throw new \RuntimeException('Wrong formatter for graylog logger');

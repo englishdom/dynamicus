@@ -30,13 +30,17 @@ class PostImageMiddleware implements MiddlewareInterface
 
     protected function getImageFile(DataObject $do): File
     {
-        $do->setExtension(TYPE_JPG);
-
-        $path = $_FILES['image']['tmp_name'];
-        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . TYPE_JPG;
+        $movedPath = $do->getTmpDirectoryPath() . $do->getEntityId() . '.' . $do->getExtension();
+        /* Create tmp folder */
+        if (!file_exists($do->getTmpDirectoryPath())) {
+            mkdir($do->getTmpDirectoryPath(), 0755, true);
+        }
+        /* Move uploaded image */
+        move_uploaded_file($_FILES['image']['tmp_name'], $movedPath);
+        $url = $do->getRelativeDirectoryUrl() . $do->getEntityId() . '.' . $do->getExtension();
 
         $image = new File();
-        $image->setPath($path);
+        $image->setPath($movedPath);
         $image->setUrl($url);
 
         return $image;

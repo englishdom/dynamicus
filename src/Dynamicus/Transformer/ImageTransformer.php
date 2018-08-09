@@ -42,7 +42,11 @@ class ImageTransformer extends TransformerAbstract
         $fileInfo = explode('_', $pathInfo['filename']);
         $filePartsCount = count($fileInfo);
 
-        if ($filePartsCount == 3) { /* В имени файла есть id, variant, size */
+        /* если тип SVG */
+        if ($pathInfo['extension'] == TYPE_SVG) {
+            $variant = TYPE_SVG;
+            $size = null;
+        } elseif ($filePartsCount == 3) { /* В имени файла есть id, variant, size */
             $variant = $fileInfo[1];
             $size = $fileInfo[2];
         } elseif ($filePartsCount == 2) { /* В имени файла есть id, size */

@@ -39,7 +39,8 @@ class GenerateAudioMiddleware implements MiddlewareInterface, ConstantMiddleware
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        if ($request->getAttribute(self::FILE_EXISTS) === false) {
+        /* Can be true/false/null. Need generate file if FILE_EXIST = false/null */
+        if ($request->getAttribute(self::FILE_EXISTS) !== true) {
             $audioDataObject = $request->getAttribute(AudioDataObject::class);
             $request = $request->withAttribute(
                 self::AUDIO_CONTENT,

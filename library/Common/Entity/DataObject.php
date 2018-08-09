@@ -79,7 +79,7 @@ class DataObject implements EntityInterface
     /**
      * @return mixed
      */
-    public function getNamespace()
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
@@ -87,7 +87,7 @@ class DataObject implements EntityInterface
     /**
      * @param mixed $namespace
      */
-    public function setNamespace($namespace): void
+    public function setNamespace(string $namespace)
     {
         $this->namespace = $namespace;
     }

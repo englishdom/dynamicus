@@ -9,6 +9,8 @@
     },
     "require": {
         "php": "^7.1",
+        "ext-curl": "*",
+        "ext-json": "*",
         "argentcrusade/flysystem-selectel": "^1.2",
         "graylog2/gelf-php": "^1.5",
         "guzzlehttp/guzzle": "~6.0",

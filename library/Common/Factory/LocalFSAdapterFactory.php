@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
  * Class FilesystemLocalFSAdapterFactory
  * @package Common\Factory
  */
-class FilesystemLocalFSAdapterFactory
+class LocalFSAdapterFactory
 {
     public function __invoke(ContainerInterface $container)
     {

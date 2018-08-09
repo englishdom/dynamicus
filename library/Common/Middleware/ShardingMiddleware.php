@@ -62,6 +62,9 @@ class ShardingMiddleware implements MiddlewareInterface
             array_unshift($split, $prefix);
         }
 
+        /* добавление главной категории `dynamicus` */
+        array_unshift($split, $this->config->get('images-path.root-name'));
+
         /* Построение пути */
         return implode(DIRECTORY_SEPARATOR, $split);
     }
@@ -86,9 +89,6 @@ class ShardingMiddleware implements MiddlewareInterface
      */
     private function getRelativeUrlPrefix(DataObject $do): string
     {
-        return str_replace('//', '/', $this->config->get('images-path.relative-url', '')
-            . DIRECTORY_SEPARATOR . $do->getShardingPath()
-            . DIRECTORY_SEPARATOR
-        );
+        return str_replace('//', '/', DIRECTORY_SEPARATOR . $do->getShardingPath() . DIRECTORY_SEPARATOR);
     }
 }

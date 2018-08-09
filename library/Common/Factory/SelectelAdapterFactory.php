@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
  * Class FilesystemSelectelAdapterFactory
  * @package Common\Factory
  */
-class FilesystemSelectelAdapterFactory
+class SelectelAdapterFactory
 {
     public function __invoke(ContainerInterface $container): AdapterInterface
     {

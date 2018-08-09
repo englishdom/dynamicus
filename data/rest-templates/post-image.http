@@ -18,34 +18,11 @@ Cookie: XDEBUG_SESSION=PHPSTORM
 
 ###
 
-# POST FORM-DATA image with parameters
-POST http://localhost:9999/post/blog-post/1
-Content-Type: multipart/form-data; boundary=boundary
+POST http://localhost:9999/course-int-lesson/1
+Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 Cookie: XDEBUG_SESSION=PHPSTORM
 
---boundary
-Content-Disposition: form-data; name="image"; filename="image.jpg"
-
-< ../../data/image.jpg
---boundary
-Content-Disposition: form-data; name="json"
-
-{"data":{"resize":[{"size":"300x190","crop":"0x0x300x190"}]}}
---boundary--
-
-###
-
-# POST FORM-DATA image
-POST http://localhost:9999/post/certificate/1
-Content-Type: multipart/form-data; boundary=boundary
-Accept: application/vnd.api+json
-Cookie: XDEBUG_SESSION=PHPSTORM
-
---boundary
-Content-Disposition: form-data; name="image"; filename="image.jpg"
-
-< ../../data/image.jpg
---boundary--
+{"data":{"resize":[{"size":"960x172","crop":"0x0x960x172"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
 
 ###
