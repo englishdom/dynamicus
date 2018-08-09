@@ -27,6 +27,10 @@ Content-Disposition: form-data; name="image"; filename="image.jpg"
 
 < ../../data/image.jpg
 --boundary--
+Content-Disposition: form-data; name="json"
+
+{"data":{"filename":"gtFr45gQ"}}
+--boundary--
 
 ###
 
