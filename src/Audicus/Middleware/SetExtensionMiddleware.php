@@ -13,12 +13,20 @@ use Psr\Http\Message\ServerRequestInterface;
  * Class AddExtensionMiddleware
  * @package Audicus\Middleware
  */
-class AddExtensionMiddleware implements MiddlewareInterface, ConstantMiddlewareInterface
+class SetExtensionMiddleware implements MiddlewareInterface, ConstantMiddlewareInterface
 {
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $do = $request->getAttribute(DataObject::class);
-        $do->setExtension(TYPE_MP3);
+
+        if ($do instanceof \SplObjectStorage) {
+            foreach ($do as $single) {
+                $single->setExtension(TYPE_MP3);
+            }
+        } else {
+            $do->setExtension(TYPE_MP3);
+        }
+
 
         return $delegate->process($request);
     }

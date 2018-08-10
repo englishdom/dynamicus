@@ -41,8 +41,10 @@ class RQLiteStorage implements StorageInterface
         $select = 'SELECT hashes.hash FROM entities INNER JOIN hashes ON hashes.id = entities.hash_id WHERE entities.entity_name="'.$do->getEntityName().'" AND entities.entity_id='.$do->getEntityId().'';
         $json = $this->generateCurl(self::TYPE_GET, $select);
 
-        foreach ($json['results'][0]['values'] as $values) {
-            $hashes[] = $values[0];
+        if (isset($json['results'][0]['values'])) {
+            foreach ($json['results'][0]['values'] as $values) {
+                $hashes[] = $values[0];
+            }
         }
         return $hashes;
     }
@@ -123,11 +125,11 @@ class RQLiteStorage implements StorageInterface
     protected function generateCurl(string $type, string $query): array
     {
         $curl = curl_init();
-        $url = 'http://' . $this->host . ':' . $this->port . '/db/query?pretty&q='.urlencode($query);
+        $url = 'http://' . $this->host . ':' . $this->port . '/db/query?q='.urlencode($query);
         if ($type == self::TYPE_POST) {
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
-            $url ='http://' . $this->host . ':' . $this->port . '/db/execute?pretty';
+            $url ='http://' . $this->host . ':' . $this->port . '/db/execute';
         }
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HEADER, 0);
