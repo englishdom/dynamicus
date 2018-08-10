@@ -136,7 +136,7 @@ $app->route(
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Добавление расширения .mp3 */
-        \Audicus\Middleware\AddExtensionMiddleware::class,
+        \Audicus\Middleware\SetExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Валидация json данных и создание DTO */
@@ -173,7 +173,7 @@ $app->route(
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Добавление расширения .mp3 */
-        \Audicus\Middleware\AddExtensionMiddleware::class,
+        \Audicus\Middleware\SetExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Валидация json данных и создание DTO */
@@ -208,7 +208,7 @@ $app->route(
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Добавление расширения .mp3 */
-        \Audicus\Middleware\AddExtensionMiddleware::class,
+        \Audicus\Middleware\SetExtensionMiddleware::class,
         /* Чтение json массива из body */
         \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
         /* Валидация json данных и создание DTO */
@@ -243,7 +243,7 @@ $app->route(
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Добавление расширения .mp3 */
-        \Audicus\Middleware\AddExtensionMiddleware::class,
+        \Audicus\Middleware\SetExtensionMiddleware::class,
         /* Шардирование по хешу */
         \Audicus\Middleware\ShardingMiddleware::class,
         /* Вывод пути к файлам */

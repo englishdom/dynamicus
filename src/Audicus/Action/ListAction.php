@@ -11,6 +11,7 @@ use Common\Storage\StorageInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Filesystem;
+use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -61,8 +62,16 @@ class ListAction implements ActionInterface
         /* @var DataObject $do */
         $do = $request->getAttribute(DataObject::class);
         /* чтение файлов */
-        $this->addFiles($do,$request->getAttribute(self::WITH_INFO) === self::WITH_INFO);
-        $item = new Item($do, new AudioTransformer(), $this->getResourceName($do));
+        if ($do instanceof \SplObjectStorage) {
+            foreach ($do as $object) {
+                $this->addFiles($object, $request->getAttribute(self::WITH_INFO) === self::WITH_INFO);
+            }
+            $item = new Collection($do, new AudioTransformer(), $this->getResourceName($object));
+        } else {
+            /* Добавление расширения, так как мы не читаем файловую систему и не знаем реальное расширение */
+            $this->addFiles($do,$request->getAttribute(self::WITH_INFO) === self::WITH_INFO);
+            $item = new Item($do, new AudioTransformer(), $this->getResourceName($do));
+        }
 
         $request = $request
             ->withAttribute(self::RESPONSE, $item)

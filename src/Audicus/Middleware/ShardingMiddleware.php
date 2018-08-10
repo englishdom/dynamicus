@@ -33,11 +33,22 @@ class ShardingMiddleware implements MiddlewareInterface, ConstantMiddlewareInter
     {
         /* @var DataObject $do */
         $do = $request->getAttribute(DataObject::class);
+        if ($do instanceof \SplObjectStorage) {
+            foreach ($do as $object) {
+                $this->createPaths($object);
+            }
+        } else {
+            $this->createPaths($do);
+        }
+
+        return $delegate->process($request);
+    }
+
+    protected function createPaths(DataObject $do)
+    {
         $shardingPath = $this->getFolder($do->getEntityId(), $do->getEntityName());
         $do->setShardingPath($shardingPath);
         $do->setRelativeDirectoryUrl($this->getRelativeUrlPrefix($do));
-
-        return $delegate->process($request);
     }
 
     private function getFolder($identifier, $prefix = null): string
