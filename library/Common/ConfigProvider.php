@@ -36,7 +36,7 @@ class ConfigProvider
                 RedisStorage::class => Factory\RedisStorageFactory::class,
                 RQLiteStorage::class => Factory\RQLiteStorageFactory::class,
                 // a read storage
-                StorageInterface::class => Factory\RQLiteStorageFactory::class,
+                StorageInterface::class => Factory\RedisStorageFactory::class,
             ],
         ];
     }
