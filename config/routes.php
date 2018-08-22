@@ -154,7 +154,7 @@ $app->route(
         /* Загрузка файла */
         \Audicus\Middleware\UploadFileMiddleware::class,
         /* Добавление entity:id в redis */
-        \Audicus\Middleware\AddEntityToStorageMiddleware::class,
+        \Audicus\Middleware\StorageEntityMiddleware::class,
         /* Вывод пути добавленного файла */
         \Audicus\Action\PostAction::class,
     ],
@@ -189,7 +189,7 @@ $app->route(
         /* Загрузка файла */
         \Audicus\Middleware\UploadFileMiddleware::class,
         /* Добавление entity:id в redis */
-        \Audicus\Middleware\AddEntityToStorageMiddleware::class,
+        \Audicus\Middleware\StorageEntityMiddleware::class,
         /* Вывод пути добавленного файла */
         \Audicus\Action\PostAction::class,
     ],
@@ -224,7 +224,7 @@ $app->route(
         /* Загрузка файла */
         \Audicus\Middleware\UploadFileMiddleware::class,
         /* Добавление entity:id в redis */
-        \Audicus\Middleware\AddEntityToStorageMiddleware::class,
+        \Audicus\Middleware\StorageEntityMiddleware::class,
         /* Вывод пути добавленного файла */
         \Audicus\Action\PostAction::class,
     ],

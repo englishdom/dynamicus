@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * Class AddEntityToStorageMiddleware
  * @package Audicus\Middleware
  */
-class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddlewareInterface
+class StorageEntityMiddleware implements MiddlewareInterface, ConstantMiddlewareInterface
 {
     /**
      * @var RedisStorage
@@ -25,17 +25,17 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
     /**
      * @var RQLiteStorage
      */
-//    private $RQLiteStorage;
+    private $RQLiteStorage;
 
     /**
      * StoreEntityInRedisMiddleware constructor.
      * @param RedisStorage  $redisStorage
      * @param RQLiteStorage $RQLiteStorage
      */
-    public function __construct(RedisStorage $redisStorage)
+    public function __construct(RedisStorage $redisStorage, RQLiteStorage $RQLiteStorage)
     {
         $this->redisStorage = $redisStorage;
-//        $this->RQLiteStorage = $RQLiteStorage;
+        $this->RQLiteStorage = $RQLiteStorage;
     }
 
     /**
@@ -51,12 +51,12 @@ class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddl
         /* Save hash to storage */
         $data = $request->getAttribute(self::RAW_BODY);
         $this->redisStorage->writeHash($hash, $data);
-//        $this->RQLiteStorage->writeHash($hash, $data);
+        $this->RQLiteStorage->writeHash($hash, $data);
 
         $do = $request->getAttribute(DataObject::class);
         /* Link entity with hash */
         $this->redisStorage->linkHash($do, $hash);
-//        $this->RQLiteStorage->linkHash($do, $hash);
+        $this->RQLiteStorage->linkHash($do, $hash);
 
         return $delegate->process($request);
     }

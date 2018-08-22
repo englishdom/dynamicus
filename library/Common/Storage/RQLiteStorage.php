@@ -135,7 +135,9 @@ class RQLiteStorage implements StorageInterface
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_USERPWD, "$this->username:$this->password");
+        if (!empty($this->username) && !empty($this->password)) {
+            curl_setopt($curl, CURLOPT_USERPWD, "$this->username:$this->password");
+        }
 
         $response = curl_exec($curl);
         $error = curl_error($curl);
