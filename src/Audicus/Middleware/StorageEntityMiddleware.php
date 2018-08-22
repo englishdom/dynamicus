@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * Class AddEntityToStorageMiddleware
  * @package Audicus\Middleware
  */
-class AddEntityToStorageMiddleware implements MiddlewareInterface, ConstantMiddlewareInterface
+class StorageEntityMiddleware implements MiddlewareInterface, ConstantMiddlewareInterface
 {
     /**
      * @var RedisStorage
