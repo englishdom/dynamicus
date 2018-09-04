@@ -21,11 +21,9 @@ class AudioTransformer extends TransformerAbstract
     {
         $data = [
             'id' => $entity->getId(),
+            'links' => null,
+            'info' => null
         ];
-
-        if (!$entity->getFiles()) {
-            throw new RuntimeException('Audio files not found!');
-        }
 
         if ($entity->getFiles()) {
             foreach ($entity->getFiles() as $file) {
