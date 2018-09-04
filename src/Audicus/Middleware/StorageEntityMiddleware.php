@@ -25,17 +25,17 @@ class StorageEntityMiddleware implements MiddlewareInterface, ConstantMiddleware
     /**
      * @var RQLiteStorage
      */
-    private $RQLiteStorage;
+//    private $RQLiteStorage;
 
     /**
      * StoreEntityInRedisMiddleware constructor.
      * @param RedisStorage  $redisStorage
      * @param RQLiteStorage $RQLiteStorage
      */
-    public function __construct(RedisStorage $redisStorage, RQLiteStorage $RQLiteStorage)
+    public function __construct(RedisStorage $redisStorage)
     {
         $this->redisStorage = $redisStorage;
-        $this->RQLiteStorage = $RQLiteStorage;
+//        $this->RQLiteStorage = $RQLiteStorage;
     }
 
     /**
@@ -51,12 +51,12 @@ class StorageEntityMiddleware implements MiddlewareInterface, ConstantMiddleware
         /* Save hash to storage */
         $data = $request->getAttribute(self::RAW_BODY);
         $this->redisStorage->writeHash($hash, $data);
-        $this->RQLiteStorage->writeHash($hash, $data);
+//        $this->RQLiteStorage->writeHash($hash, $data);
 
         $do = $request->getAttribute(DataObject::class);
         /* Link entity with hash */
         $this->redisStorage->linkHash($do, $hash);
-        $this->RQLiteStorage->linkHash($do, $hash);
+//        $this->RQLiteStorage->linkHash($do, $hash);
 
         return $delegate->process($request);
     }

@@ -16,7 +16,7 @@ class StorageEntityMiddlewareFactory
     public function __invoke(ContainerInterface $container)
     {
         $redisStorage = $container->get(RedisStorage::class);
-        $RQLiteStorage = $container->get(RQLiteStorage::class);
-        return new StorageEntityMiddleware($redisStorage, $RQLiteStorage);
+//        $RQLiteStorage = $container->get(RQLiteStorage::class);
+        return new StorageEntityMiddleware($redisStorage);
     }
 }
