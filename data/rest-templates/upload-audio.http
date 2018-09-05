@@ -1,4 +1,4 @@
-POST http://localhost:9999/audio/upload/blog-post/1
+POST http://localhost:9999/audio/upload/blog-post/11
 Content-Type: multipart/form-data; boundary=boundary
 Accept: application/vnd.api+json
 Cookie: XDEBUG_SESSION=PHPSTORM
@@ -10,7 +10,7 @@ Content-Disposition: form-data; name="audio"; filename="audio.mp3"
 --boundary
 Content-Disposition: form-data; name="json"
 
-{"data":{"message":"<speak>arm</speak>"}}
+{"data":{"message":"<speak>arm2</speak>"}}
 --boundary--
 
 ###

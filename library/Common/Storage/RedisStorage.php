@@ -74,9 +74,11 @@ class RedisStorage implements StorageInterface
         }
 
         if ($hashIsExist === false) {
+            /* Добавление нового элемента слева */
             $result = (bool)$this->redis->lPush($key, $hashKey);
             if ($result === true) {
-                $hashes = $this->redis->lRange($key, 0, -1);
+                /* читаем с первого элемента до последнего, 0 это новый добавленный */
+                $hashes = $this->redis->lRange($key, 1, -1);
                 foreach ($hashes as $hash) {
                     $parts = explode(':', $hash);
                     if (count($parts) == 3 && $parts[2] != $hash) {
