@@ -18,13 +18,15 @@ class DeleteAction implements ActionInterface
 {
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        /* @var FilesystemInterface $filesystem */
-        $filesystem = $request->getAttribute(FilesystemInterface::class);
+        $collection = $request->getAttribute(FilesystemInterface::class);
         /* @var DataObject $do */
         $do = $request->getAttribute(DataObject::class);
 
-        /* удаляется только указанная директория и все вложения */
-        $filesystem->deleteDir($do->getShardingPath());
+        foreach ($collection as $filesystem) {
+            /* @var FilesystemInterface $filesystem */
+            /* удаляется только указанная директория и все вложения */
+            $filesystem->deleteDir($do->getShardingPath());
+        }
 
         $request = $request
             ->withAttribute(self::HTTP_CODE, Response::STATUS_CODE_204);

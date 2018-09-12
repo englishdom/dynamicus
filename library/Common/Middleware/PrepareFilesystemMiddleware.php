@@ -4,9 +4,9 @@ namespace Common\Middleware;
 
 use Common\Container\Config;
 use Common\Entity\DataObject;
+use Common\Exception\RuntimeException;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
-use League\Flysystem\AdapterInterface;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemInterface;
 use Psr\Container\ContainerInterface;
@@ -50,11 +50,20 @@ class PrepareFilesystemMiddleware implements MiddlewareInterface
         }
 
         /* Получение адаптера из контейнера */
-        $adapter = $this->container->get($this->config->get($configKey));
+        $adapters = $this->container->get($this->config->get($configKey));
+        $collection = new \SplObjectStorage();
+
+        if (is_array($adapters)) {
+            foreach ($adapters as $adapter) {
+                $collection->attach(new Filesystem($adapter));
+            }
+        } else {
+            throw new RuntimeException('Invalid config for file adapters.');
+        }
 
         $request = $request->withAttribute(
             FilesystemInterface::class,
-            new Filesystem($adapter)
+            $collection
         );
 
         return $delegate->process($request);

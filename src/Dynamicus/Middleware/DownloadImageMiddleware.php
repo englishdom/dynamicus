@@ -46,7 +46,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
         if (!$this->validImageType($image->getPath())) {
             /* Image remove with wrong type */
             unlink($image->getPath());
-            throw new RuntimeException('Filetype is not an image. It has been removed!');
+            throw new RuntimeException('File type is not an image. It has been removed!');
         }
 
         /* Image set to collection */

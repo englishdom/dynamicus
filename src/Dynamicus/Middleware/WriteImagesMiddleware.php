@@ -20,8 +20,7 @@ class WriteImagesMiddleware implements MiddlewareInterface
     {
         /* @var DataObject $do */
         $do = $request->getAttribute(DataObject::class);
-        /* @var FilesystemInterface $filesystem */
-        $filesystem = $request->getAttribute(FilesystemInterface::class);
+        $collection = $request->getAttribute(FilesystemInterface::class);
 
         $images = $do->getFiles();
         /* Original image remove from collection if NAMESPACE = content */
@@ -31,11 +30,15 @@ class WriteImagesMiddleware implements MiddlewareInterface
 
         /* @var File $imageFile */
         foreach ($images as $imageFile) {
-            $this->moveImage(
-                $filesystem,
-                $imageFile->getPath(),
-                $this->createNewPath($do->getShardingPath(), $imageFile->getUrl())
-            );
+            /* Save to all filesystems */
+            foreach ($collection as $fileSystem) {
+                /* @var FilesystemInterface $fileSystem */
+                $this->moveImage(
+                    $fileSystem,
+                    $imageFile->getPath(),
+                    $this->createNewPath($do->getShardingPath(), $imageFile->getUrl())
+                );
+            }
         }
 
         return $delegate->process($request);
@@ -71,7 +74,7 @@ class WriteImagesMiddleware implements MiddlewareInterface
         } else {
             $result = $filesystem->putStream($newFilePath, $resource);
         }
-        if ($result) {
+        if ($result && file_exists($tmpFilePath)) {
             unlink($tmpFilePath);
         }
         return $result;

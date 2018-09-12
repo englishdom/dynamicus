@@ -14,9 +14,17 @@ return [
         ],
     ],
     'adapters' => [
-        '0' => \League\Flysystem\AdapterInterface::class,
+        '0' => [
+            \League\Flysystem\AdapterInterface::class,
+        ],
         /* Для entity FAQ будет использвоаться адаптер selectel */
-        'faq' => \Common\Container\SelectelAdapterInterface::class,
-        'course-int-lesson' => \Common\Container\SelectelAdapterInterface::class,
+        'faq' => [
+            \Common\Container\SelectelAdapterInterface::class,
+            \League\Flysystem\AdapterInterface::class,
+        ],
+        'course-int-lesson' => [
+            \Common\Container\SelectelAdapterInterface::class,
+            \League\Flysystem\AdapterInterface::class,
+        ],
     ],
 ];
