@@ -26,5 +26,13 @@ return [
             \Common\Container\SelectelAdapterInterface::class,
             \League\Flysystem\AdapterInterface::class,
         ],
+        'teacher' => [
+            \Common\Container\SelectelAdapterInterface::class,
+            \League\Flysystem\AdapterInterface::class,
+        ],
+        'headteacher' => [
+            \Common\Container\SelectelAdapterInterface::class,
+            \League\Flysystem\AdapterInterface::class,
+        ]
     ],
 ];
