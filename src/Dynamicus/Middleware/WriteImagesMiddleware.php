@@ -16,6 +16,12 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class WriteImagesMiddleware implements MiddlewareInterface
 {
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface      $delegate
+     * @return ResponseInterface
+     * @throws \League\Flysystem\FileExistsException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         /* @var DataObject $do */
@@ -39,6 +45,10 @@ class WriteImagesMiddleware implements MiddlewareInterface
                     $this->createNewPath($do->getShardingPath(), $imageFile->getUrl())
                 );
             }
+            /* Удаление темпового файла */
+            if (file_exists($imageFile->getUrl())) {
+                unlink($imageFile->getUrl());
+            }
         }
 
         return $delegate->process($request);
@@ -57,11 +67,12 @@ class WriteImagesMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Копирование имиджа и удаление темпового
+     * Копирование имиджа
      * @param FilesystemInterface $filesystem
      * @param string              $tmpFilePath
      * @param string              $newFilePath
      * @return bool
+     * @throws \League\Flysystem\FileExistsException
      */
     private function moveImage(FilesystemInterface $filesystem, string $tmpFilePath, string $newFilePath): bool
     {
@@ -73,9 +84,6 @@ class WriteImagesMiddleware implements MiddlewareInterface
             $result = $filesystem->writeStream($newFilePath, $resource);
         } else {
             $result = $filesystem->putStream($newFilePath, $resource);
-        }
-        if ($result && file_exists($tmpFilePath)) {
-            unlink($tmpFilePath);
         }
         return $result;
     }
