@@ -1,11 +1,11 @@
 # otions in query: ?data[resize][0][size]=300x215&data[resize][0][crop]=0x0x300x215&data[links][url]=https://www.what-dog.net/Images/faces2/scroll001.jpg
 # dumanic height
-POST http://localhost:9999/blog-post/1
+POST http://localhost:9999/faq/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 Cookie: XDEBUG_SESSION=PHPSTORM
 
-{"data":{"resize":[{"size":"300x215","crop":"0x0x300x215"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
+{"data":{"resize":[{"size":"400x250","crop":"0x0x400x250"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
 
 ###
 

@@ -50,12 +50,13 @@ class PrepareFilesystemMiddleware implements MiddlewareInterface
         }
 
         /* Получение адаптера из контейнера */
-        $adapters = $this->container->get($this->config->get($configKey));
+        $adapters = $this->config->get($configKey);
         $collection = new \SplObjectStorage();
 
         if (is_array($adapters)) {
             foreach ($adapters as $adapter) {
-                $collection->attach(new Filesystem($adapter));
+                $adapterObject = $this->container->get($adapter);
+                $collection->attach(new Filesystem($adapterObject));
             }
         } else {
             throw new RuntimeException('Invalid config for file adapters.');
