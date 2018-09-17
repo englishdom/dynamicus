@@ -3,6 +3,7 @@
 namespace Common\Storage;
 
 use Common\Entity\DataObject;
+use Common\Exception\RuntimeException;
 
 class RQLiteStorage implements StorageInterface
 {
@@ -46,6 +47,37 @@ class RQLiteStorage implements StorageInterface
                 $hashes[] = $values[0];
             }
         }
+        return $hashes;
+    }
+
+    /**
+     * @param \SplObjectStorage $collection
+     * @return array
+     * @throws RQLiteStorageException
+     * @throws RuntimeException
+     */
+    public function readCollection(\SplObjectStorage $collection)
+    {
+        $hashes = [];
+        $ids = [];
+
+        foreach ($collection as $object) {
+            if (!$object instanceof DataObject) {
+                throw new RuntimeException('Collection is not storage DataObject');
+            }
+            $ids[] = $object->getEntityId();
+        }
+
+        $ids = implode(',', $ids);
+        $select = 'SELECT hashes.hash, entities.entity_id FROM entities INNER JOIN hashes ON hashes.id = entities.hash_id WHERE entities.entity_name="'.$object->getEntityName().'" AND entities.entity_id IN('.$ids.')';
+        $json = $this->generateCurl(self::TYPE_GET, $select);
+
+        if (isset($json['results'][0]['values'])) {
+            foreach ($json['results'][0]['values'] as $values) {
+                $hashes[$values[1]] = $values[0];
+            }
+        }
+
         return $hashes;
     }
 
