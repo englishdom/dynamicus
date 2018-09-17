@@ -7,6 +7,9 @@ use Common\Action\ActionInterface;
 use Common\Container\Config;
 use Common\Entity\DataObject;
 use Common\Entity\File;
+use Common\Exception\RuntimeException;
+use Common\Storage\RedisStorage;
+use Common\Storage\RQLiteStorage;
 use Common\Storage\StorageInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Flysystem\AdapterInterface;
@@ -63,10 +66,17 @@ class ListAction implements ActionInterface
         $do = $request->getAttribute(DataObject::class);
         /* чтение файлов */
         if ($do instanceof \SplObjectStorage) {
-            foreach ($do as $object) {
-                $this->addFiles($object, $request->getAttribute(self::WITH_INFO) === self::WITH_INFO);
+            /* если хранилище RQLite */
+            if ($this->storage instanceof RQLiteStorage) {
+                $this->addFiles($do, $request->getAttribute(self::WITH_INFO) === self::WITH_INFO);
+                $do->rewind();
+                $item = new Collection($do, new AudioTransformer(), $this->getResourceName($do->current()));
+            } else {
+                foreach ($do as $object) {
+                    $this->addFiles($object, $request->getAttribute(self::WITH_INFO) === self::WITH_INFO);
+                }
+                $item = new Collection($do, new AudioTransformer(), $this->getResourceName($object));
             }
-            $item = new Collection($do, new AudioTransformer(), $this->getResourceName($object));
         } else {
             /* Добавление расширения, так как мы не читаем файловую систему и не знаем реальное расширение */
             $this->addFiles($do,$request->getAttribute(self::WITH_INFO) === self::WITH_INFO);
@@ -81,24 +91,43 @@ class ListAction implements ActionInterface
     }
 
     /**
-     * Чтение хешей из редиса
+     * Чтение хешей из хранилища
      *
      * @param DataObject $do
      * @param bool $withMetaInfo
      * @throws \Common\Exception\RuntimeException
      */
-    protected function addFiles(DataObject $do, bool $withMetaInfo = false)
+    protected function addFiles($do, bool $withMetaInfo = false)
     {
-        $do->setExtension(TYPE_MP3);
-        $hashes = $this->storage->readHashes($do);
+        if ($do instanceof DataObject) {
+            $do->setExtension(TYPE_MP3);
+            $hashes = $this->storage->readHashes($do);
 
-        foreach ($hashes as $hash) {
-            $file = new File();
-            if ($withMetaInfo) {
-                $file->setMetaData($this->getFileInfo($this->createUrlInFileSystem($do, $hash)));
+            foreach ($hashes as $hash) {
+                $file = new File();
+                if ($withMetaInfo) {
+                    $file->setMetaData($this->getFileInfo($this->createUrlInFileSystem($do, $hash)));
+                }
+                $file->setUrl($this->createUrl($do, $hash));
+                $do->attachFile($file);
             }
-            $file->setUrl($this->createUrl($do, $hash));
-            $do->attachFile($file);
+        } elseif ($do instanceof \SplObjectStorage) {
+            /* это код работает только для RQLite хранилища */
+            $hashes = $this->storage->readCollection($do);
+            foreach ($do as $object) {
+                if (!$object instanceof DataObject) {
+                    throw new RuntimeException('Collection does not have DataObject');
+                }
+
+                $file = new File();
+                $object->setExtension(TYPE_MP3);
+                foreach ($hashes as $id => $hash) {
+                    if ($id == $object->getEntityId()) {
+                        $file->setUrl($this->createUrl($object, $hash));
+                        $object->attachFile($file);
+                    }
+                }
+            }
         }
     }
 
