@@ -37,6 +37,8 @@ class ConfigProvider
                 RQLiteStorage::class => Factory\RQLiteStorageFactory::class,
                 // a read storage
                 StorageInterface::class => Factory\RQLiteStorageFactory::class,
+                // Diagnostics
+                Middleware\DiagnosticsMiddleware::class => Factory\DiagnosticsMiddlewareFactory::class,
             ],
         ];
     }

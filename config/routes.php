@@ -286,3 +286,11 @@ $app->route(
     ['GET'],
     'test-log'
 );
+$app->route(
+    '/diagnostics[/]',
+    [
+        \Common\Middleware\DiagnosticsMiddleware::class
+    ],
+    ['GET'],
+    'diagnostics'
+);
