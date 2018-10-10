@@ -37,6 +37,7 @@ class WriteImagesMiddleware implements MiddlewareInterface
         /* @var File $imageFile */
         foreach ($images as $imageFile) {
             /* Save to all filesystems */
+            $collection->rewind();
             foreach ($collection as $fileSystem) {
                 /* @var FilesystemInterface $fileSystem */
                 $this->moveImage(

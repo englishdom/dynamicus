@@ -19,6 +19,7 @@ class DeleteAction implements ActionInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $collection = $request->getAttribute(FilesystemInterface::class);
+        $collection->rewind();
         /* @var DataObject $do */
         $do = $request->getAttribute(DataObject::class);
 

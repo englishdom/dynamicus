@@ -31,6 +31,7 @@ class UploadFileMiddleware implements MiddlewareInterface, ConstantMiddlewareInt
         /* сохранение файла если контент не пустой */
         if ($audioContent) {
             $collection = $request->getAttribute(FilesystemInterface::class);
+            $collection->rewind();
             foreach ($collection as $fileSystem) {
                 /* @var FilesystemInterface $fileSystem */
                 $fileSystem->put($file->getPath(), $audioContent);

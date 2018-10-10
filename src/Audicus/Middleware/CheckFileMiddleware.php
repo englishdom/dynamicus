@@ -20,16 +20,12 @@ class CheckFileMiddleware implements MiddlewareInterface, ConstantMiddlewareInte
     {
         $hash = $request->getAttribute(self::HASH);
         $do = $request->getAttribute(DataObject::class);
-        $fileSystem = $request->getAttribute(FilesystemInterface::class);
+        $collection = $request->getAttribute(FilesystemInterface::class);
 
         $fileName = $hash . '.' . $do->getExtension();
         $path = $do->getShardingPath() . DIRECTORY_SEPARATOR . $fileName;
-        if ($fileSystem instanceof \SplObjectStorage) {
-            $fileSystem->rewind();
-            $request = $request->withAttribute(self::FILE_EXISTS, $fileSystem->current()->has($path));
-        } else {
-            $request = $request->withAttribute(self::FILE_EXISTS, $fileSystem->has($path));
-        }
+        $collection->rewind();
+        $request = $request->withAttribute(self::FILE_EXISTS, $collection->current()->has($path));
         return $delegate->process($request);
     }
 
