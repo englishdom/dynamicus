@@ -24,7 +24,12 @@ class CheckFileMiddleware implements MiddlewareInterface, ConstantMiddlewareInte
 
         $fileName = $hash . '.' . $do->getExtension();
         $path = $do->getShardingPath() . DIRECTORY_SEPARATOR . $fileName;
-        $request = $request->withAttribute(self::FILE_EXISTS, $fileSystem->has($path));
+        if ($fileSystem instanceof \SplObjectStorage) {
+            $fileSystem->rewind();
+            $request = $request->withAttribute(self::FILE_EXISTS, $fileSystem->current()->has($path));
+        } else {
+            $request = $request->withAttribute(self::FILE_EXISTS, $fileSystem->has($path));
+        }
         return $delegate->process($request);
     }
 
