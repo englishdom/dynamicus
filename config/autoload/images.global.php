@@ -20,6 +20,13 @@ return [
                 [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // размер для тренировки для мобильной версии
             ],
         ],
+        'ebook-translation' => [
+            KEY_DEFAULT => [
+                [WIDTH => 66, HEIGHT => 50, QUALITY => 85], // размер на списке слов
+                [WIDTH => 240, HEIGHT => 168, QUALITY => 85], // размер для карточки слова
+                [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // размер для тренировки для мобильной версии
+            ],
+        ],
         'word-set' => [
             KEY_DEFAULT => [
                 [WIDTH => 180, HEIGHT => 115, QUALITY => 85], // skills/glossary/ список вордсетов
