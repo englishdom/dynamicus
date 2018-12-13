@@ -45,17 +45,17 @@ class File
     }
 
     /**
-     * @return mixed
+     * @return array|null
      */
-    public function getMetaData()
+    public function getMetaData(): ?array
     {
         return $this->metaData;
     }
 
     /**
-     * @param mixed $metaData
+     * @param array|null $metaData
      */
-    public function setMetaData(array $metaData)
+    public function setMetaData(?array $metaData)
     {
         $this->metaData = $metaData;
     }

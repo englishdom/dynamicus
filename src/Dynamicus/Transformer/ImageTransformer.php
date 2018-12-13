@@ -12,6 +12,8 @@ class ImageTransformer extends TransformerAbstract
     {
         $data = [
             'id' => $entity->getId(),
+            'links' => null,
+            'info' => null
         ];
 
         if (!$entity->getFiles()) {
@@ -23,6 +25,7 @@ class ImageTransformer extends TransformerAbstract
                 $fileInfo = $this->getFileInfo($image->getUrl());
                 if (!$fileInfo['size']) {
                     $data['links'][$fileInfo['variant']] = $image->getUrl();
+                    $data['info'][$fileInfo['variant']] = $image->getMetaData();
                 } else {
                     $data['links'][$fileInfo['variant']][$fileInfo['size']] = $image->getUrl();
                 }

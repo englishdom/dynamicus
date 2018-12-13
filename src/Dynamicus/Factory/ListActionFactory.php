@@ -5,6 +5,7 @@ namespace Dynamicus\Factory;
 use Common\Container\ConfigInterface;
 use Dynamicus\Action\ListAction;
 use Psr\Container\ContainerInterface;
+use League\Flysystem\AdapterInterface;
 
 /**
  * Class ListActionFactory
@@ -15,6 +16,8 @@ class ListActionFactory
     public function __invoke(ContainerInterface $container)
     {
         $config = $container->get(ConfigInterface::class);
-        return new ListAction($config);
+        $adapter = $container->get(AdapterInterface::class);
+
+        return new ListAction($config, $adapter);
     }
 }

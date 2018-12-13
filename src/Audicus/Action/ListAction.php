@@ -3,17 +3,15 @@
 namespace Audicus\Action;
 
 use Audicus\Transformer\AudioTransformer;
-use Common\Action\ActionInterface;
+use Common\Action\AbstractAction;
 use Common\Container\Config;
 use Common\Entity\DataObject;
 use Common\Entity\File;
 use Common\Exception\RuntimeException;
-use Common\Storage\RedisStorage;
 use Common\Storage\RQLiteStorage;
 use Common\Storage\StorageInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use League\Flysystem\AdapterInterface;
-use League\Flysystem\Filesystem;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use Psr\Http\Message\ResponseInterface;
@@ -24,7 +22,7 @@ use Zend\Http\Response;
  * Class ListAction
  * @package Audicus\Action
  */
-class ListAction implements ActionInterface
+class ListAction extends AbstractAction
 {
     /**
      * @var Config
@@ -58,7 +56,8 @@ class ListAction implements ActionInterface
      * @param ServerRequestInterface $request
      * @param DelegateInterface $delegate
      * @return ResponseInterface
-     * @throws \Common\Exception\RuntimeException
+     * @throws RuntimeException
+     * @throws \League\Flysystem\FileNotFoundException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
@@ -93,9 +92,10 @@ class ListAction implements ActionInterface
     /**
      * Чтение хешей из хранилища
      *
-     * @param DataObject $do
+     * @param $do
      * @param bool $withMetaInfo
-     * @throws \Common\Exception\RuntimeException
+     * @throws RuntimeException
+     * @throws \League\Flysystem\FileNotFoundException
      */
     protected function addFiles($do, bool $withMetaInfo = false)
     {
@@ -129,22 +129,6 @@ class ListAction implements ActionInterface
                 }
             }
         }
-    }
-
-    /**
-     * @param string $url
-     * @return array|null
-     */
-    protected function getFileInfo(string $url): ?array
-    {
-        $result = null;
-        $fileSystem = new Filesystem($this->fileSystemAdapter);
-
-        if ($fileSystem->has($url)) {
-            $result = $fileSystem->getMetadata($url);
-        }
-
-        return $result;
     }
 
     /**
