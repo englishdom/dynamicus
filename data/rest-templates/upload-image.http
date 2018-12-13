@@ -34,7 +34,7 @@ Content-Disposition: form-data; name="json"
 
 ###
 
-POST http://localhost:9999/upload/user/1
+POST http://localhost:9999/upload/exercise/1
 Content-Type: multipart/form-data; boundary=boundary
 Accept: application/vnd.api+json
 Cookie: XDEBUG_SESSION=PHPSTORM
@@ -42,7 +42,7 @@ Cookie: XDEBUG_SESSION=PHPSTORM
 --boundary
 Content-Disposition: form-data; name="image"; filename="image.jpg"
 
-< ../../data/image.jpg
+< ../../data/test.jpeg
 --boundary--
 
 ###

@@ -3,7 +3,7 @@
 
 /* GET /list/translation/34 */
 $app->route(
-    '/list/{entity}/{entity_id}[/]',
+    '/list/{entity}/{entity_id}[/{with-info}]',
     [
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Установка расширения по namespace */
