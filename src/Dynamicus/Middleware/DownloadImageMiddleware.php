@@ -95,7 +95,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
         $response = $this->getGuzzleClient()->request(
             'GET',
             $fromFile,
-            ['stream' => true]
+            ['stream' => true, 'timeout' => 5]
         );
         return $response;
     }
