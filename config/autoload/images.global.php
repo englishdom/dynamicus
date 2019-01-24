@@ -63,6 +63,13 @@ return [
                 [WIDTH => 940, HEIGHT => 532, QUALITY => 85], // Exercise, LifeStory
             ],
         ],
+        'ed-word' => [
+            KEY_DEFAULT => [
+                [WIDTH => 66, HEIGHT => 50, QUALITY => 85], // размер на списке слов
+                [WIDTH => 240, HEIGHT => 168, QUALITY => 85], // размер для карточки слова
+                [WIDTH => 600, HEIGHT => 432, QUALITY => 85], // размер для тренировки для мобильной версии
+            ],
+        ],
         'ed-class' => [
             KEY_DEFAULT => [
                 [WIDTH => 300, HEIGHT => 181, QUALITY => 85], // Ed Class small image
