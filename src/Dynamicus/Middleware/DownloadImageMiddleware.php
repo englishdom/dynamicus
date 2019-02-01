@@ -66,6 +66,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
     private function getImageFile(DataObject $do, $imageUrl): File
     {
         $extension = pathinfo(parse_url($imageUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
+        $extension = strtolower($extension);
         if (!in_array($extension, ['jpeg', 'jpg'])) {
             throw new UnsupportedMediaException('The image unsupported with type: '.$extension);
         }
