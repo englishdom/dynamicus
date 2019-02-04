@@ -17,9 +17,11 @@ class GoogleSearchAdapter implements SearchAdapterInterface
     const GOOGLE_SEARCH_API_URL = 'https://www.googleapis.com/customsearch/v1';
     const GOOGLE_SEARCH_TYPE = 'image';
     const GOOGLE_SEARCH_FILE_TYPE = 'jpg';
-    const GOOGLE_SEARCH_IMAGE_SIZE = 'xlarge';
+    const GOOGLE_SEARCH_IMAGE_SIZE = 'large';
     const GOOGLE_SEARCH_RESPONSE_FORMAT = 'json';
     const GOOGLE_SEARCH_REQUEST_METHOD = 'GET';
+    const GOOGLE_SEARCH_FIELDS = 'items(link)';
+    const GOOGLE_SEARCH_GEOLOCATION = 'ru';
     // "high": Enables highest level of SafeSearch filtering.
     const GOOGLE_SEARCH_PARAM_SAFE = 'high';
     const CURSOR_DEFAULT = 1;
@@ -90,12 +92,15 @@ class GoogleSearchAdapter implements SearchAdapterInterface
     */
     private function prepareUrl($searchText): string
     {
+        // полный список параметров https://developers.google.com/custom-search/v1/cse/list
         $arguments = [
             'key' => $this->config->get('google-api.key'),
             'cx' => $this->config->get('google-api.cx'),
             'q' => trim($searchText),
             'searchType' => self::GOOGLE_SEARCH_TYPE,
             'fileType' => self::GOOGLE_SEARCH_FILE_TYPE,
+            'fields' => self::GOOGLE_SEARCH_FIELDS,
+            'gl' => self::GOOGLE_SEARCH_GEOLOCATION,
             'imgSize' => self::GOOGLE_SEARCH_IMAGE_SIZE,
             'alt' => self::GOOGLE_SEARCH_RESPONSE_FORMAT,
             'safe' => self::GOOGLE_SEARCH_PARAM_SAFE,
