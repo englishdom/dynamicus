@@ -16,7 +16,7 @@ return [
     'graylog' => [
         'host' => env('GRAYLOG_HOST'),
         'port' => env('GRAYLOG_APPLICATION_OUTPUT_PORT'),
-        'protocol' => env('GRAYLOG_PROTOCOL','UDP'),
+        'protocol' => 'UDP',
         'facility' => 'Dynamicus. HOST: ' . $host . ' IP:' . $ip,
     ],
 ];
