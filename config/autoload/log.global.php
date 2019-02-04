@@ -10,7 +10,7 @@ $ip = (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '');
 return [
     'dependencies' => [
         'factories'  => [
-            LoggerInterface::class => Factory\GrayLogFactory::class,
+            LoggerInterface::class => Factory\GrayLogWithRequestIdFactory::class,
         ],
     ],
     'graylog' => [

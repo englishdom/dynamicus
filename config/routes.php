@@ -5,8 +5,6 @@
 $app->route(
     '/list/{entity}/{entity_id}[/{with-info}]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Установка расширения по namespace */
         Dynamicus\Middleware\SetExtensionMiddleware::class,
@@ -27,8 +25,6 @@ $app->route(
 $app->route(
     '/{entity}/{entity_id}[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Установка расширения по namespace */
         Dynamicus\Middleware\SetExtensionMiddleware::class,
@@ -49,8 +45,6 @@ $app->route(
 $app->route(
     '/{entity}/{entity_id}[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Установка расширения по namespace */
@@ -87,8 +81,6 @@ $app->route(
 $app->route(
     '/upload/{entity}/{entity_id}[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Установка расширения по namespace */
@@ -125,8 +117,6 @@ $app->route(
 $app->route(
     '/search/{search_text}[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         \Dynamicus\Action\SearchAction::class
     ],
     ['GET'],
@@ -143,8 +133,6 @@ $app->route(
 $app->route(
     '/audio/{entity}/{entity_id}[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Добавление расширения .mp3 */
@@ -182,8 +170,6 @@ $app->route(
 $app->route(
     '/audio/upload/{entity}/{entity_id}[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Добавление расширения .mp3 */
@@ -219,8 +205,6 @@ $app->route(
 $app->route(
     '/audio/regenerate/{entity}/{entity_id}[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Добавление расширения .mp3 */
@@ -256,8 +240,6 @@ $app->route(
 $app->route(
     '/audio/{entity}/{entity_id}[/{with-info}]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         /* Подготовка DO */
         \Common\Middleware\PrepareDataObjectMiddleware::class,
         /* Добавление расширения .mp3 */
@@ -279,8 +261,6 @@ $app->route(
 //$app->route(
 //    '/audio/{entity}/{entity_id}[/]',
 //    [
-//        /* Логирование исключений */
-//        \Common\Middleware\ExceptionLoggingMiddleware::class,
 //        /* Подготовка DO */
 //        \Common\Middleware\PrepareDataObjectMiddleware::class,
 //        /* Шардирование по хешу */
@@ -301,8 +281,6 @@ $app->route(
 $app->route(
     '/test-log/{type:.*}[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         \Dynamicus\Action\TestLogAction::class
     ],
     ['GET'],
@@ -311,8 +289,6 @@ $app->route(
 $app->route(
     '/diagnostics[/]',
     [
-        /* Логирование исключений */
-        \Common\Middleware\ExceptionLoggingMiddleware::class,
         \Common\Middleware\DiagnosticsMiddleware::class
     ],
     ['GET'],

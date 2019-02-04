@@ -49,6 +49,10 @@ $app->pipe(UrlHelperMiddleware::class);
 
 // Prepare response in json-api format
 // Register the dispatch middleware in the middleware pipeline
+
+// Log all exceptions to Graylog
+$app->pipe(Middleware\ExceptionLoggingMiddleware::class);
+
 $app->pipeDispatchMiddleware();
 
 // Prepare response in json-api format

@@ -34,10 +34,12 @@ class ExceptionLoggingMiddleware implements MiddlewareInterface
         try {
             return $delegate->process($request);
         } catch (\Exception $exception) {
-            $requestId = $request->getHeaderLine('RequestId');
             $this->logger->err(
                 'Dynamicus exception: ' . $exception->getMessage(),
-                ['StackTrace' => $exception->getTraceAsString()]
+                [
+                    'StackTrace' => $exception->getTraceAsString(),
+                    'RequestId' => $request->getHeaderLine('RequestId')
+                ]
             );
             throw $exception;
         }
