@@ -39,6 +39,8 @@ class ConfigProvider
                 StorageInterface::class => Factory\RQLiteStorageFactory::class,
                 // Diagnostics
                 Middleware\DiagnosticsMiddleware::class => Factory\DiagnosticsMiddlewareFactory::class,
+                // Exception logging
+                Middleware\ExceptionLoggingMiddleware::class => Factory\ExceptionLoggingMiddlewareFactory::class,
             ],
         ];
     }

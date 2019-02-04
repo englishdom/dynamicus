@@ -47,6 +47,9 @@ $app->pipe(UrlHelperMiddleware::class);
 // - route-based validation
 // - etc.
 
+// Log all exceptions to Graylog
+$app->pipe(Middleware\ExceptionLoggingMiddleware::class);
+
 // Prepare response in json-api format
 // Register the dispatch middleware in the middleware pipeline
 $app->pipeDispatchMiddleware();

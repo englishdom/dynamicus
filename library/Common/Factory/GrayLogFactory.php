@@ -48,7 +48,7 @@ class GrayLogFactory
      * @param $protocol
      * @return Logger
      */
-    private function getGrayLogLogger($hostname, $port, $facility, $protocol): Logger
+    protected function getGrayLogLogger($hostname, $port, $facility, $protocol): Logger
     {
         $logger = new Logger();
         if ('TCP' == $protocol) {
