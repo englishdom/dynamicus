@@ -10,13 +10,13 @@ $ip = (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '');
 return [
     'dependencies' => [
         'factories'  => [
-            LoggerInterface::class => Factory\GrayLogFactory::class,
+            LoggerInterface::class => Factory\GrayLogWithRequestIdFactory::class,
         ],
     ],
     'graylog' => [
         'host' => env('GRAYLOG_HOST'),
         'port' => env('GRAYLOG_APPLICATION_OUTPUT_PORT'),
-        'protocol' => env('GRAYLOG_PROTOCOL','UDP'),
+        'protocol' => 'UDP',
         'facility' => 'Dynamicus. HOST: ' . $host . ' IP:' . $ip,
     ],
 ];

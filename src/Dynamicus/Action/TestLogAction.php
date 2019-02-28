@@ -19,7 +19,6 @@ class TestLogAction implements ActionInterface
 
     /**
      * SearchAction constructor.
-     * @param SearchAdapterInterface $adapter
      * @param LoggerInterface        $logger
      */
     public function __construct(LoggerInterface $logger)
