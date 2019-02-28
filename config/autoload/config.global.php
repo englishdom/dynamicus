@@ -30,17 +30,4 @@ return [
         /* для временного аплоада и манипуляций с имиджами */
         'absolute-tmp-path' => '/tmp/images/', /* /tmp/images/translation/000/000/001/1.jpg */
     ],
-    'storage' => [
-        'redis' => [
-            'host' => env('REDIS_HOST'),
-            'port' => env('REDIS_PORT'),
-            'password' => env('REDIS_PASS')
-        ],
-        'rqlite' => [
-            'host' => env('RQLITE_HOST'),
-            'port' => env('RQLITE_PORT'),
-            'username' => env('RQLITE_USERNAME'),
-            'password' => env('RQLITE_PASSWORD'),
-        ]
-    ]
 ];
