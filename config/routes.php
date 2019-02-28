@@ -153,8 +153,6 @@ $app->route(
         \Audicus\Middleware\GenerateAudioMiddleware::class,
         /* Загрузка файла */
         \Audicus\Middleware\UploadFileMiddleware::class,
-        /* Добавление entity:id в redis */
-        \Audicus\Middleware\StorageEntityMiddleware::class,
         /* Вывод пути добавленного файла */
         \Audicus\Action\PostAction::class,
     ],
@@ -188,8 +186,6 @@ $app->route(
         \Audicus\Middleware\PrepareUploadedFileMiddleware::class,
         /* Загрузка файла */
         \Audicus\Middleware\UploadFileMiddleware::class,
-        /* Добавление entity:id в redis */
-        \Audicus\Middleware\StorageEntityMiddleware::class,
         /* Вывод пути добавленного файла */
         \Audicus\Action\PostAction::class,
     ],
@@ -223,8 +219,6 @@ $app->route(
         \Audicus\Middleware\GenerateAudioMiddleware::class,
         /* Загрузка файла */
         \Audicus\Middleware\UploadFileMiddleware::class,
-        /* Добавление entity:id в redis */
-        \Audicus\Middleware\StorageEntityMiddleware::class,
         /* Вывод пути добавленного файла */
         \Audicus\Action\PostAction::class,
     ],
@@ -234,27 +228,6 @@ $app->route(
     'tokens' => [
         'entity' => '\w+',
         'entity_id' => '\d+'
-    ],
-]);
-
-$app->route(
-    '/audio/{entity}/{entity_id}[/{with-info}]',
-    [
-        /* Подготовка DO */
-        \Common\Middleware\PrepareDataObjectMiddleware::class,
-        /* Добавление расширения .mp3 */
-        \Audicus\Middleware\SetExtensionMiddleware::class,
-        /* Шардирование по хешу */
-        \Audicus\Middleware\ShardingMiddleware::class,
-        /* Вывод пути к файлам */
-        \Audicus\Action\ListAction::class,
-    ],
-    ['GET'],
-    'audio-list'
-)->setOptions([
-    'tokens' => [
-        'entity' => '\w+',
-        'entity_id' => '\d+',
     ],
 ]);
 
