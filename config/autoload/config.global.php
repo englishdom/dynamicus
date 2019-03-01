@@ -3,8 +3,25 @@
 return [
     // для поиска картинок в гугл
     'google-api' => [
-        'key' => env('GOOGLE_API_KEY'),
-        'cx' => env('GOOGLE_API_CX'),
+        'default' => [
+            'key' => env('GOOGLE_API_KEY'),
+            'cx' => env('GOOGLE_API_CX'),
+        ],
+        /* расширение для хрома */
+        'ed-translator' => [
+            'key' => env('GOOGLE_EDTRANSLATOR_API_KEY'),
+            'cx' => env('GOOGLE_EDTRANSLATOR_API_CX'),
+        ],
+        /* веб */
+        'web' => [
+            'key' => env('GOOGLE_WEB_API_KEY'),
+            'cx' => env('GOOGLE_WEB_API_CX'),
+        ],
+        /* мобильный клиент */
+        'ed-words' => [
+            'key' => env('GOOGLE_EDWORDS_API_KEY'),
+            'cx' => env('GOOGLE_EDWORDS_API_CX'),
+        ],
     ],
     // для сохранение файлов на s3 совместимое хранилище
     'filesystem' => [

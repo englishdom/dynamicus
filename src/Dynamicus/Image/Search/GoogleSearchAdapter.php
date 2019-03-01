@@ -25,10 +25,14 @@ class GoogleSearchAdapter implements SearchAdapterInterface
     const GOOGLE_SEARCH_PARAM_SAFE = 'high';
     const CURSOR_DEFAULT = 1;
 
+    const CONFIG_NAME_DEFAULT = 'default';
+
     /**
      * @var ConfigInterface
      */
     private $config;
+
+    private $configApiName;
 
     /**
      * Google constructor.
@@ -49,6 +53,26 @@ class GoogleSearchAdapter implements SearchAdapterInterface
         $resultArray = $this->getResult($searchText);
         $collection = $this->parseResult($resultArray);
         return $collection;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfigApiName(): string
+    {
+        if (!$this->configApiName) {
+            return self::CONFIG_NAME_DEFAULT;
+        }
+        return (string)$this->configApiName;
+    }
+
+    /**
+     * @param string $configApiName
+     * @return string
+     */
+    public function setConfigApiName(string $configApiName)
+    {
+        $this->configApiName = $configApiName;
     }
 
     /**
@@ -93,8 +117,8 @@ class GoogleSearchAdapter implements SearchAdapterInterface
     {
         // полный список параметров https://developers.google.com/custom-search/v1/cse/list
         $arguments = [
-            'key' => $this->config->get('google-api.key'),
-            'cx' => $this->config->get('google-api.cx'),
+            'key' => $this->config->get('google-api.'.$this->getConfigApiName().'.key'),
+            'cx' => $this->config->get('google-api.'.$this->getConfigApiName().'.cx'),
             'q' => trim($searchText),
             'searchType' => self::GOOGLE_SEARCH_TYPE,
             'fileType' => self::GOOGLE_SEARCH_FILE_TYPE,

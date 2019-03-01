@@ -17,4 +17,6 @@ interface ConstantMiddlewareInterface
     const FILE_EXISTS = 'file_exists';
 
     const DYNAMICUS_KEY = 'dynamicus';
+
+    const GOOGLE_API_NAME = 'google_api_name';
 }

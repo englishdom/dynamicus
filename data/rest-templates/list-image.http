@@ -25,3 +25,13 @@ Accept: application/vnd.api+json
 Cookie: XDEBUG_SESSION=PHPSTORM
 
 ###
+
+GET http://localhost:9999/search/car
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+X-Client-Id: ed-words
+
+###
+#X-Client-Id: ed-translator
+#X-Client-Id: web

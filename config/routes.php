@@ -41,6 +41,21 @@ $app->route(
     ],
 ]);
 
+/* GET /search/{urlencode('search text')} */
+$app->route(
+    '/search/{search_text}[/]',
+    [
+        \Dynamicus\Middleware\ConfigGoogleAPIMiddleware::class,
+        \Dynamicus\Action\SearchAction::class
+    ],
+    ['GET'],
+    'search'
+)->setOptions([
+    'tokens' => [
+        'search_text' => '.+',
+    ],
+]);
+
 /* POST /translation/35 or with namespace /meta_info:og/34 */
 $app->route(
     '/{entity}/{entity_id}[/]',
@@ -110,20 +125,6 @@ $app->route(
     'tokens' => [
         'entity' => '\w+',
         'entity_id' => '\d+'
-    ],
-]);
-
-/* GET /search/{urlencode('search text')} */
-$app->route(
-    '/search/{search_text}[/]',
-    [
-        \Dynamicus\Action\SearchAction::class
-    ],
-    ['GET'],
-    'search'
-)->setOptions([
-    'tokens' => [
-        'search_text' => '\w+',
     ],
 ]);
 

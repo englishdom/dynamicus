@@ -4,6 +4,7 @@ namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
 use Common\Entity\DataObject;
+use Common\Middleware\ConstantMiddlewareInterface;
 use Dynamicus\Image\Search\SearchAdapterInterface;
 use Dynamicus\Transformer\SearchImageTransformer;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -17,7 +18,7 @@ use Zend\Log\LoggerInterface;
  * Class SearchAction
  * @package Dynamicus\Action
  */
-class SearchAction implements ActionInterface
+class SearchAction implements ActionInterface, ConstantMiddlewareInterface
 {
     /**
      * @var SearchAdapterInterface
@@ -44,6 +45,7 @@ class SearchAction implements ActionInterface
         $do = new DataObject();
         $searchText = urldecode($request->getAttribute('search_text'));
 
+        $this->adapter->setConfigApiName($request->getAttribute(self::GOOGLE_API_NAME));
         $collection = $this->adapter->search($searchText);
         $do->setFiles($collection);
 
