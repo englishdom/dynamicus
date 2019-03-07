@@ -29,7 +29,7 @@ class ConfigGoogleAPIMiddleware implements MiddlewareInterface, ConstantMiddlewa
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
-        $header = $request->getHeader('X-Client-Id');
+        $header = $request->getHeader('X-Client-Type');
         if (isset($header[0]) && in_array($header[0], [self::ED_TRANSLATOR_KEY, self::ED_WORDS_KEY, self::WEB_KEY])) {
             $request = $request->withAttribute(self::GOOGLE_API_NAME, $header[0]);
         }
