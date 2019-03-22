@@ -37,7 +37,8 @@ class ExceptionLoggingMiddleware implements MiddlewareInterface
                 'Dynamicus exception: ' . $exception->getMessage(),
                 [
                     'StackTrace' => $exception->getTraceAsString(),
-                    'RequestId' => $request->getHeaderLine('RequestId')
+                    'RequestId' => $request->getHeaderLine('RequestId'),
+                    'RequestBody' => $request->getBody(),
                 ]
             );
             throw $exception;
