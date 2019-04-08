@@ -33,6 +33,15 @@ return [
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
             ]
         ],
+        'group-lesson-schedule' => [
+            KEY_DEFAULT => [
+                [WIDTH => 800, HEIGHT => 300, QUALITY => 85],
+                [WIDTH => 130, HEIGHT => 130, QUALITY => 85],
+                [WIDTH => 110, HEIGHT => 110, QUALITY => 85],
+                [WIDTH => 80, HEIGHT => 80, QUALITY => 85],
+                [WIDTH => 70, HEIGHT => 70, QUALITY => 85],
+            ]
+        ],
         'grammar' => [
             KEY_DEFAULT => [
                 [WIDTH => 300, HEIGHT => 190, QUALITY => 85], // Картинка на /home в списке заданий
