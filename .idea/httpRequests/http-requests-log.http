@@ -1,0 +1,813 @@
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="80х80.png"
+
+< /home/gorlinskiy/Downloads/80х80.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"80x80","crop":"0x0x80x80"}]}}
+--boundary--
+
+<> 2019-04-10T043705.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T043538.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T043409.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T042702.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T042040.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T041834.200.html
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/exercise/1
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="image.jpg"
+
+< /var/www/stv2/data/test.jpeg
+--boundary--
+
+<> 2019-04-10T041600.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T041506.200.html
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T041341.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T040650.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T040547.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T040417.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T040306.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T035037.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T035000.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T034948.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:svg/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T034934.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T034919.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T034001.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T033642.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T033611.201.json
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+<> 2019-04-10T032649.404.html
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="272х234.png"
+
+< /home/gorlinskiy/Downloads/272х234.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"272x234","crop":"0x0x272x234"}]}}
+--boundary--
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM;
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="80х80.png"
+
+< /home/gorlinskiy/Downloads/80х80.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"80x80"}]}}
+--boundary--
+
+<> 2019-04-10T024335.404.html
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM;
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="80х80.png"
+
+< /home/gorlinskiy/Downloads/80х80.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"80x80"}]}}
+--boundary--
+
+<> 2019-04-10T024134.404.html
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2/
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM;
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="80х80.png"
+
+< /home/gorlinskiy/Downloads/80х80.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"80x80"}]}}
+--boundary--
+
+<> 2019-04-10T024019.404.html
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM;
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="80х80.png"
+
+< /home/gorlinskiy/Downloads/80х80.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"80x80"}]}}
+--boundary--
+
+<> 2019-04-10T023948.404.html
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="80х80.png"
+
+< /home/gorlinskiy/Downloads/80х80.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"80x80"}]}}
+--boundary--
+
+<> 2019-04-10T023932.404.html
+
+###
+
+POST http://localhost:9999/faq/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+X-Client-Type: ed-translator
+
+{"data":{"resize":[{"size":"400x250","crop":"0x0x400x250"}],"links":{"url":"https://www.what-dog.net/Images/faces2/scroll001.jpg"}}}
+
+<> 2019-04-10T023921.404.html
+
+###
+
+POST http://localhost:9999/upload/exercise/1
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="image.jpg"
+
+< /var/www/stv2/data/test.jpeg
+--boundary--
+
+<> 2019-04-10T023725.404.html
+
+###
+
+POST http://localhost:9999/upload/course-int-mobile/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="80х80.png"
+
+< /home/gorlinskiy/Downloads/80х80.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"80x80"}]}}
+--boundary--
+
+<> 2019-04-10T023622.404.html
+
+###
+
+GET http://localhost:9999/list/exercise/1/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+###
+
+GET http://localhost:9999/list/exercise/1/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T122553.200.json
+
+###
+
+GET http://localhost:9999/list/lesson-element/1/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T122506.200.json
+
+###
+
+GET http://localhost:9999/list/exercise/1/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T122453.200.json
+
+###
+
+GET http://localhost:9999/list/exercise/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T122019.200.json
+
+###
+
+GET http://localhost:9999/list/exercise/1/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T122015.200.json
+
+###
+
+GET http://localhost:9999/list/exercise/1/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T121004.200.json
+
+###
+
+GET http://localhost:9999/list/exercise/100500/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T120956.200.json
+
+###
+
+GET http://localhost:9999/list/exercise/100500/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T115958.200.html
+
+###
+
+GET http://localhost:9999/list/exercise/100500/with-info
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+<> 2018-12-13T115229.200.json
+
+###
+

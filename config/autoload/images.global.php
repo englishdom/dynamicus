@@ -5,11 +5,13 @@ define('HEIGHT', 'height');
 define('QUALITY', 'quality');
 define('TYPE_JPG', 'jpg');
 define('TYPE_SVG', 'svg');
+define('TYPE_PNG', 'png');
 define('TYPE_MP3', 'mp3');
 /* ключевые слова */
 define('KEY_DEFAULT', 'default');
 define('KEY_CONTENT', 'content');
 define('KEY_ORIGINAL', 'original');
+define('KEY_PNG', 'png');
 
 return [
     'images' => [
@@ -190,7 +192,7 @@ return [
             KEY_ORIGINAL => true // save only original
         ],
         'course-int-mobile' => [
-            KEY_DEFAULT => [
+            KEY_PNG => [
                 [WIDTH => 342, HEIGHT => 294, QUALITY => 100], /* изображения онлайн курса в рекомендуемых, и детальной информации о курсе s1 342x294 */
                 [WIDTH => 272, HEIGHT => 234, QUALITY => 100], /* изображения онлайн курса в списках курсов s2 272x234 */
                 [WIDTH => 80, HEIGHT => 80, QUALITY => 100],   /* круглое изображение онлайн курсов s3 80x80 */
