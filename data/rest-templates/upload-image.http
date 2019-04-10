@@ -46,3 +46,19 @@ Content-Disposition: form-data; name="image"; filename="image.jpg"
 --boundary--
 
 ###
+
+POST http://localhost:9999/upload/course-int-mobile:png/2
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM; ed2=131bf6b4dc6da5999ffbe26d576ad71a
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="80х80.png"
+
+< ../../../../../home/gorlinskiy/Downloads/80х80.png
+--boundary
+Content-Disposition: form-data; name="json"
+
+{"data":{"resize":[{"size":"80x80","crop":"0x0x80x80"}]}}
+
+###

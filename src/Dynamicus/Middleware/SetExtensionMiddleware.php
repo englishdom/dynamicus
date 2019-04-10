@@ -37,6 +37,9 @@ class SetExtensionMiddleware implements MiddlewareInterface, ConstantMiddlewareI
             case 'svg':
                 $do->setExtension(TYPE_SVG);
                 break;
+            case 'png':
+                $do->setExtension(TYPE_PNG);
+                break;
             default:
                 $do->setExtension(TYPE_JPG);
                 break;
