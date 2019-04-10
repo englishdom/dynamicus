@@ -189,6 +189,13 @@ return [
         'promocode' => [
             KEY_ORIGINAL => true // save only original
         ],
+        'course-int-mobile' => [
+            KEY_DEFAULT => [
+                [WIDTH => 342, HEIGHT => 294, QUALITY => 100], /* изображения онлайн курса в рекомендуемых, и детальной информации о курсе s1 342x294 */
+                [WIDTH => 272, HEIGHT => 234, QUALITY => 100], /* изображения онлайн курса в списках курсов s2 272x234 */
+                [WIDTH => 80, HEIGHT => 80, QUALITY => 100],   /* круглое изображение онлайн курсов s3 80x80 */
+            ]
+        ]
     ]
 ];
 
