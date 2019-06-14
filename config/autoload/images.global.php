@@ -202,7 +202,10 @@ return [
             KEY_DEFAULT => [
                 [WIDTH => 50, HEIGHT => 50, QUALITY => 100], /* логотип компании */
             ]
-        ]
+        ],
+        'ed-event-history' => [
+            TYPE_SVG => true
+        ],
     ]
 ];
 
