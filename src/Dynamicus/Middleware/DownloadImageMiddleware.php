@@ -86,6 +86,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
 
     /**
      * File uploading to folder
+     * Disable verify SSL
      * http://guzzle.readthedocs.io/en/latest/request-options.html#sink-option
      * @param string $fromFile
      * @return ResponseInterface
@@ -96,7 +97,7 @@ class DownloadImageMiddleware implements MiddlewareInterface
         $response = $this->getGuzzleClient()->request(
             'GET',
             $fromFile,
-            ['stream' => true, 'timeout' => 5]
+            ['stream' => true, 'timeout' => 5, 'verify' => false]
         );
         return $response;
     }
