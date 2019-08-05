@@ -4,6 +4,7 @@ namespace Dynamicus\Action;
 
 use Common\Action\ActionInterface;
 use Common\Entity\DataObject;
+use Common\Exception\RuntimeException;
 use Common\Middleware\ConstantMiddlewareInterface;
 use Dynamicus\Image\Search\SearchAdapterInterface;
 use Dynamicus\Transformer\SearchImageTransformer;
@@ -45,9 +46,17 @@ class SearchAction implements ActionInterface, ConstantMiddlewareInterface
         $do = new DataObject();
         $searchText = urldecode($request->getAttribute('search_text'));
 
-        $this->adapter->setConfigApiName($request->getAttribute(self::GOOGLE_API_NAME));
-        $collection = $this->adapter->search($searchText);
-        $do->setFiles($collection);
+        try {
+            $this->adapter->setConfigApiName($request->getAttribute(self::GOOGLE_API_NAME));
+            $collection = $this->adapter->search($searchText);
+            $do->setFiles($collection);
+        } catch (\Exception $err) {
+            $this->logger->err(
+                'Dynamicus: '.$err->getMessage(),
+                ['StackTrace' => $err->getTraceAsString()]
+            );
+            throw new RuntimeException('Error search in dynamicus! '.$err->getMessage());
+        }
 
         $this->writeToLog($searchText);
 
