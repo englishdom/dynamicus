@@ -83,6 +83,7 @@ return [
         ],
         'ed-class' => [
             KEY_DEFAULT => [
+                [WIDTH => 140, HEIGHT => 140, QUALITY => 85], // Ed Class image for let sum up
                 [WIDTH => 300, HEIGHT => 181, QUALITY => 85], // Ed Class small image
                 [WIDTH => 940, HEIGHT => 384, QUALITY => 85], // Ed Class big image internal
             ]
