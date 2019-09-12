@@ -13,7 +13,7 @@ use ZendDiagnostics\Runner\Runner;
 
 class DiagnosticsMiddleware implements MiddlewareInterface
 {
-    protected CONST PROMETHEUS_NAME = 'api_http_dynamicus_%s{response="%s", message="%s", method="GET"}';
+    protected CONST PROMETHEUS_NAME = 'api_http_dynamicus_%s{response="%s", message="%s", method="GET"} 1';
     /**
      * @var \SplObjectStorage
      */
