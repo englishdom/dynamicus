@@ -261,7 +261,7 @@ $app->route(
     'test-log'
 );
 $app->route(
-    '/diagnostics[/]',
+    '/metrics[/]',
     [
         \Common\Middleware\DiagnosticsMiddleware::class
     ],

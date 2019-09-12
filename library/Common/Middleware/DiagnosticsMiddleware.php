@@ -7,11 +7,13 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
+use Zend\Diactoros\Response\TextResponse;
 use ZendDiagnostics\Result\FailureInterface;
 use ZendDiagnostics\Runner\Runner;
 
 class DiagnosticsMiddleware implements MiddlewareInterface
 {
+    protected CONST PROMETHEUS_NAME = 'api_http_dynamicus_%s{response="%s", message="%s", method="GET"}';
     /**
      * @var \SplObjectStorage
      */
@@ -39,15 +41,16 @@ class DiagnosticsMiddleware implements MiddlewareInterface
         // Run all checks
         $results = $runner->run();
 
-        $response = [];
+        $textString = '';
         foreach ($this->collection as $checker) {
-            $response[] = [
-                'checker' => $this->collection->getInfo(),
-                'response' => $results[$checker] instanceof FailureInterface ? 'Fail' : 'Ok',
-                'message' => $results[$checker]->getMessage(),
-            ];
+            $textString .= sprintf(
+                self::PROMETHEUS_NAME,
+                $this->collection->getInfo(),
+                $results[$checker] instanceof FailureInterface ? 'Fail' : 'Ok',
+                $results[$checker]->getMessage()
+            ) . "\n";
         }
 
-        return new Response\JsonResponse($response);
+        return new TextResponse($textString);
     }
 }
