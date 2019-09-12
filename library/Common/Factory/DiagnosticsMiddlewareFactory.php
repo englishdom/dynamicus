@@ -13,7 +13,11 @@ class DiagnosticsMiddlewareFactory
         $config = $container->get(ConfigInterface::class);
         $collection = new \SplObjectStorage();
         foreach ($config->get('diagnostics') as $checkerName => $checkerClass) {
-            $collection->attach(new $checkerClass($container), $checkerName);
+            if (is_object($checkerClass)) {
+                $collection->attach($checkerClass, $checkerName);
+            } else {
+                $collection->attach(new $checkerClass($container), $checkerName);
+            }
         }
         return new DiagnosticsMiddleware($collection);
     }
