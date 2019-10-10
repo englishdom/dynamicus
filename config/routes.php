@@ -56,6 +56,16 @@ $app->route(
     ],
 ]);
 
+/* GET /domain/ */
+$app->route(
+    '/domain[/]',
+    [
+        \Common\Middleware\DomainMiddleware::class,
+    ],
+    ['GET'],
+    'domain'
+);
+
 /* POST /translation/35 or with namespace /meta_info:og/34 */
 $app->route(
     '/{entity}/{entity_id}[/]',
