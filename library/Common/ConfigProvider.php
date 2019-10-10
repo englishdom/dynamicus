@@ -23,6 +23,7 @@ class ConfigProvider
                 Middleware\PrepareResponseMiddleware::class => Factory\PrepareResponseMiddlewareFactory::class,
                 Middleware\ShardingMiddleware::class => Factory\ShardingMiddlewareFactory::class,
                 Middleware\PrepareFilesystemMiddleware::class => Factory\PrepareFilesystemMiddlewareFactory::class,
+                Middleware\DomainMiddleware::class => Factory\DomainMiddlewareFactory::class,
                 // для работы с локальной ФС
                 AdapterInterface::class => Factory\LocalFSAdapterFactory::class,
                 // для работы с selectel
