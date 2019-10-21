@@ -207,6 +207,11 @@ return [
         'ed-event-history' => [
             TYPE_SVG => true
         ],
+        'marketing-popup' => [
+            KEY_DEFAULT => [
+                [WIDTH => 250, HEIGHT => 400, QUALITY => 100], /* изображения для меркетинговых попапов */
+            ]
+        ]
     ]
 ];
 
