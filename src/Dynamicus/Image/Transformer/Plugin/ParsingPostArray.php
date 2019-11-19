@@ -3,6 +3,7 @@
 namespace Dynamicus\Image\Transformer\Plugin;
 
 use Common\Entity\DataObject;
+use Common\Exception\BadRequestException;
 use Dynamicus\Image\Options;
 
 /**
@@ -41,14 +42,17 @@ class ParsingPostArray implements TransformerPluginInterface
             } else {
                 $options->setVariant(self::DEFAULT_NAMESPACE);
             }
-            $options->setSize(
-                explode('x', $optionsRow['size'])
-            );
-            $options->setCrop(
-                explode('x', $optionsRow['crop'])
-            );
+            if (isset($optionsRow['center'])) {
+                $options->setAutoResize(explode('x', $optionsRow['center']));
+                list ($width, $height) = $this->getSizesFromConfig($options->getAutoResize(), $do);
+            } elseif (isset($optionsRow['size'])) {
+                $options->setSize(explode('x', $optionsRow['size']));
+                $options->setCrop(explode('x', $optionsRow['crop']));
+                list ($width, $height) = $this->getSizesFromConfig($options->getSize(), $do);
+            } else {
+                throw new BadRequestException('Invalid resize parameters!');
+            }
 
-            list ($width, $height) = $this->getSizesFromConfig($options->getSize(), $do);
             $options->setFileNameSizes([$width, $height]);
             $storage->attach($options);
         }
