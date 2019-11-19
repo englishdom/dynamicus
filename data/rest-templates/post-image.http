@@ -19,6 +19,15 @@ Cookie: XDEBUG_SESSION=PHPSTORM
 
 ###
 
+POST http://localhost:9999/blog-post/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Cookie: XDEBUG_SESSION=PHPSTORM
+
+{"data":{"resize":[{"center":"300x190"}],"links":{"url":"https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/09/dog-landing-hero-lg.jpg?bust=1536935129&width=1080"}}}
+
+###
+
 POST http://localhost:9999/course-int-lesson/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json

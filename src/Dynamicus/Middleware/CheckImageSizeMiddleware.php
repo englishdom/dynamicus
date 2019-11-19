@@ -4,6 +4,7 @@ namespace Dynamicus\Middleware;
 
 use Common\Container\ConfigInterface;
 use Common\Entity\DataObject;
+use Common\Exception\BadRequestException;
 use Common\Exception\WrongImageSizeException;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
@@ -44,9 +45,17 @@ class CheckImageSizeMiddleware implements MiddlewareInterface
 
         if (isset($queryData['data']['resize'])) {
             foreach ($queryData['data']['resize'] as $sizes) {
-                if (!$this->checkSizeWithConfig($do->getEntityName(), $sizes['size'])) {
+                if (isset($sizes['size'])) {
+                    $size = $sizes['size'];
+                } elseif (isset($sizes['center'])) {
+                    $size = $sizes['center'];
+                } else {
+                    throw new BadRequestException('Undefined sizes from parameters!');
+                }
+
+                if (!$this->checkSizeWithConfig($do->getEntityName(), $size)) {
                     throw new WrongImageSizeException(
-                        'Wrong image size `'.$sizes['size'].'` for entity `' . $do->getEntityName() .'`'
+                        'Wrong image size `'.$size.'` for entity `' . $do->getEntityName() .'`'
                     );
                 }
             }
